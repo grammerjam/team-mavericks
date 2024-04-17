@@ -1,0 +1,16 @@
+{
+  "name": "blue-very-back-end",
+  "version": "1.0.0",
+  "description": "RESTful API Back-End for Blue-Very App",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm start",
+    "test": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodemon": "^3.1.0"
+  }
+}
