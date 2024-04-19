@@ -1,6 +1,7 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const port = 8000;
+const PORT = process.env.PORT;
 
 const app = express();
 
@@ -25,6 +26,6 @@ app.use("/auth", authRouter);
 // POST http://localhost:8000/auth/login
 // POST http://localhost:8000/auth/logout
 
-app.listen(port, () => {
-    console.log("App listening on port: " + port);
+app.listen(PORT, () => {
+    console.log("App listening on port: " + PORT);
 });
