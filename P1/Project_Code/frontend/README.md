@@ -14,4 +14,11 @@ To get started with this project, follow these steps:
 
 ```bash
 npm install
+```
+##Usage
+
+Start the development server by running	
+
+```bash
 npm run dev
+```
