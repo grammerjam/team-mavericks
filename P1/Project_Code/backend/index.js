@@ -39,10 +39,6 @@ const { authRouter, userRouter } = require("./routes/");
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
 
-// POST http://localhost:8000/auth/register
-// POST http://localhost:8000/auth/login
-// POST http://localhost:8000/auth/logout
-
 app.listen(PORT, () => {
     console.log("App listening on port: " + PORT);
 });

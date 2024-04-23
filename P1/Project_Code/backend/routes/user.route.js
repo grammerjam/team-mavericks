@@ -6,15 +6,15 @@ const userController = require("../controllers/user.controller");
 const router = express.Router();
 
 // Configure HTTP Methods for /user
-// Try out POST http://localhost:8000/register
+// Try out POST http://localhost:8000/user/register
 router.post("/register", userController.register);
-// Try out GET http://localhost:8000/getAllUsers
+// Try out GET http://localhost:8000/user/getAllUsers
 router.get("/getAllUsers", userController.getAllUsers);
-// Try out GET http://localhost:8000/getUserById?id=<positive whole number>
+// Try out GET http://localhost:8000/user/getUserById?id=<positive whole number>
 router.get("/getUserById", userController.getUserById);
-// Try out GET http://localhost:8000/getUserByUsername?username=<username value>
+// Try out GET http://localhost:8000/user/getUserByUsername?username=<username value>
 router.get("/getUserByUsername", userController.getUserByUsername);
-// Try out GET http://localhost:8000/getUserByEmail?email=<email value>
+// Try out GET http://localhost:8000/user/getUserByEmail?email=<email value>
 router.get("/getUserByEmail", userController.getUserByEmail);
 
 module.exports = router;
