@@ -1,4 +1,8 @@
-# Blue Very Back End
+# Vlueberry
+
+## Description
+
+Video streaming service app
 
 ## Commands
 1 Install Node Dependencies

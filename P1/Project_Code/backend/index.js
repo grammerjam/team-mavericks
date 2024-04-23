@@ -1,9 +1,13 @@
+// Require Dependencies
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const PORT = process.env.PORT;
 const sequelize = require('./config/database');
-require('./models/')
+
+// Require all models so they can be created
+require('./models/');
+
+const PORT = process.env.PORT;
 
 const app = express();
 
@@ -28,11 +32,12 @@ app.use(express.json());
   }
 })();
 
-// Custom Routes
-const authRouter = require("./routes/auth.route");
+// Import Custom Routers
+const { authRouter, userRouter } = require("./routes/");
 
 // Incorporate Routes in Express App
 app.use("/auth", authRouter);
+app.use("/user", userRouter);
 
 // POST http://localhost:8000/auth/register
 // POST http://localhost:8000/auth/login

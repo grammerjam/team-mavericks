@@ -5,7 +5,7 @@ const authController = require("../controllers/auth.controller");
 // Create a router instance
 const router = express.Router();
 
-router.post("/register", authController.register);
+// Configure HTTP Methods for /auth
 router.post("/login", authController.login);
 router.post("/logout", authController.logout);
 

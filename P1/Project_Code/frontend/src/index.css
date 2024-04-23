@@ -14,7 +14,7 @@
 body
 {
   font-family: var(--font);
-  background-color: var(--darkGray);
+  background-color: var(--black);
 }
 
 .outfit-font

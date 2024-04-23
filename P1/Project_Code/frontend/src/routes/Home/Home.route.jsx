@@ -1,20 +1,13 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 
-const homeStyles = {
-  button: {
-    backgroundColor: "rgb(252, 71, 71)",
-    fontFamily: "Outfit",
-    fontSize: "13px",
-    fontWeight: "300"
-
-  }
-};
+import homeStyles from './Home.styles';
 
 function Home() {
   return (
     <div className="page-container">
-        <Button variant="contained" className="body-S" style={homeStyles.button}>Hello world</Button>
+      <h1 className="font-heading-L">I'm an h1</h1>
+        <Button variant="contained" style={homeStyles.button}>Hello world</Button>
     </div>
   );
 }
