@@ -1,6 +1,8 @@
-# Blue Very
+# Vlueberry
 
-## Open Source Video Distributing Web Application
+## Description
+
+Video streaming service app
 
 ### Stack
 1. React
