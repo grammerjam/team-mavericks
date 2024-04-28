@@ -16,5 +16,7 @@ router.get("/getUserById", userController.getUserById);
 router.get("/getUserByUsername", userController.getUserByUsername);
 // Try out GET http://localhost:8000/user/getUserByEmail?email=<email value>
 router.get("/getUserByEmail", userController.getUserByEmail);
+// Try out PUT http://localhost:8000/user/updateUser?id=<id value>
+router.put("/updateUser", userController.updateUser);
 
 module.exports = router;

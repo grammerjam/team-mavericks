@@ -72,6 +72,10 @@ User.register = async(userData) => {
   return await User.create(userData);
 };
 
+User.updateUser = async(id, userData) => {
+  return await User.update(userData, { where: { id } });
+}
+
 // Add static method to delete user by id
 User.deleteById = async (id) => {
   return await User.destroy({ where: { id }});

@@ -4,6 +4,7 @@ class HTTPCodes
 {
     static Ok = 200;
     static Created = 201;
+    static Accepted = 202;
     static BadRequest = 400;
     static Unauthorized = 401;
     static Forbidden = 403;

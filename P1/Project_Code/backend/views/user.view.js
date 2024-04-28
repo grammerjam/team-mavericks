@@ -77,6 +77,21 @@ class UserView
             email
         };
     }
+
+    static update(data, http_code, msg)
+    {
+        // If the http_code is not Accepted. Return error message
+        if (http_code !== HTTPCodes.Accepted)
+        {
+            return {
+                error: msg
+            };
+        }
+
+        return {
+            success: msg
+        }
+    }
 }
 
 module.exports = UserView;

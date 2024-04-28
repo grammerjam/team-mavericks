@@ -215,9 +215,46 @@ exports.getUserByEmail = async (req, res) => {
     }
 };
 
-/**
-exports.deleteUserById = async (req, res) => {
+//Update user and return updated user object
+exports.updateUser = async (req, res) => {
 
-};
-*/
+    // Grab user id from Query Parameter
+    const userId = req.query.id;
+    // Ensure the id is a positive whole number
+    if (isNaN(userId) || ( Number.isInteger(userId) && userId > 0 )){
+        const invalidIdResponse = UserView.getUser(null, HTTPCodes.BadRequest, `Invalid id parameter: ${userId}`);
+
+        return res.status(HTTPCodes.BadRequest).json(invalidIdResponse);
+    }
+
+    //Grab user data from request body
+    const {
+        username,
+        email,
+        photo
+    } = req.body;
+
+    if (!username || !email){
+        // Grab the response object from user view
+        const missingInfoRes = UserView.update(null, HTTPCodes.BadRequest, `The attributes username and email are required`);
+        return res.status(HTTPCodes.BadRequest).json(missingInfoRes);
+    }
+
+    try {
+        //Updates user and returns number of rows updated
+        await UserModel.updateUser(userId, { username, email, photo });
+
+        // Prepare a successful response for an updated user
+        const updatedUserRes = UserView.update(null, HTTPCodes.Accepted, 'User updated successfully');
+        // Return a successful response once the user is updated
+        return res.status(HTTPCodes.Accepted).json(updatedUserRes);
+    }
+    catch (err){
+        //Prepare an error response 
+        const updatedUserErrRes = UserView.update(null, HTTPCodes.InternalServerError, "Unable to update user");
+        //Error log
+        console.log(err);
+        return res.status(HTTPCodes.InternalServerError).json(updatedUserErrRes);
+    }
+}
 
