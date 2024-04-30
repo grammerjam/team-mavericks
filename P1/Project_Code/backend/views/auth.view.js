@@ -1,8 +1,18 @@
 class AuthView 
 {
-    static auth_works(route_name)
+    static login(http_code, msg)
     {
-        return {"message": `${route_name} works well` };
+        // If the http_code is not Ok. Return error message
+        if (http_code !== HTTPCodes.Ok)
+        {
+            return {
+                error: msg;
+            };
+        }
+
+        return {
+            success: msg;
+        }
     }
 }
 
