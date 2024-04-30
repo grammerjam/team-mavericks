@@ -6,6 +6,12 @@ const HTTPCodes = require("../helpers/http_codes");
 exports.login = async (req, res) => {
 	try {
 		const { email, password } = req.body;
+
+		if(!email || !password){
+			const missingInfoRes = AuthView.login(HTTPCodes.BadRequest, "The attributes email and password are required");
+			return res.status(HTTPCodes.BadRequest).json(missingInfoRes);
+		}
+
 		const result = await AuthModel.login(email, password);
 		res.cookie("token", result.token, { secure: true });
 
