@@ -6,12 +6,12 @@ class AuthView
         if (http_code !== HTTPCodes.Ok)
         {
             return {
-                error: msg;
+                error: msg
             };
         }
 
         return {
-            success: msg;
+            success: msg
         }
     }
 }
