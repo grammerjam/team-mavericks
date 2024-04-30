@@ -1,5 +1,6 @@
 const AuthView = require("../views/auth.view");
 const AuthModel = require("../models/auth.model");
+const HTTPCodes = require("../helpers/http_codes");
 
 
 exports.login = async (req, res) => {

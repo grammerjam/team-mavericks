@@ -1,3 +1,5 @@
+const HTTPCodes = require("../helpers/http_codes");
+
 class AuthView 
 {
     static login(http_code, msg)
