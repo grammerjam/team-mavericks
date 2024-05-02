@@ -2,6 +2,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const sequelize = require('./config/database');
 require('./models');
 
@@ -21,6 +22,9 @@ app.use(express.urlencoded({ extended: false }));
 
 // Set up JSON usage
 app.use(express.json());
+
+// Allow Cookie Parsing
+app.use(cookieParser());
 
 // Sync the Sequelize models with the MySQL database
 (async () => {
