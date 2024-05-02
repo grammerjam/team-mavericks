@@ -13,7 +13,7 @@ class AuthView
         }
 
         return {
-            success: msg
+            message: msg
         }
     }
 }

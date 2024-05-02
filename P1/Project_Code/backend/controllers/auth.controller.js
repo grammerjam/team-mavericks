@@ -26,6 +26,6 @@ exports.login = async (req, res) => {
 }
 
 exports.logout = (req, res) => {
-
-    return res.json(AuthView.auth_works("logout"));
+	res.clearCookie("token");
+	return res.status(HTTPCodes.Ok).json({ message: "Logged out successfully" });
 }
