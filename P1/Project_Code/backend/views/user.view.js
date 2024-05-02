@@ -92,6 +92,24 @@ class UserView
             success: msg
         }
     }
+
+    static delete(data, http_code, error_msg)
+    {
+        // If the code is not Ok. Return error message
+        if (http_code !== HTTPCodes.Ok)
+        {
+            return {
+                error: error_msg
+            }
+        }
+
+        // Grab user id
+        const { id } = data;
+
+        return {
+            message: `The user of id ${id} was successfully deleted`
+        };
+    }
 }
 
 module.exports = UserView;

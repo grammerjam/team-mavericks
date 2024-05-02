@@ -18,5 +18,7 @@ router.get("/getUserByUsername", userController.getUserByUsername);
 router.get("/getUserByEmail", userController.getUserByEmail);
 // Try out PUT http://localhost:8000/user/updateUser?id=<id value>
 router.put("/updateUser", userController.updateUser);
+// Try out DELETE http://localhost:8000/user/deleteUserById
+router.delete("/deleteUserById", userController.deleteUserById);
 
 module.exports = router;
