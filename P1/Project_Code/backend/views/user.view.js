@@ -78,25 +78,30 @@ class UserView
         };
     }
 
-    static update(data, http_code, msg)
+    static update(data, http_code, error_msg)
     {
         // If the http_code is not Accepted. Return error message
         if (http_code !== HTTPCodes.Accepted)
         {
             return {
-                error: msg
+                error: error_msg
             };
         }
 
+        const { id, username, email, photo } = data;
+
         return {
-            success: msg
-        }
+            id,
+            username,
+            email,
+            photo
+        };
     }
 
     static delete(data, http_code, error_msg)
     {
         // If the code is not Ok. Return error message
-        if (http_code !== HTTPCodes.Ok)
+        if (http_code !== HTTPCodes.NoContent)
         {
             return {
                 error: error_msg

@@ -10,14 +10,14 @@ const router = express.Router();
 router.post("/register", userController.register);
 // Try out GET http://localhost:8000/user/getAllUsers
 router.get("/getAllUsers", userController.getAllUsers);
-// Try out GET http://localhost:8000/user/getUserById?id=<positive whole number>
-router.get("/getUserById", userController.getUserById);
-// Try out GET http://localhost:8000/user/getUserByUsername?username=<username value>
-router.get("/getUserByUsername", userController.getUserByUsername);
-// Try out GET http://localhost:8000/user/getUserByEmail?email=<email value>
-router.get("/getUserByEmail", userController.getUserByEmail);
-// Try out PUT http://localhost:8000/user/updateUser?id=<id value>
-router.put("/updateUser", userController.updateUser);
+// Try out GET http://localhost:8000/user/<id value>
+router.get("/getUserById/:id", userController.getUserById);
+// Try out GET http://localhost:8000/user/<username value>
+router.get("/getUserByUsername/:username", userController.getUserByUsername);
+// Try out GET http://localhost:8000/user/<email value>
+router.get("/getUserByEmail/:email", userController.getUserByEmail);
+// Try out PUT http://localhost:8000/user/<id value>
+router.put("/updateUserById", userController.updateUserById);
 // Try out DELETE http://localhost:8000/user/deleteUserById
 router.delete("/deleteUserById", userController.deleteUserById);
 

@@ -15,21 +15,43 @@ exports.login = async (email, password) => {
 			if(match){
 				// If passwords match, generate a JWT token for the user
 				const token = jwt.sign(
-					{ username: user.username, email: user.email, userId: user.id },
+					{ username: user.username, email: user.email, id: user.id },
 					secret,
 					{ expiresIn: "1h" }
 				);
-				// Return token and success message
-				return { token, message: "Success" };
+				// Return token and user data
+				return { 
+					token,
+					id: user.id,
+					email: user.email,
+					username: user.username
+				 };
 			}else{
-				return { message: "Incorrect password" };
+				return { error: "Incorrect password" };
 			}
 		}else{
-			return { message: "User not found" };
+			return { error: "User not found" };
 		}
 	}
 	catch(error){
 		// Throw any errors encountered during the authentication process
 		throw error;
 	}
+};
+
+// Check if a JWT is valid or invalid
+exports.verifyJWT = (token) => {
+
+	try
+	{
+		jwt.verify(token, secret);
+
+		return {message: "JWT Token is valid"};
+	}
+
+	catch
+	{
+		return {error: "JWT Token is invalid"};
+	}
+
 };
