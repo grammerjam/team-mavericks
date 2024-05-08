@@ -1,9 +1,10 @@
 // Import dependencies
-const { genSaltSync, hashSync } = require("bcrypt");
 const { isEmail } = require("validator");
+const xss = require("xss");
 
 // Custom dependencies
 const HTTPCodes = require("../helpers/http_codes");
+const { isValidId, makeBcryptHash } = require("../helpers/funcs");
 const UserView = require("../views/user.view");
 const UserModel = require("../models/user.model");
 
@@ -22,23 +23,22 @@ exports.register = async (req, res) => {
         if (!userData.hasOwnProperty(key) || userData[key] === null || userData[key] == undefined)
         {
             // Grab the response object from user view
-            const missingInfoResObj = UserView.register(null, HTTPCodes.BadRequest, `The attribute "${key}" is missing, null, or undefined`);
+            const missingInfoResObj = UserView.register(null, HTTPCodes.BadRequest, `The attribute "${key}" is missing`);
 
             return res.status(HTTPCodes.BadRequest).json(missingInfoResObj);
         }
     }
 
-    // Generate a sync hash for the password
-    const salt = genSaltSync(10);
-    const hashedPassword = hashSync(userData.password, salt);
+    // Make Bcrypt Hash
+    const hashedPassword = makeBcryptHash(xss(userData.password));
 
     // Try to register the user
     try
     {
         const newUserData = await UserModel.register({
-            username: userData.username,
-            email: userData.email,
-            password: hashedPassword
+            username: xss(userData.username),
+            email: xss(userData.email),
+            password: xss(hashedPassword)
         });
 
         // Prepare a successful response for a created user
@@ -93,10 +93,10 @@ exports.getAllUsers = async (req, res) => {
 exports.getUserById = async (req, res) => {
 
     // Grab id from GET Query Parameter
-    const { id } = req.query;
+    const { id } = req.params;
 
     // Ensure the id is a positive whole number
-    if (isNaN(id) || ( Number.isInteger(id) && id > 0 ))
+    if (!isValidId(parseInt(xss(id))))
     {
         const invalidIdResponse = UserView.getUser(null, HTTPCodes.BadRequest, `Invalid id parameter: ${id}`);
 
@@ -106,12 +106,12 @@ exports.getUserById = async (req, res) => {
     try
     {
         // Try to grab the user by its id
-        const userData = await UserModel.getUserById(id);
+        const userData = await UserModel.getUserById(xss(id));
 
         // If userData is null, then the user was not found
         if (!userData)
         {
-            const userNotFoundResponse = UserView.getUser(null, HTTPCodes.NotFound, `user of id ${id} was not found`);
+            const userNotFoundResponse = UserView.getUser(null, HTTPCodes.NotFound, `user of id ${xss(id)} was not found`);
 
             return res.status(HTTPCodes.NotFound).json(userNotFoundResponse);
         }
@@ -127,7 +127,7 @@ exports.getUserById = async (req, res) => {
     catch (error)
     {
         // Form an error response
-        const userErrorResponse = UserView.getUser(null, HTTPCodes.InternalServerError, `Could not try to get user of id ${id}`);
+        const userErrorResponse = UserView.getUser(null, HTTPCodes.InternalServerError, `Could not try to get user of id ${xss(id)}`);
 
         // Console Log Error Just In Case
         console.log(error);
@@ -141,17 +141,17 @@ exports.getUserById = async (req, res) => {
 exports.getUserByUsername = async (req, res) => {
 
     // Grab username from GET Query Parameter
-    const { username } = req.query;
+    const { username } = req.params;
 
     // Try to grab the user from the DB
     try
     {
-        const userData = await UserModel.getUserByUsername(username);
+        const userData = await UserModel.getUserByUsername(xss(username));
 
         // If userData is null, the user was not found
         if (!userData)
         {
-            const userNotFoundResponse = UserView.getUser(null, HTTPCodes.NotFound, `User of username ${username} was not found`);
+            const userNotFoundResponse = UserView.getUser(null, HTTPCodes.NotFound, `User of username ${xss(username)} was not found`);
 
             return res.status(HTTPCodes.NotFound).json(userNotFoundResponse);
         }
@@ -165,7 +165,7 @@ exports.getUserByUsername = async (req, res) => {
     catch (error)
     {
         // Form an error response for the user
-        const userErrorResponse = UserView.getUser(null, HTTPCodes.InternalServerError, `Could not try to get user of username ${username}`);
+        const userErrorResponse = UserView.getUser(null, HTTPCodes.InternalServerError, `Could not try to get user of username ${xss(username)}`);
 
         console.log(error);
 
@@ -178,24 +178,24 @@ exports.getUserByUsername = async (req, res) => {
 exports.getUserByEmail = async (req, res) => {
 
     // Grab email from GET Query Parameter
-    const { email } = req.query;
+    const { email } = req.params;
 
     // If email is not invalid, return early error response
-    if (!isEmail(email))
+    if (!isEmail(xss(email)))
     {
-        const invalidEmailResponse = UserView.getUser(null, HTTPCodes.BadRequest, `Invalid Email Parameter: ${email}`);
+        const invalidEmailResponse = UserView.getUser(null, HTTPCodes.BadRequest, `Invalid Email Parameter: ${xss(email)}`);
 
         return res.status(HTTPCodes.BadRequest).json(invalidEmailResponse);
     }
 
     try
     {
-        const userData = await UserModel.getUserByEmail(email);
+        const userData = await UserModel.getUserByEmail(xss(email));
 
         // If userData is null, the user was not found
         if (!userData)
         {
-            const userNotFoundResponse = UserView.getUser(null, HTTPCodes.NotFound, `User of email ${email} was not found`);
+            const userNotFoundResponse = UserView.getUser(null, HTTPCodes.NotFound, `User of email ${xss(email)} was not found`);
             
             return res.status(HTTPCodes.NotFound).json(userNotFoundResponse);
         }
@@ -207,7 +207,7 @@ exports.getUserByEmail = async (req, res) => {
 
     catch (error)
     {
-        const userErrorResponse = UserView.getUser(null, HTTPCodes.InternalServerError, `Could not try to get user of email ${email}`);
+        const userErrorResponse = UserView.getUser(null, HTTPCodes.InternalServerError, `Could not try to get user of email ${xss(email)}`);
 
         console.log(error);
 
@@ -217,35 +217,58 @@ exports.getUserByEmail = async (req, res) => {
 
 
 //Update user and return updated user object
-exports.updateUser = async (req, res) => {
+exports.updateUserById = async (req, res) => {
 
     //Grab user data from request body
     const {
-        userId,
+        id,
         username,
         email,
         photo
     } = req.body;
-
+    
     // Ensure the id is a positive whole number
-    if (isNaN(userId) || ( Number.isInteger(userId) && userId > 0 )){
-        const invalidIdResponse = UserView.getUser(null, HTTPCodes.BadRequest, `Invalid id parameter: ${userId}`);
+    if (!isValidId(parseInt(xss(id)))){
+        const invalidIdResponse = UserView.getUser(null, HTTPCodes.BadRequest, `Invalid id parameter: ${xss(id)}`);
 
         return res.status(HTTPCodes.BadRequest).json(invalidIdResponse);
     }
 
-    if (!username || !email){
+    if (!xss(username) || !xss(email)){
         // Grab the response object from user view
         const missingInfoRes = UserView.update(null, HTTPCodes.BadRequest, `The attributes username and email are required`);
         return res.status(HTTPCodes.BadRequest).json(missingInfoRes);
     }
 
     try {
+        // First ensure the user exists in the DB
+        const userToChangeData = await UserModel.getUserById(xss(id));
+
+        if (!userToChangeData)
+        {
+            const userNotFoundResponse = UserView.update(null, HTTPCodes.NotFound, `user of id ${xss(id)} was not found`);
+
+            return res.status(HTTPCodes.NotFound).json(userNotFoundResponse);     
+        }
+
         //Updates user and returns number of rows updated
-        await UserModel.updateUser(userId, { username, email, photo });
+        const userDataToUpdate = {
+            username: xss(username),
+            email: xss(email), 
+            photo: xss(photo)
+        };
+
+        await UserModel.updateUserById(xss(id), userDataToUpdate);
 
         // Prepare a successful response for an updated user
-        const updatedUserRes = UserView.update(null, HTTPCodes.Accepted, 'User updated successfully');
+        const updatedUserRes = UserView.update({
+            id: xss(id),
+            username: xss(username),
+            email: xss(email),
+            photo: xss(photo)
+            }, 
+            HTTPCodes.Accepted, null);
+
         // Return a successful response once the user is updated
         return res.status(HTTPCodes.Accepted).json(updatedUserRes);
     }
@@ -265,9 +288,9 @@ exports.deleteUserById = async(req, res) => {
     const { id } = req.body;
 
     // Ensure the id is a positive whole number
-    if (isNaN(id) || !( Number.isInteger(id) && id > 0 ))
+    if (!isValidId(parseInt(xss(id))))
     {
-        const invalidIdResponse = UserView.getUser(null, HTTPCodes.BadRequest, `Invalid id parameter: ${id}`);
+        const invalidIdResponse = UserView.getUser(null, HTTPCodes.BadRequest, `Invalid id parameter: ${xss(id)}`);
 
         return res.status(HTTPCodes.BadRequest).json(invalidIdResponse);
     }
@@ -276,29 +299,29 @@ exports.deleteUserById = async(req, res) => {
     try
     {
         // Try to grab the user by its id
-        const userData = await UserModel.getUserById(id);
+        const userData = await UserModel.getUserById(xss(id));
 
         // If userData is null, then the user was not found
         if (!userData)
         {
-            const userNotFoundResponse = UserView.getUser(null, HTTPCodes.NotFound, `user of id ${id} was not found`);
+            const userNotFoundResponse = UserView.getUser(null, HTTPCodes.NotFound, `user of id ${xss(id)} was not found`);
 
             return res.status(HTTPCodes.NotFound).json(userNotFoundResponse);
         }
 
         // Now try to delete the user
-        await UserModel.deleteById(id);
+        await UserModel.deleteById(xss(id));
 
         // Return a response
-        const userDeletedResponse = UserView.delete(userData, HTTPCodes.Ok, null);
+        const userDeletedResponse = UserView.delete(userData, HTTPCodes.NoContent, null);
 
-        return res.status(HTTPCodes.Ok).json(userDeletedResponse);
+        return res.status(HTTPCodes.NoContent).json(userDeletedResponse);
         
     }
 
     catch (error)
     {
-        const userErrorResponse = UserView.delete(null, HTTPCodes.InternalServerError, `Could not try to delete user of id ${id}`);
+        const userErrorResponse = UserView.delete(null, HTTPCodes.InternalServerError, `Could not try to delete user of id ${xss(id)}`);
 
         console.log(error);
 

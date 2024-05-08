@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@sequelize/core": "^7.0.0-alpha.37",
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -19,6 +20,7 @@
     "mysql2": "^3.9.6",
     "nodemon": "^3.1.0",
     "sequelize": "^6.37.3",
-    "validator": "^13.11.0"
+    "validator": "^13.11.0",
+    "xss": "^1.0.15"
   }
 }

@@ -6,6 +6,7 @@ const authController = require("../controllers/auth.controller");
 const router = express.Router();
 
 // Configure HTTP Methods for /auth
+
 // POST http://localhost:8000/auth/login
 router.post("/login", authController.login);
 // POST http://localhost:8000/auth/logout

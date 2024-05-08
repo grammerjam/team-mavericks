@@ -72,7 +72,8 @@ User.register = async(userData) => {
   return await User.create(userData);
 };
 
-User.updateUser = async(id, userData) => {
+// Add static method to update user by id
+User.updateUserById = async(id, userData) => {
   return await User.update(userData, { where: { id } });
 }
 
