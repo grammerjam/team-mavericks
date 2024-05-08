@@ -215,24 +215,24 @@ exports.getUserByEmail = async (req, res) => {
     }
 };
 
+
 //Update user and return updated user object
 exports.updateUser = async (req, res) => {
 
-    // Grab user id from Query Parameter
-    const userId = req.query.id;
+    //Grab user data from request body
+    const {
+        userId,
+        username,
+        email,
+        photo
+    } = req.body;
+
     // Ensure the id is a positive whole number
     if (isNaN(userId) || ( Number.isInteger(userId) && userId > 0 )){
         const invalidIdResponse = UserView.getUser(null, HTTPCodes.BadRequest, `Invalid id parameter: ${userId}`);
 
         return res.status(HTTPCodes.BadRequest).json(invalidIdResponse);
     }
-
-    //Grab user data from request body
-    const {
-        username,
-        email,
-        photo
-    } = req.body;
 
     if (!username || !email){
         // Grab the response object from user view
