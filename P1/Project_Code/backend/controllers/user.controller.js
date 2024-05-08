@@ -258,3 +258,51 @@ exports.updateUser = async (req, res) => {
     }
 }
 
+// Delete user based on its id
+exports.deleteUserById = async(req, res) => {
+
+    // Grab id from JSON request body
+    const { id } = req.body;
+
+    // Ensure the id is a positive whole number
+    if (isNaN(id) || !( Number.isInteger(id) && id > 0 ))
+    {
+        const invalidIdResponse = UserView.getUser(null, HTTPCodes.BadRequest, `Invalid id parameter: ${id}`);
+
+        return res.status(HTTPCodes.BadRequest).json(invalidIdResponse);
+    }
+
+    // Try to delete the user
+    try
+    {
+        // Try to grab the user by its id
+        const userData = await UserModel.getUserById(id);
+
+        // If userData is null, then the user was not found
+        if (!userData)
+        {
+            const userNotFoundResponse = UserView.getUser(null, HTTPCodes.NotFound, `user of id ${id} was not found`);
+
+            return res.status(HTTPCodes.NotFound).json(userNotFoundResponse);
+        }
+
+        // Now try to delete the user
+        await UserModel.deleteById(id);
+
+        // Return a response
+        const userDeletedResponse = UserView.delete(userData, HTTPCodes.Ok, null);
+
+        return res.status(HTTPCodes.Ok).json(userDeletedResponse);
+        
+    }
+
+    catch (error)
+    {
+        const userErrorResponse = UserView.delete(null, HTTPCodes.InternalServerError, `Could not try to delete user of id ${id}`);
+
+        console.log(error);
+
+        return res.status(HTTPCodes.InternalServerError).json(userErrorResponse);
+    }
+    
+};
