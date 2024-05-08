@@ -1,5 +1,5 @@
 // Import dependencies
-const { isEmail } = require("validator");
+const { isEmail, isURL } = require("validator");
 const xss = require("xss");
 
 // Custom dependencies
@@ -254,9 +254,13 @@ exports.updateUserById = async (req, res) => {
         //Updates user and returns number of rows updated
         const userDataToUpdate = {
             username: xss(username),
-            email: xss(email), 
-            photo: xss(photo)
+            email: xss(email) 
         };
+
+        if (photo && isURL(photo))
+        {
+            userDataToUpdate.photo = xss(photo);
+        }
 
         await UserModel.updateUserById(xss(id), userDataToUpdate);
 
