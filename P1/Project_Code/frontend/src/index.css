@@ -57,3 +57,43 @@ body
   font-size: 13px;
   font-weight: 300;
 }
+
+/*+++++++++++lgin/Signup Page+++++++++++++++++++*/
+
+.logo-container
+{
+  display: flex;
+  justify-content: center;
+  padding: 70px;
+}
+
+.redirect-link
+{
+  display: flex;
+  justify-content: center;
+}
+
+.link-font
+{
+  margin-left: 5px;
+  text-decoration: none;
+  color: rgb(252, 71, 71);
+}
+
+
+
+/*+++++++++++Login/Signup Page+++++++++++++++++++*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
