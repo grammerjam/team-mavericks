@@ -1,13 +1,14 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
-
 import homeStyles from './Home.styles';
+import {RecommendedContainer} from "../Recommended/RecommendedContainer.jsx";
+import {TrendingContainter} from "../Trending/TrendingContainter.jsx";
 
 function Home() {
   return (
     <div className="page-container">
-      <h1 className="font-heading-L">I'm an h1</h1>
-        <Button variant="contained" style={homeStyles.button}>Hello world</Button>
+        <RecommendedContainer></RecommendedContainer>
+        <TrendingContainter></TrendingContainter>
     </div>
   );
 }
