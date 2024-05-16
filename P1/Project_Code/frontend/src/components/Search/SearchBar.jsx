@@ -3,15 +3,10 @@ import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 
-
-
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    '&:hover': {
-        backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
+    backgroundColor: alpha("rgb(16, 20, 30)", 0.15),
     marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
@@ -31,12 +26,17 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
+    color: 'white',
     width: '100%',
+    marginLeft: "50px",
+    caretColor: "rgb(252, 71, 71)",
+    '&:hover': {
+        border: "none",
+        borderBottom: "1px solid rgb(90, 105, 143)"
+    },
     '& .MuiInputBase-input': {
         padding: theme.spacing(1, 1, 1, 0),
         // vertical padding + font size from searchIcon
-        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
         transition: theme.transitions.create('width'),
         [theme.breakpoints.up('sm')]: {
             width: '12ch',
@@ -52,7 +52,7 @@ export const SearchBar = () => {
     return (
                     <Search>
                         <SearchIconWrapper>
-                            <SearchIcon />
+                            <SearchIcon style={{color: "white"}} />
                         </SearchIconWrapper>
                         <StyledInputBase
                             placeholder="Search for movies of TV series"
