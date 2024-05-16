@@ -15,7 +15,7 @@ exports.register = async (req, res) => {
     const userData = req.body;
 
     // Check for compulsory keys
-    const mustHaveKeys = ["username", "email", "password"];
+    const mustHaveKeys = ["email", "password"];
 
     // If no compulsory key is defined, return error
     for (const key of mustHaveKeys)
