@@ -14,6 +14,7 @@ function Register() {
 		confirmPass: ''
 	});
 
+	const [errors, setErrors] = useState({});
 	const apiUrl = getApiUrl();
 	const navigate = useNavigate();
 
@@ -23,17 +24,41 @@ function Register() {
 			...inputData,
 			[name]: value
 		});
+		if(inputData.email === ''){
+			errors.email = null;
+		}else if(inputData.password === ''){
+			errors.password = null;
+		}else if(inputData.confirmPass === ''){
+			errors.confirmPass = null;
+		}
+	}
+
+	//Error validation function
+	const validateInput = (data) => {
+		let inputErrors = {};
+
+		if(data.confirmPass !== data.password){
+			inputErrors.confirmPass = 'No match!';
+		}
+
+		return inputErrors;
 	}
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		const validationErrors = validateInput(inputData)
 		
-		const { email, password } = inputData;
-		try{
-			const result = await axios.post(`${apiUrl}/user/register`, { email, password });
-			navigate('/');
-		} catch (err) {
-			console.log(err);
+		if(Object.keys(validationErrors).length === 0){
+			const { email, password } = inputData;
+
+			try{
+				const result = await axios.post(`${apiUrl}/user/register`, { email, password });
+				navigate('/');
+			} catch (err) {
+				console.log(err);
+			}
+		}else {
+			setErrors(validationErrors);
 		}
 	}
 
@@ -51,19 +76,17 @@ function Register() {
 			    			required
 			    			variant="standard"
 			    			sx={{mb: 3}}
-			    			color="secondary"
 			    			type="email"
 			    			fullWidth
 			    			name="email"
 			    			value={inputData.email}
 			    			onChange={handleChange}
-			    			
+
 			    		/>
 			    		<TextField
 			    			label="Password"
 			    			required
 			    			variant="standard"
-			    			color="secondary"
 			    			type="password"
 			    			sx={{mb: 3}}
 			    			fullWidth
@@ -72,10 +95,10 @@ function Register() {
 			    			onChange={handleChange}
 			    		/>
 			    		<TextField
-			    			label="Confirm password"
+			    			label={errors.confirmPass ? errors.confirmPass : "Confirm password"}
+			    			error={errors.confirmPass ? true : false}
 			    			required
 			    			variant="standard"
-			    			color="secondary"
 			    			type="password"
 			    			sx={{mb: 3}}
 			    			fullWidth
