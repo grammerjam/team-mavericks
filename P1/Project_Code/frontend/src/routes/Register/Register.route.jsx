@@ -76,6 +76,7 @@ function Register() {
 			    			required
 			    			variant="standard"
 			    			sx={{mb: 3}}
+			    			color="white"
 			    			type="email"
 			    			fullWidth
 			    			name="email"
@@ -89,6 +90,7 @@ function Register() {
 			    			variant="standard"
 			    			type="password"
 			    			sx={{mb: 3}}
+			    			color="white"
 			    			fullWidth
 			    			name="password"
 			    			value={inputData.password}
@@ -101,6 +103,7 @@ function Register() {
 			    			variant="standard"
 			    			type="password"
 			    			sx={{mb: 3}}
+			    			color="white"
 			    			fullWidth
 			    			name="confirmPass"
 			    			value={inputData.confirmPass}

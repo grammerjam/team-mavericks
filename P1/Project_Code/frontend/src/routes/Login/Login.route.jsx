@@ -38,7 +38,7 @@ function Login() {
 			    			required
 			    			variant="standard"
 			    			sx={{mb: 3}}
-			    			color="secondary"
+			    			color="white"
 			    			type="email"
 			    			fullWidth
 			    			name="email"
@@ -49,7 +49,7 @@ function Login() {
 			    			label="Password"
 			    			required
 			    			variant="standard"
-			    			color="secondary"
+			    			color="white"
 			    			type="password"
 			    			sx={{mb: 3}}
 			    			fullWidth
