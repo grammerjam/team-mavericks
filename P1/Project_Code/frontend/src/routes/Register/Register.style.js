@@ -1,4 +1,0 @@
-const registerStyles = {
-    formContainer: {
-    }
-};

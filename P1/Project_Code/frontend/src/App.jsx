@@ -7,6 +7,7 @@ import { Layout } from "./components/Layout/Layout.jsx";
 
 // Contexts that contain data needed throughout the whole app
 import { BackendURLContextProvider } from './context/BackendURL.context';
+import { UserContextProvider } from './context/User.context.jsx';
 import { MoviesContextProvider } from './context/Movies.context.jsx';
 
 function Movies() {
@@ -37,18 +38,20 @@ function App() {
     return (
         <BrowserRouter>
             <BackendURLContextProvider>
-                <MoviesContextProvider>
-                    <Routes>
-                        <Route path="/" element={<Layout />}>
-                            <Route index element={<Home/>} />
-                            <Route path="/movies" element={<Movies/>} />
-                            <Route path="/tv-series" element={<TvSeries/>} />
-                            <Route path="/bookmarks" element={<Bookmarks/>} />
-                        </Route>
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/register" element={<Register />} />
-                    </Routes>
-                </MoviesContextProvider>
+                <UserContextProvider>
+                    <MoviesContextProvider>
+                        <Routes>
+                            <Route path="/" element={<Layout />}>
+                                <Route index element={<Home/>} />
+                                <Route path="/movies" element={<Movies/>} />
+                                <Route path="/tv-series" element={<TvSeries/>} />
+                                <Route path="/bookmarks" element={<Bookmarks/>} />
+                            </Route>
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/register" element={<Register />} />
+                        </Routes>
+                    </MoviesContextProvider>
+                </UserContextProvider>
             </BackendURLContextProvider>
         </BrowserRouter>
     );
