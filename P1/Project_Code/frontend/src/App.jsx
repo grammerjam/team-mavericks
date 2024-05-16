@@ -9,7 +9,7 @@ import { Layout } from "./components/Layout/Layout.jsx";
 function Movies() {
     return (
         <div>
-            <h1>I am the movies container</h1>
+            <h1 style={{color:"white"}} >I am the movies container</h1>
         </div>
     );
 }
@@ -17,7 +17,7 @@ function Movies() {
 function TvSeries() {
     return (
         <div>
-            <h1>I am the tv series container</h1>
+            <h1 style={{color:"white"}}>I am the tv series container</h1>
         </div>
     );
 }
@@ -25,7 +25,7 @@ function TvSeries() {
 function Bookmarks() {
     return (
         <div>
-            <h1>I am the bookmark container</h1>
+            <h1 style={{color:"white"}}>I am the bookmark container</h1>
         </div>
     );
 }
