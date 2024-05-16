@@ -1,8 +1,10 @@
 import { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {Button, TextField, FormControl, Container, ThemeProvider, Typography} from '@mui/material';
 import logo from "../../assets/logo.svg";
 import theme from "../Theme.styles";
+import axios from "axios";
+import { getApiUrl } from "../../services/ApiUrl";
 
 function Register() {
 
@@ -12,18 +14,27 @@ function Register() {
 		confirmPass: ''
 	});
 
+	const apiUrl = getApiUrl();
+	const navigate = useNavigate();
+
 	const handleChange = (e) => {
 		const { name, value } = e.target;
-		console.log(`inside handleChange. name: ${name}, value: ${value}`);
 		setInputData({
 			...inputData,
 			[name]: value
 		});
 	}
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log("handleSubmit clicked");
+		
+		const { email, password } = inputData;
+		try{
+			const result = await axios.post(`${apiUrl}/user/register`, { email, password });
+			navigate('/');
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	return (
@@ -46,6 +57,7 @@ function Register() {
 			    			name="email"
 			    			value={inputData.email}
 			    			onChange={handleChange}
+			    			
 			    		/>
 			    		<TextField
 			    			label="Password"
@@ -71,7 +83,7 @@ function Register() {
 			    			value={inputData.confirmPass}
 			    			onChange={handleChange}
 			    		/>
-			    		<Button variant="contained" fullWidth >Login to your account</Button>
+			    		<Button type="submit" variant="contained" fullWidth >Create an account</Button>
 			    	</form>
 			    	<div className="redirect-link">
 			    		<small>Already have an account? <Link to="/login" className="link-font">Login</Link></small>

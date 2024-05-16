@@ -6,8 +6,18 @@ import theme from "../Theme.styles";
 
 function Login() {
 
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
+	const [inputData, setInputData] = useState({
+		email: "",
+		password: ""
+	});
+
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		setInputData({
+			...inputData,
+			[name]: value
+		});
+	}
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -29,9 +39,11 @@ function Login() {
 			    			variant="standard"
 			    			sx={{mb: 3}}
 			    			color="secondary"
-			    			type="emial"
+			    			type="email"
 			    			fullWidth
-			    			value={email}
+			    			name="email"
+			    			value={inputData.email}
+			    			onChange={handleChange}
 			    		/>
 			    		<TextField
 			    			label="Password"
@@ -41,7 +53,9 @@ function Login() {
 			    			type="password"
 			    			sx={{mb: 3}}
 			    			fullWidth
-			    			value={password}
+			    			name="password"
+			    			value={inputData.password}
+			    			onChange={handleChange}
 			    		/>
 			    		<Button variant="contained" fullWidth >Login to your account</Button>
 			    	</form>
