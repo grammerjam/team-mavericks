@@ -1,53 +1,39 @@
-import * as React from 'react';
-import { styled, alpha } from '@mui/material/styles';
-import InputBase from '@mui/material/InputBase';
+import React, { useState, useEffect, useContext } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 
-const Search = styled('div')(({ theme }) => ({
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha("rgb(16, 20, 30)", 0.15),
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(1),
-        width: 'auto',
-    },
-}));
+import { Search, SearchIconWrapper, StyledInputBase } from './SearchBar.styles';
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'white',
-    width: '100%',
-    marginLeft: "50px",
-    caretColor: "rgb(252, 71, 71)",
-    '&:hover': {
-        border: "none",
-        borderBottom: "1px solid rgb(90, 105, 143)"
-    },
-    '& .MuiInputBase-input': {
-        padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
-        transition: theme.transitions.create('width'),
-        [theme.breakpoints.up('sm')]: {
-            width: '12ch',
-            '&:focus': {
-                width: '20ch',
-            },
-        },
-    },
-}));
+// Import Movies Context
+import { MoviesContext } from '../../context/Movies.context';
 
 export const SearchBar = () => {
+
+    // Import Movies Context
+    const { movies, filteredMovies, setFilteredMovies } = useContext(MoviesContext);
+
+    // Let the user user the search input
+    const [searchInput, setSearchInput] = useState("");
+
+    const onHandleInputChange = (e) => {
+        // Change value of searchInput to whatever the user wrote right now
+        const inputVal = e.target.value;
+        setSearchInput(inputVal);
+    };
+
+     // Run this effect whenever searchInput changes
+    useEffect(() => {
+        // Filter movies based on the input value
+        const filtered = movies.filter(movie =>
+            movie.title.toLowerCase().includes(searchInput.toLowerCase())
+        );
+        setFilteredMovies(filtered);
+    }, [searchInput]);
+
+     // Run this effect whenever filteredMovies changes
+     // DELETE THIS EFFECT ONCE MOVIES ARE SHOWN IN THE MEDIA CARDS
+    useEffect(() => {
+        console.log(filteredMovies);
+    }, [filteredMovies]);
 
     return (
                     <Search>
@@ -57,6 +43,7 @@ export const SearchBar = () => {
                         <StyledInputBase
                             placeholder="Search for movies of TV series"
                             inputProps={{ 'aria-label': 'search' }}
+                            onChange={onHandleInputChange}
                         />
                     </Search>
     )

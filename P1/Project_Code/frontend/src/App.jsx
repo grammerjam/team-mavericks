@@ -3,8 +3,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './routes/Home/Home.route';
 import Login from './routes/Login/Login.route';
 import Register from './routes/Register/Register.route';
-import { BackendURLContextProvider } from './context/BackendURL.context';
 import { Layout } from "./components/Layout/Layout.jsx";
+
+// Contexts that contain data needed throughout the whole app
+import { BackendURLContextProvider } from './context/BackendURL.context';
+import { MoviesContextProvider } from './context/Movies.context.jsx';
 
 function Movies() {
     return (
@@ -34,17 +37,19 @@ function App() {
     return (
         <BrowserRouter>
             <BackendURLContextProvider>
-            <Routes>
-                <Route path="/" element={<Layout />}>
-                    <Route index element={<Home/>} />
-                    <Route path="/movies" element={<Movies/>} />
-                    <Route path="/tv-series" element={<TvSeries/>} />
-                    <Route path="/bookmarks" element={<Bookmarks/>} />
-                </Route>
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-            </Routes>
-                </BackendURLContextProvider>
+                <MoviesContextProvider>
+                    <Routes>
+                        <Route path="/" element={<Layout />}>
+                            <Route index element={<Home/>} />
+                            <Route path="/movies" element={<Movies/>} />
+                            <Route path="/tv-series" element={<TvSeries/>} />
+                            <Route path="/bookmarks" element={<Bookmarks/>} />
+                        </Route>
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
+                    </Routes>
+                </MoviesContextProvider>
+            </BackendURLContextProvider>
         </BrowserRouter>
     );
 }
