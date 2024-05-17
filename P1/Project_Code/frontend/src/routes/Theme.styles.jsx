@@ -14,6 +14,11 @@ const theme = createTheme({
 			fontWeight: "300",
 			fontSize: "32px",
 			letterSpacing: "-0.5px"	
+		},
+		span: {
+			fontFamily: "Outfit",
+			fontWeight: "300",
+			letterSpacing: "-0.5px"
 		}
 	},
 	components: {
