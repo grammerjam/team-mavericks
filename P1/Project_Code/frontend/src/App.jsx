@@ -9,30 +9,10 @@ import { Layout } from "./components/Layout/Layout.jsx";
 import { BackendURLContextProvider } from './context/BackendURL.context';
 import { UserContextProvider } from './context/User.context.jsx';
 import { MoviesContextProvider } from './context/Movies.context.jsx';
-
-function Movies() {
-    return (
-        <div>
-            <h1 style={{color:"white"}} >I am the movies container</h1>
-        </div>
-    );
-}
-
-function TvSeries() {
-    return (
-        <div>
-            <h1 style={{color:"white"}}>I am the tv series container</h1>
-        </div>
-    );
-}
-
-function Bookmarks() {
-    return (
-        <div>
-            <h1 style={{color:"white"}}>I am the bookmark container</h1>
-        </div>
-    );
-}
+import {Movies} from "./routes/Movies/Movies.route.jsx";
+import {Bookmarks} from "./routes/Bookmarks/Bookmarks.route.jsx";
+import {TvSeries} from "./routes/TvSeries/TvSeries.route.jsx";
+import {SearchResults} from "./routes/SearchResults/SearchResults.route.jsx"
 
 function App() {
     return (
@@ -46,6 +26,7 @@ function App() {
                                 <Route path="/movies" element={<Movies/>} />
                                 <Route path="/tv-series" element={<TvSeries/>} />
                                 <Route path="/bookmarks" element={<Bookmarks/>} />
+                                <Route path="/searchresults" element={<SearchResults/>} />
                             </Route>
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
