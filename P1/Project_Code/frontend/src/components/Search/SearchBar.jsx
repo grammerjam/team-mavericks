@@ -3,12 +3,12 @@ import SearchIcon from '@mui/icons-material/Search';
 
 import { Search, SearchIconWrapper, StyledInputBase } from './SearchBar.styles';
 
-// Import Movies Context
+// Import MoviesRoute Context
 import { MoviesContext } from '../../context/Movies.context';
 
 export const SearchBar = () => {
 
-    // Import Movies Context
+    // Import MoviesRoute Context
     const { movies, filteredMovies, setFilteredMovies } = useContext(MoviesContext);
 
     // Let the user user the search input
@@ -41,7 +41,7 @@ export const SearchBar = () => {
                             <SearchIcon style={{color: "white"}} />
                         </SearchIconWrapper>
                         <StyledInputBase
-                            placeholder="Search for movies of TV series"
+                            placeholder="SearchRoute for movies of TV series"
                             inputProps={{ 'aria-label': 'search' }}
                             onChange={onHandleInputChange}
                         />

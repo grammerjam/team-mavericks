@@ -12,10 +12,10 @@ export const NavigationBar = () => {
             <MovieIcon  sx={{ color: 'red'}} />
             <nav>
                 <ul style={{listStyleType: 'none', display: 'flex', justifyContent: 'space-around'}}>
-                    <li><GridViewIcon sx={{ color: "white" }} /><Link to="/">Home</Link></li>
-                    <li><LocalMoviesIcon sx={{ color: "white" }} /><Link to="/movies">Movies</Link></li>
-                    <li><BookmarkIcon sx={{ color: "white" }} /><Link to="/bookmarks">Bookmarks</Link></li>
-                    <li><TvIcon sx={{ color: "white" }}/><Link to="/tv-series">TV Series</Link></li>
+                    <li><Link to="/"><GridViewIcon sx={{ color: "white" }} /></Link></li>
+                    <li><Link to="/movies"><LocalMoviesIcon sx={{ color: "white" }} /></Link></li>
+                    <li><Link to="/bookmarks"><BookmarkIcon sx={{ color: "white" }} /></Link></li>
+                    <li><Link to="/tv-series"><TvIcon sx={{ color: "white" }}/></Link></li>
                 </ul>
             </nav>
             <AccountCircleIcon sx={{ color: 'white'}}></AccountCircleIcon>
