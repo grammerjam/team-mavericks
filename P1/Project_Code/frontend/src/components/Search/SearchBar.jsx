@@ -1,15 +1,19 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
+import { IconButton } from "@mui/material";
 
-import { Search, SearchIconWrapper, StyledInputBase } from "./SearchBar.styles";
+import { Search, StyledInputBase } from "./SearchBar.styles";
 
 // Import MoviesRoute Context
 import { MoviesContext } from "../../context/Movies.context";
 
 export const SearchBar = () => {
   // Import MoviesRoute Context
-  const { movies, filteredMovies, setFilteredMovies } =
-    useContext(MoviesContext);
+  const { movies, setFilteredMovies } = useContext(MoviesContext);
+
+  // Import Navigation Handler
+  const navigate = useNavigate();
 
   // Let the user user the search input
   const [searchInput, setSearchInput] = useState("");
@@ -20,24 +24,51 @@ export const SearchBar = () => {
     setSearchInput(inputVal);
   };
 
-  // Run this effect whenever searchInput changes
-  useEffect(() => {
-    // Filter movies based on the input value
-    const filtered = movies.filter((movie) =>
-      movie.title.toLowerCase().includes(searchInput.toLowerCase()),
-    );
-    setFilteredMovies(filtered);
-  }, [searchInput]);
+  const goToSearchResults = () => {
+    navigate("/search");
+  };
+
+  const onHandleSearchButtonClick = () => {
+    filterMovies();
+    goToSearchResults();
+  };
+
+  const onHandleKeyDownPress = (e) => {
+    // Detect that the Enter key was pressed
+    if (e.key === 'Enter' || e.keyCode === 13)
+      {
+        filterMovies();
+        goToSearchResults();
+      }
+  };
+
+  const filterMovies = () => {
+        // Filter movies based on the input value
+        const filtered = movies.filter((movie) =>
+          movie.title.toLowerCase().includes(searchInput.toLowerCase()),
+        );
+
+        if (filtered.length ==  0)
+        {
+            setFilteredMovies([]);
+        }
+
+        else
+        {
+          setFilteredMovies(filtered);
+        }
+  }
 
   return (
     <Search>
-      <SearchIconWrapper>
-        <SearchIcon style={{ color: "white"}} />
-      </SearchIconWrapper>
+        <IconButton aria-label="search" style={{ position: "relative", top: "50px"}} onClick={onHandleSearchButtonClick}>
+          <SearchIcon style={{ color: "white"}}/>
+        </IconButton >
       <StyledInputBase
         placeholder="Search for movies of TV series"
         inputProps={{ "aria-label": "search" }}
         onChange={onHandleInputChange}
+        onKeyDown={onHandleKeyDownPress}
       />
     </Search>
   );

@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { Box } from "@mui/material";
 
 const MediaCard = ({ movie, type }) => {
 
     const [imgSrc, setImgSrc] = useState("");
 
+    // Dynamically import the image required for the media card
     useEffect(() => {
         const loadPic = async () => {
             const pic = await import(`../../assets/thumbnails/${movie.pics.regular.medium}`);

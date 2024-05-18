@@ -13,20 +13,13 @@ export const Search = styled('div')(({ theme }) => ({
     },
 }));
 
-export const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-}));
-
 export const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: 'white',
     width: '100%',
     marginLeft: "50px",
+    fontSize: "24px",
+    fontWeight: "300",
+    fontFamily: "Outfit",
     caretColor: "rgb(252, 71, 71)",
     '&:hover': {
         border: "none",
