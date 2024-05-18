@@ -29,16 +29,10 @@ export const SearchBar = () => {
     setFilteredMovies(filtered);
   }, [searchInput]);
 
-  // Run this effect whenever filteredMovies changes
-  // DELETE THIS EFFECT ONCE MOVIES ARE SHOWN IN THE MEDIA CARDS
-  useEffect(() => {
-    console.log(filteredMovies);
-  }, [filteredMovies]);
-
   return (
     <Search>
       <SearchIconWrapper>
-        <SearchIcon style={{ color: "white" }} />
+        <SearchIcon style={{ color: "white"}} />
       </SearchIconWrapper>
       <StyledInputBase
         placeholder="Search for movies of TV series"
