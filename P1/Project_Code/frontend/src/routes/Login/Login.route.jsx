@@ -1,17 +1,54 @@
 import { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {Button, TextField, FormControl, Container, ThemeProvider, Typography} from '@mui/material';
 import logo from "../../assets/logo.svg";
-import theme from "../Theme.styles";
+import theme from "../../Theme.styles";
+import { getApiUrl } from "../../services/ApiUrl";
+import axios from "axios";
 
 function Login() {
 
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
+	const [inputData, setInputData] = useState({
+		email: "",
+		password: ""
+	});
 
-	const handleSubmit = (e) => {
+	const navigate = useNavigate();
+	const [errors, setErrors] = useState({});
+	const apiUrl = getApiUrl();
+
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		setInputData({
+			...inputData,
+			[name]: value
+		});
+		if(inputData.email === '' || inputData.password === ''){
+			errors.all = null;
+		}
+	}
+
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log("handleSubmit clicked");
+		const { email, password } = inputData;
+
+		try{
+			const result = await axios.post(`${apiUrl}/auth/login`, { email, password });
+			console.log(result.data);
+			if(result.data.id){
+				navigate('/');
+			}
+		} catch(err){
+			const { data } = err.response;
+		 	console.log(data);
+		 	if(data.error == "User not found" || data.error === "Incorrect password"){
+		 		setErrors({
+					all: "Wrong email or password"
+				});
+
+		 	}
+		}
+		
 	}
 
 	return (
@@ -25,25 +62,32 @@ function Login() {
 			    		<Typography variant="h2">Login</Typography>
 			    		<TextField
 			    			label="Email address"
+			    			error={errors.all ? true : false}
 			    			required
 			    			variant="standard"
 			    			sx={{mb: 3}}
-			    			color="secondary"
-			    			type="emial"
+			    			color="white"
+			    			type="email"
 			    			fullWidth
-			    			value={email}
+			    			name="email"
+			    			value={inputData.email}
+			    			onChange={handleChange}
 			    		/>
 			    		<TextField
 			    			label="Password"
+			    			error={errors.all ? true : false}
 			    			required
 			    			variant="standard"
-			    			color="secondary"
+			    			color="white"
 			    			type="password"
 			    			sx={{mb: 3}}
 			    			fullWidth
-			    			value={password}
+			    			name="password"
+			    			value={inputData.password}
+			    			onChange={handleChange}
 			    		/>
-			    		<Button variant="contained" fullWidth >Login to your account</Button>
+			    		{ errors.all && <Typography color="error" variant="span">{errors.all}</Typography>}
+			    		<Button type="submit" variant="contained" fullWidth >Login to your account</Button>
 			    	</form>
 			    	<div className="redirect-link">
 			    		<small>Don't have an account? <Link to="/register" className="link-font">Sign Up</Link></small>

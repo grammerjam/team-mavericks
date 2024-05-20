@@ -1,6 +1,11 @@
 import { createTheme } from "@mui/material";
 
 const theme = createTheme({
+	palette: {
+		white: {
+	      main: "#FFFFFF",			
+		}
+	},
 	typography: {
 		h2: {
 			paddingTop: "40px",
@@ -9,6 +14,11 @@ const theme = createTheme({
 			fontWeight: "300",
 			fontSize: "32px",
 			letterSpacing: "-0.5px"	
+		},
+		span: {
+			fontFamily: "Outfit",
+			fontWeight: "300",
+			letterSpacing: "-0.5px"
 		}
 	},
 	components: {
@@ -24,7 +34,7 @@ const theme = createTheme({
 							opacity: "0.5"
 						},
 						"&:after": {
-							borderColor: "secondary.main",
+							borderColor: "#FFFFFF",
 							borderWidth: "3px"
 						},
 						":hover:not(.Mui-focused)":{
@@ -41,9 +51,8 @@ const theme = createTheme({
 						opacity: "0.5",
 						fontSize: "15px",
 						marginLeft: "15px",
-
-					}
-				}
+					},
+				},
 			}
 		},
 		//Custom Override for container
@@ -71,7 +80,8 @@ const theme = createTheme({
 					padding: "10px",
 
 					"&:hover":{
-						backgroundColor: 'rgba(252, 71, 71, 0.8)', 
+						backgroundColor: "#f6f6f6",
+						color: "#10141E"
 					}  
 				}
 			}

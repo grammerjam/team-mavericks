@@ -32,6 +32,7 @@ export const Layout = () => {
       </Grid>
       <Grid item xs={11} style={{ paddingTop: "1rem" }}>
         <SearchBar></SearchBar>
+        <div style={{visibility: "hidden", padding: "10px"}}>xd</div>
         <Outlet></Outlet>
       </Grid>
     </Grid>

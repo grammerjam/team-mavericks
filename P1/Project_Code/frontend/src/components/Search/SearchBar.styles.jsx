@@ -13,20 +13,13 @@ export const Search = styled('div')(({ theme }) => ({
     },
 }));
 
-export const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-}));
-
 export const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: 'white',
     width: '100%',
     marginLeft: "50px",
+    fontSize: "24px",
+    fontWeight: "300",
+    fontFamily: "Outfit",
     caretColor: "rgb(252, 71, 71)",
     '&:hover': {
         border: "none",
@@ -34,13 +27,5 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
     '& .MuiInputBase-input': {
         padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
-        transition: theme.transitions.create('width'),
-        [theme.breakpoints.up('sm')]: {
-            width: '12ch',
-            '&:focus': {
-                width: '20ch',
-            },
-        },
     },
 }));
