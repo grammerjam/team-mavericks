@@ -7,7 +7,6 @@ export const SearchResults = () => {
 
     // Grab the filtered movies
     const { filteredMovies } = useContext(MoviesContext);
-    console.log(filteredMovies);
 
     return (
         <Grid container spacing={{ sm: 2, md: 3 }} columns={{ xs: 12, sm: 4, md: 3 }}>

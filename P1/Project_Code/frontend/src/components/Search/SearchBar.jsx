@@ -44,18 +44,19 @@ export const SearchBar = () => {
 
   const filterMovies = () => {
         // Filter movies based on the input value
-        const filtered = movies.filter((movie) =>
-          movie.title.toLowerCase().includes(searchInput.toLowerCase()),
-        );
-
-        if (filtered.length ==  0)
+        if (searchInput.length > 0)
         {
-            setFilteredMovies([]);
+          const filtered = movies.filter((movie) => {
+              return movie.title.toLowerCase().includes(searchInput.toLowerCase());
+            }
+          );
+
+          setFilteredMovies(filtered);
         }
 
         else
         {
-          setFilteredMovies(filtered);
+          setFilteredMovies([]);
         }
   }
 
