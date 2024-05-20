@@ -1,12 +1,16 @@
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LocalMoviesIcon from "@mui/icons-material/LocalMovies";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import MovieIcon from "@mui/icons-material/Movie";
 import TvIcon from "@mui/icons-material/Tv";
 import GridViewIcon from "@mui/icons-material/GridView";
-import { Drawer } from "@mui/material";
 import React, { useState } from "react";
+import {
+  NavBarContainer,
+  NavBarMenuItemsContainer,
+  NavBarLink,
+} from "./NavigationBar.styles.js";
 
 export const NavigationBar = () => {
   const location = useLocation();
@@ -21,84 +25,29 @@ export const NavigationBar = () => {
   });
 
   return (
-    <div
-      className="NavigationContainer"
-      style={{
-        display: "flex",
-        height: "625px",
-        flexDirection: "column",
-        alignItems: "center",
-        width: "96px",
-        paddingTop: "1rem",
-        paddingBottom: "1rem",
-        background: "#161D2F",
-        borderRadius: "20px",
-      }}
-    >
-      <div className="MovieIconContainer" style={{ marginBottom: "20px" }}>
-        <MovieIcon sx={{ color: "red" }} />
-      </div>
-      <div
-        className="NavigationMenuItemsContainer"
-        style={{
-          flexGrow: 1,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Link
-          to="/"
-          style={{ margin: "20px 0" }}
-          onClick={() => handleIconClick("/")}
-        >
+    <NavBarContainer>
+      <MovieIcon sx={{ color: "red", marginBottom: "20px" }} />
+      <NavBarMenuItemsContainer>
+        <NavBarLink to="/" onClick={() => handleIconClick("/")}>
           <GridViewIcon sx={iconStyle("/")} />
-        </Link>
-        <Link
-          to="/movies"
-          style={{ margin: "20px 0" }}
-          onClick={() => handleIconClick("/movies")}
-        >
+        </NavBarLink>
+        <NavBarLink to="/movies" onClick={() => handleIconClick("/movies")}>
           <LocalMoviesIcon sx={iconStyle("/movies")} />
-        </Link>
-        <Link
+        </NavBarLink>
+        <NavBarLink
           to="/bookmarks"
-          style={{ margin: "20px 0" }}
           onClick={() => handleIconClick("/bookmarks")}
         >
           <BookmarkIcon sx={iconStyle("/bookmarks")} />
-        </Link>
-        <Link
+        </NavBarLink>
+        <NavBarLink
           to="/tv-series"
-          style={{ margin: "20px 0" }}
           onClick={() => handleIconClick("/tv-series")}
         >
           <TvIcon sx={iconStyle("/tv-series")} />
-        </Link>
-      </div>
-      <div
-        className="ProfileIconContainer"
-        style={{ marginBottom: "20px", paddingTop: "100px" }}
-      >
-        <AccountCircleIcon sx={{ color: "#5A698F" }} />
-      </div>
-    </div>
+        </NavBarLink>
+      </NavBarMenuItemsContainer>
+      <AccountCircleIcon sx={{ color: "#5A698F" }} />
+    </NavBarContainer>
   );
 };
-
-// <Drawer
-//     sx={{
-//         width: drawerWidth,
-//         flexShrink: 0,
-//         "& .MuiDrawer-paper": {
-//             width: drawerWidth,
-//             boxSizing: "border-box",
-//             display: "flex",
-//             flexDirection: "column",
-//             backgroundColor: "#161D2F",
-//         },
-//     }}
-//     variant="permanent"
-//     anchor="left"
-// >
-// </Drawer>
