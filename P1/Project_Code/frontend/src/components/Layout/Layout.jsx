@@ -30,9 +30,9 @@ export const Layout = () => {
       >
         <NavigationBar></NavigationBar>
       </Grid>
-      <Grid item xs={11} style={{ paddingTop: "1rem" }}>
+      <Grid item xs={11}>
         <SearchBar></SearchBar>
-        <div style={{visibility: "hidden", padding: "10px"}}>xd</div>
+        <div style={{ visibility: "hidden", padding: "10px" }}>xd</div>
         <Outlet></Outlet>
       </Grid>
     </Grid>

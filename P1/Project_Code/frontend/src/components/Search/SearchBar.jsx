@@ -35,38 +35,36 @@ export const SearchBar = () => {
 
   const onHandleKeyDownPress = (e) => {
     // Detect that the Enter key was pressed
-    if (e.key === 'Enter' || e.keyCode === 13)
-      {
-        filterMovies();
-        goToSearchResults();
-      }
+    if (e.key === "Enter" || e.keyCode === 13) {
+      filterMovies();
+      goToSearchResults();
+    }
   };
 
   const filterMovies = () => {
-        // Filter movies based on the input value
-        if (searchInput.length > 0)
-        {
-          const filtered = movies.filter((movie) => {
-              return movie.title.toLowerCase().includes(searchInput.toLowerCase());
-            }
-          );
+    // Filter movies based on the input value
+    if (searchInput.length > 0) {
+      const filtered = movies.filter((movie) => {
+        return movie.title.toLowerCase().includes(searchInput.toLowerCase());
+      });
 
-          setFilteredMovies(filtered);
-        }
-
-        else
-        {
-          setFilteredMovies([]);
-        }
-  }
+      setFilteredMovies(filtered);
+    } else {
+      setFilteredMovies([]);
+    }
+  };
 
   return (
     <Search>
-        <IconButton aria-label="search" style={{ position: "relative", top: "50px"}} onClick={onHandleSearchButtonClick}>
-          <SearchIcon style={{ color: "white"}}/>
-        </IconButton >
+      <IconButton
+        aria-label="search"
+        style={{ position: "relative", top: "50px" }}
+        onClick={onHandleSearchButtonClick}
+      >
+        <SearchIcon style={{ color: "white" }} />
+      </IconButton>
       <StyledInputBase
-        placeholder="Search for movies of TV series"
+        placeholder="Search for movies or TV series"
         inputProps={{ "aria-label": "search" }}
         onChange={onHandleInputChange}
         onKeyDown={onHandleKeyDownPress}
