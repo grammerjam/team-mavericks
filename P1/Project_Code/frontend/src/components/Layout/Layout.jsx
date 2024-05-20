@@ -5,21 +5,35 @@ import { SearchBar } from "../Search/SearchBar.jsx";
 import {
   Box,
   Drawer,
+  Grid,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Stack,
 } from "@mui/material";
 
 export const Layout = () => {
   return (
-    <Box sx={{ display: "flex" }}>
-      <NavigationBar></NavigationBar>
-      <Box component="main" sx={{ flexGrow: 1, bgcolor: "10141E", p: 3 }}>
+    // part 1: page that is a grid container
+    // contains a horizontal stack for search bar
+    // grid container for media container
+    // part 2: vertical stack for nav bar
+    <Grid container spacing={0}>
+      <Grid
+        item
+        xs={1}
+        container
+        justifyContent="center"
+        style={{ paddingTop: "1rem" }}
+      >
+        <NavigationBar></NavigationBar>
+      </Grid>
+      <Grid item xs={11} style={{ paddingTop: "1rem" }}>
         <SearchBar></SearchBar>
         <Outlet></Outlet>
-      </Box>
-    </Box>
+      </Grid>
+    </Grid>
   );
 };
