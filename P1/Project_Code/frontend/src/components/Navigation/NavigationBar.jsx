@@ -26,7 +26,9 @@ export const NavigationBar = () => {
 
   return (
     <NavBarContainer>
-      <MovieIcon sx={{ color: "red", marginBottom: "20px" }} />
+      <NavBarLink to="/" onClick={() => handleIconClick("/")}>
+        <MovieIcon sx={{ color: "red", marginBottom: "20px" }} />
+      </NavBarLink>
       <NavBarMenuItemsContainer>
         <NavBarLink to="/" onClick={() => handleIconClick("/")}>
           <GridViewIcon sx={iconStyle("/")} />
