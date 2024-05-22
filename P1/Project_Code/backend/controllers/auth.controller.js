@@ -23,12 +23,17 @@ exports.login = async (req, res) => {
 		if (result.token)
 		{
 			// Set token cookie for authenticated user
-			res.cookie("token", result.token, { secure: true });
+			res.cookie("token", result.token, { 
+				path: "/",
+				secure: true,
+				httpOnly: true,
+				sameSite: "None",
+				maxAge: 3600000 // 1 Hour
+			 });
 
 			// Send success response upon successful login
 			const successLoginRes = AuthView.login({
 				id: result.id,
-				username: result.username,
 				email: result.email
 			},HTTPCodes.Ok, null);
 

@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import {Button, TextField, FormControl, Container, ThemeProvider, Typography} from '@mui/material';
 import logo from "../../assets/logo.svg";
 import theme from "../../Theme.styles";
 import { getApiUrl } from "../../services/ApiUrl";
 import axios from "axios";
+
+import { UserContext } from '../../context/User.context';
 
 function Login() {
 
@@ -16,6 +18,24 @@ function Login() {
 	const navigate = useNavigate();
 	const [errors, setErrors] = useState({});
 	const apiUrl = getApiUrl();
+
+	const { user, signUser } = useContext(UserContext);
+
+	useEffect(() => {
+		// If the user is set, go to the main page
+		if (user)
+		{
+			navigate("/");
+		}
+	}, []);
+
+	useEffect(() => {
+		// If the user is set, go to the main page
+		if (user)
+		{
+			navigate("/");
+		}
+	}, [user]);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -34,9 +54,8 @@ function Login() {
 
 		try{
 			const result = await axios.post(`${apiUrl}/auth/login`, { email, password });
-			console.log(result.data);
 			if(result.data.id){
-				navigate('/');
+				signUser(result.data);
 			}
 		} catch(err){
 			const { data } = err.response;

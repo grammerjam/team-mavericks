@@ -13,7 +13,11 @@ const PORT = process.env.PORT;
 const app = express();
 
 // Allow CORS
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true
+}
+));
 
 /** Whitelist CORS ONLY FOR THE FRONT-END */
 
