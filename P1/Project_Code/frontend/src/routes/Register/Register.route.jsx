@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import {Button, TextField, FormControl, Container, ThemeProvider, Typography} from '@mui/material';
 import logo from "../../assets/logo.svg";
 import theme from "../../Theme.styles";
 import axios from "axios";
 import { getApiUrl } from "../../services/ApiUrl";
+
+import { UserContext } from '../../context/User.context';
 
 function Register() {
     const [inputData, setInputData] = useState({
@@ -16,6 +18,24 @@ function Register() {
 	const [errors, setErrors] = useState({});
 	const apiUrl = getApiUrl();
 	const navigate = useNavigate();
+
+	const { user, signUser} = useContext(UserContext);
+
+	useEffect(() => {
+		// If the user is set, go to the main page
+		if (user)
+		{
+			navigate("/");
+		}
+	}, []);
+
+	useEffect(() => {
+		// If the user is set, go to the main page
+		if (user)
+		{
+			navigate("/");
+		}
+	}, [user]);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -76,7 +96,7 @@ function Register() {
 
 			try{
 				const result = await axios.post(`${apiUrl}/user/register`, { email, password });
-				navigate('/');
+				signUser(result.data);
 			} catch (err) {
 				console.log(err.response);
 			}

@@ -5,19 +5,29 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 import MovieIcon from "@mui/icons-material/Movie";
 import TvIcon from "@mui/icons-material/Tv";
 import GridViewIcon from "@mui/icons-material/GridView";
-import React, { useState } from "react";
+import { IconButton } from "@mui/material";
+import React, { useState, useContext } from "react";
 import {
   NavBarContainer,
   NavBarMenuItemsContainer,
   NavBarLink,
 } from "./NavigationBar.styles.js";
 
+import { UserContext } from "../../context/User.context.jsx";
+import avatar from "../../assets/image-avatar.png";
+
 export const NavigationBar = () => {
   const location = useLocation();
   const [activePath, setActivePath] = useState(location.pathname);
 
+  const { user, logoutUser } = useContext(UserContext);
+
   const handleIconClick = (path) => {
     setActivePath(path);
+  };
+
+  const onClickLogoutUser = () => {
+    logoutUser();
   };
 
   const iconStyle = (path) => ({
@@ -49,7 +59,19 @@ export const NavigationBar = () => {
           <TvIcon sx={iconStyle("/tv-series")} />
         </NavBarLink>
       </NavBarMenuItemsContainer>
-      <AccountCircleIcon sx={{ color: "#5A698F" }} />
+      {
+        user
+        ?
+          (
+            <IconButton aria-label="avatar" onClick={onClickLogoutUser}>
+                <img src={avatar} alt="User Profile Picture Avatar" width={42} style={{border: "2px solid white", borderRadius: "50%"}} />
+            </IconButton>
+          )
+        :
+          (
+            <AccountCircleIcon sx={{ color: "#5A698F", fontSize: 42 }} />
+          )
+      }
     </NavBarContainer>
   );
 };

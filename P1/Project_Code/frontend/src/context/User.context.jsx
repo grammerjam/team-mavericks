@@ -15,6 +15,7 @@ const UserContextProvider = ({ children }) => {
      */
 
     const [user, setUser] = useState(() => {
+        
         const userFromSessionStorage = sessionStorage.getItem("user");
 
         if (userFromSessionStorage)
