@@ -21,10 +21,9 @@ exports.login = async (email, password) => {
 				);
 				// Return token and user data
 				return { 
-					token,
+					token: token,
 					id: user.id,
-					email: user.email,
-					username: user.username
+					email: user.email
 				 };
 			}else{
 				return { error: "Incorrect password" };

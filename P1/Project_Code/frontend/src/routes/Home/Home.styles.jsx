@@ -1,6 +1,6 @@
 const homeStyles = {
     button: {
-      backgroundColor: "rgb(252, 71, 71)",
+      backgroundColor: "rgb(18,121,215)",
       fontFamily: "Outfit",
       fontSize: "13px",
       fontWeight: "300"
