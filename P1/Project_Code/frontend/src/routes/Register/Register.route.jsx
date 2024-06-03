@@ -52,32 +52,13 @@ function Register() {
 		}
 	}
 
-	const userExists = async (email) => {
-		try{
-			const user = await axios.get(`${apiUrl}/user/getUserByEmail/${email}`);
-			if(user.data.id){
-				return true;
-			}
-
-		} catch(err) {
-			console.log(err);
-			return false;
-		}
-
-	}
 
 	//Error validation function
 	const validateInput = async (data) => {
 		let inputErrors = {};
 
-		//Function checks if user email already exists
-		const emailExists = await userExists(data.email)
-
 		if(data.confirmPass !== data.password){
 			inputErrors.confirmPass = 'No match!';
-		}
-		if(emailExists){
-			inputErrors.email = "Email already exists"
 		}
 
 		if(data.password.length < 8){
@@ -89,7 +70,7 @@ function Register() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const validationErrors = await validateInput(inputData)
+		const validationErrors = await validateInput(inputData);
 		
 		if(Object.keys(validationErrors).length === 0){
 			const { email, password } = inputData;
@@ -97,8 +78,11 @@ function Register() {
 			try{
 				const result = await axios.post(`${apiUrl}/user/register`, { email, password });
 				signUser(result.data);
+				setErrors({});
 			} catch (err) {
-				console.log(err.response);
+				setErrors({
+					userExists: err.response.data.error
+				});
 			}
 		}else {
 			setErrors(validationErrors);
@@ -157,6 +141,7 @@ function Register() {
 			    			onChange={handleChange}
 			    		/>
 			    		{ errors.confirmPass && <Typography color="error" variant="span">{errors.confirmPass}</Typography>}
+						{ errors.userExists && <Typography color="error" variant="span">{errors.userExists}</Typography>}
 			    		<Button type="submit" variant="contained" fullWidth >Create an account</Button>
 			    	</form>
 			    	<div className="redirect-link">

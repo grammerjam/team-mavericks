@@ -29,6 +29,19 @@ exports.register = async (req, res) => {
         }
     }
 
+    // Try to get user data by the email, if a user is found, return a user already exists error
+    const userNewData = await UserModel.getUserByEmail(userData.email);
+
+    // If a user was found, return a Conflint Client Error Response
+    if (userNewData)
+    {
+        // Produce Conflict error response for user already exists
+        const userAlreadyExistsObj = UserView.register(null, HTTPCodes.Conflict, `User of email "${userData.email}" already exists`);
+
+        return res.status(HTTPCodes.Conflict).json(userAlreadyExistsObj);
+    }
+
+
     // Make Bcrypt Hash
     const hashedPassword = makeBcryptHash(xss(userData.password));
 
