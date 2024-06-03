@@ -10,6 +10,7 @@ class HTTPCodes
     static Unauthorized = 401;
     static Forbidden = 403;
     static NotFound = 404;
+    static Conflict = 409;
     static InternalServerError = 500;
 }
 
