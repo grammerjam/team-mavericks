@@ -1,11 +1,11 @@
 import { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import {Button, TextField, FormControl, Container, ThemeProvider, Typography} from '@mui/material';
+import { Button, TextField, Container, ThemeProvider, Typography } from '@mui/material';
 import logo from "../../assets/logo.svg";
 import theme from "../../Theme.styles";
 import axios from "axios";
 import { getApiUrl } from "../../services/ApiUrl";
-
+import isEmail from "validator/lib/isEmail";
 import { UserContext } from '../../context/User.context';
 
 function Register() {
@@ -56,6 +56,11 @@ function Register() {
 	//Error validation function
 	const validateInput = async (data) => {
 		let inputErrors = {};
+
+		if (!isEmail(data.email))
+		{
+			inputErrors.email = "Invalid Email";
+		}
 
 		if(data.confirmPass !== data.password){
 			inputErrors.confirmPass = 'No match!';
