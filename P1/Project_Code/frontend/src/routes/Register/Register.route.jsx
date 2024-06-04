@@ -27,15 +27,7 @@ function Register() {
 		{
 			navigate("/");
 		}
-	}, []);
-
-	useEffect(() => {
-		// If the user is set, go to the main page
-		if (user)
-		{
-			navigate("/");
-		}
-	}, [user]);
+	}, [user, navigate]);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;

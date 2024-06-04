@@ -28,15 +28,7 @@ function Login() {
 		{
 			navigate("/");
 		}
-	}, []);
-
-	useEffect(() => {
-		// If the user is set, go to the main page
-		if (user)
-		{
-			navigate("/");
-		}
-	}, [user]);
+	}, [navigate, user]);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
