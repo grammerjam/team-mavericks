@@ -2,6 +2,7 @@
     {
         "title": "112",
         "isBookmarked": false,
+        "category": "movie",
         "pics": {
             "regular": {
                 "large": "112/regular/large.jpg",
@@ -13,6 +14,7 @@
     {
         "title": "1998",
         "isBookmarked": false,
+        "category": "movie",
         "pics": {
             "regular": {
                 "large": "1998/regular/large.jpg",
@@ -28,6 +30,7 @@
     {
         "title": "Asia In 24 Days",
         "isBookmarked": false,
+        "category": "movie",
         "pics": {
             "regular": {
                 "large": "asia-in-24-days/regular/large.jpg",
@@ -39,6 +42,7 @@
     {
         "title": "Autosport The Series",
         "isBookmarked": false,
+        "category": "movie",
         "pics": {
             "regular": {
                 "large": "autosport-the-series/regular/large.jpg",
@@ -50,6 +54,7 @@
     {
         "title": "Below Echo",
         "isBookmarked": false,
+        "category": "movie",
         "pics": {
             "regular": {
                 "large": "below-echo/regular/large.jpg",
@@ -61,6 +66,7 @@
     {
         "title": "Beyond Earth",
         "isBookmarked": false,
+        "category": "movie",
         "pics": {
             "regular": {
                 "large": "beyond-earth/regular/large.jpg",
@@ -76,6 +82,7 @@
     {
         "title": "Bottom Gear",
         "isBookmarked": false,
+        "category": "movie",
         "pics": {
             "regular": {
                 "large": "bottom-gear/regular/large.jpg",
@@ -91,6 +98,7 @@
     {
         "title": "Community Of Ours",
         "isBookmarked": false,
+        "category": "movie",
         "pics": {
             "regular": {
                 "large": "community-of-ours/regular/large.jpg",
@@ -102,6 +110,7 @@
     {
         "title": "Dark Side Of The Moon",
         "isBookmarked": false,
+        "category": "movie",
         "pics": {
             "regular": {
                 "large": "dark-side-of-the-moon/regular/large.jpg",
@@ -117,6 +126,7 @@
     {
         "title": "Darker",
         "isBookmarked": false,
+        "category": "movie",
         "pics": {
             "regular": {
                 "large": "darker/regular/large.jpg",
@@ -128,6 +138,7 @@
     {
         "title": "Dogs",
         "isBookmarked": false,
+        "category": "movie",
         "pics": {
             "regular": {
                 "large": "dogs/regular/large.jpg",
@@ -139,6 +150,7 @@
     {
         "title": "During The Hunt",
         "isBookmarked": false,
+        "category": "movie",
         "pics": {
             "regular": {
                 "large": "during-the-hunt/regular/large.jpg",
