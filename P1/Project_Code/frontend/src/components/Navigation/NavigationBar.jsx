@@ -68,7 +68,7 @@ export const NavigationBar = () => {
         user
         ?
           (
-            <IconButton aria-label="avatar" onClick={onClickLogoutUser}>
+            <IconButton aria-label="avatar" onClick={onClickLogoutUser} sx={{  paddingTop: isDesktop ? "6em" : 0 }}>
                 <img src={avatar} alt="User Profile Picture Avatar" width={42} style={{border: "2px solid white", borderRadius: "50%"}} />
             </IconButton>
           )

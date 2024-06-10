@@ -12,9 +12,9 @@ export const NavBarContainer = styled("div")(({ theme }) => ({
   background: "#161D2F",
   borderRadius: "20px",
 // Media queries
-  [`@media (min-width: 769px) and (max-width: 1279px)`]: {
+  [`@media (min-width: 768px) and (max-width: 1439px)`]: {
     width: "100%",
-    height: "100%",
+    height: "50%",
     flexDirection: "row",
     justifyContent: "space-around",
   },
@@ -26,8 +26,8 @@ export const NavBarMenuItemsContainer = styled("div")(({ theme }) => ({
   flexDirection: "column",
   alignItems: "center",
   // Media queries
-  [`@media (min-width: 769px) and (max-width: 1279px)`]: {
-    width: "100%",
+  [`@media (min-width: 768px) and (max-width: 1439px)`]: {
+    width: "30%",
     flexDirection: "row",
     justifyContent: "space-around",
   },
