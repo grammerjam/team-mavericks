@@ -1,7 +1,7 @@
 // Require Dependencies
 require("dotenv").config();
 const express = require("express");
-const cors = require("cors");
+//const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const sequelize = require('./config/database');
 require('./models');
@@ -12,12 +12,13 @@ const PORT = process.env.PORT;
 
 const app = express();
 
-// Allow CORS
-app.use(cors({
+// Don't Allow CORS
+/* app.use(cors({
   origin: "http://localhost:5173",
   credentials: true
 }
 ));
+*/
 
 /** Whitelist CORS ONLY FOR THE FRONT-END */
 
