@@ -1,9 +1,10 @@
 import { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import {Button, TextField, FormControl, Container, ThemeProvider, Typography} from '@mui/material';
+import {Button, TextField, Container, ThemeProvider, Typography} from '@mui/material';
 import logo from "../../assets/logo.svg";
 import theme from "../../Theme.styles";
 import { getApiUrl } from "../../services/ApiUrl";
+import isEmail from 'validator/lib/isEmail';
 import axios from "axios";
 
 import { UserContext } from '../../context/User.context';
@@ -27,15 +28,7 @@ function Login() {
 		{
 			navigate("/");
 		}
-	}, []);
-
-	useEffect(() => {
-		// If the user is set, go to the main page
-		if (user)
-		{
-			navigate("/");
-		}
-	}, [user]);
+	}, [navigate, user]);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -48,24 +41,50 @@ function Login() {
 		}
 	}
 
+	//Error validation function
+	const validateInput = async (data) => {
+		let inputErrors = {};
+
+		if (!isEmail(data.email))
+		{
+			inputErrors.email = "Invalid Email";
+		}
+
+		if(data.password.length < 8){
+			inputErrors.password = "Password is too short. At least 8 characters"
+		}
+	
+			return inputErrors;
+	}
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const { email, password } = inputData;
+		const validationErrors = await validateInput(inputData);
 
-		try{
-			const result = await axios.post(`${apiUrl}/auth/login`, { email, password });
-			if(result.data.id){
-				signUser(result.data);
-			}
-		} catch(err){
-			const { data } = err.response;
-		 	console.log(data);
-		 	if(data.error == "User not found" || data.error === "Incorrect password"){
-		 		setErrors({
-					all: "Wrong email or password"
-				});
+		// Perform AJAX request if no validation errors are found
+		if (Object.keys(validationErrors).length === 0)
+		{
+			const { email, password } = inputData;
 
-		 	}
+			try{
+				const result = await axios.post(`${apiUrl}/auth/login`, { email, password });
+				if(result.data.id){
+					signUser(result.data);
+				}
+			} catch(err){
+				const { data } = err.response;
+				 if(data.error == "User not found" || data.error === "Incorrect password"){
+					 setErrors({
+						all: "Wrong email or password"
+					});
+	
+				 }
+			}	
+		}
+
+		else
+		{
+			setErrors(validationErrors);
 		}
 		
 	}
@@ -77,7 +96,7 @@ function Login() {
 		    		<img src={logo} alt="logo img"/>
 		    	</div>
 		    	<Container maxWidth="sm">
-			    	<form onSubmit={handleSubmit}>
+			    	<form onSubmit={handleSubmit} noValidate>
 			    		<Typography variant="h2">Login</Typography>
 			    		<TextField
 			    			label="Email address"
@@ -92,6 +111,7 @@ function Login() {
 			    			value={inputData.email}
 			    			onChange={handleChange}
 			    		/>
+						{ errors.email && <Typography color="error" variant="span">{errors.email}</Typography>}
 			    		<TextField
 			    			label="Password"
 			    			error={errors.all ? true : false}
@@ -105,6 +125,7 @@ function Login() {
 			    			value={inputData.password}
 			    			onChange={handleChange}
 			    		/>
+						{ errors.password && <Typography color="error" variant="span">{errors.password}</Typography>}
 			    		{ errors.all && <Typography color="error" variant="span">{errors.all}</Typography>}
 			    		<Button type="submit" variant="contained" fullWidth >Login to your account</Button>
 			    	</form>
