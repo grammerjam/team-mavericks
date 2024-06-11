@@ -12,7 +12,7 @@ const theme = createTheme({
   },
 	palette: {
 		white: {
-	      main: "#FFFFFF",			
+			main: "#FFFFFF",
 		}
 	},
 	typography: {
