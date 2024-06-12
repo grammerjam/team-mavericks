@@ -30,6 +30,7 @@ const MediaCard = ({ movie, type }) => {
                         (
                             <div>
                                 <img src={imgSrc} alt={movie.title} />
+                                <h4 style={{ color: "white"}}>{movie.category}</h4>
                                 <h3 className="heading-S" style={{ color: "white"}}>{movie.title}</h3>
                             </div>
                         )
