@@ -7,6 +7,12 @@ const theme = createTheme({
 		}
 	},
 	typography: {
+		h1: {
+			fontFamily: "Outfit",
+			fontWeight: "300",
+			fontSize: "32px",
+			letterSpacing: "-0.5px"	
+		},
 		h2: {
 			paddingTop: "40px",
 			paddingBottom: "40px",
