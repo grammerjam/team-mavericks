@@ -21,8 +21,15 @@ const MediaCard = ({ movie, type }) => {
                 ?(
                     type.toLowerCase() == "trending"
                     ?
-                        (   <div style={{ width: "440px", height: "280px", backgroundImage: `url(${imgSrc})`, backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundSize: "cover"}}>
-                                <h2 className="heading-M" style={{ color: "white", marginTop: "15rem", fontWeight: "bolder"}}>{movie.title}</h2>
+                        (   <div style={{ borderRadius: "20px", width: "540px", height: "280px", backgroundImage: `url(${imgSrc})`, backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundSize: "cover"}}>
+                                <div className="trending-media-info">
+                                    <div className="media-info">
+                                        <h4 className="media-info-item">{movie.year} •</h4>
+                                        <h4 className="media-info-item">{movie.category} •</h4>
+                                        <h4 className="media-info-item">{movie.rating}</h4>
+                                    </div>
+                                    <div className="media-title">{movie.title}</div>
+                                </div>
                             </div>
                         )
                     :
@@ -30,8 +37,12 @@ const MediaCard = ({ movie, type }) => {
                         (
                             <div>
                                 <img src={imgSrc} alt={movie.title} />
-                                <h4 style={{ color: "white"}}>{movie.category}</h4>
-                                <h3 className="heading-S" style={{ color: "white"}}>{movie.title}</h3>
+                                <div className="media-info">
+                                    <h4 className="media-info-item">{movie.year} •</h4>
+                                    <h4 className="media-info-item">{movie.category} •</h4>
+                                    <h4 className="media-info-item">{movie.rating}</h4>
+                                </div>
+                                <div className="media-title">{movie.title}</div>
                             </div>
                         )
                 )
@@ -45,3 +56,4 @@ const MediaCard = ({ movie, type }) => {
 }
 
 export default MediaCard;
+
