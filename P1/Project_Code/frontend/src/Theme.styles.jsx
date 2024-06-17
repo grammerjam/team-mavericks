@@ -88,22 +88,14 @@ const theme = createTheme({
 					marginBottom: "20px",
 					padding: "10px",
 
-					"&:hover":{
-						backgroundColor: "#f6f6f6",
-						color: "#10141E"
-					}  
-				}
-			}
-		},
-	}
+          "&:hover": {
+            backgroundColor: "#f6f6f6",
+            color: "#10141E",
+          },
+        },
+      },
+    },
+  },
 });
 
 export default theme;
-
-
-
-
-
-
-
-
