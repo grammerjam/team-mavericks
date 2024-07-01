@@ -108,6 +108,63 @@ body
 
 /*+++++++++++Login/Signup Page+++++++++++++++++++*/
 
+/*+++++++++++MediaList+++++++++++++++++++*/
+
+.media-container
+{
+  margin-top: 80px;
+}
+
+/*+++++++++++MediaList+++++++++++++++++++*/
+
+/*+++++++++++MediaCard+++++++++++++++++++*/
+
+.trending-media-info{
+  margin-top: 190px;
+}
+
+.media-info{
+  display: flex;
+  color: #FFFFFF;
+  margin-left: 10px;
+}
+
+.media-info-item{
+  margin-left: 10px;
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 19px;
+  height: 19px;
+  left: 0%;
+  right: 78.67%;
+  top: calc(50% - 19px/2);
+  mix-blend-mode: normal;
+  opacity: 0.75;
+  margin-bottom: 5px;
+}
+
+.media-title{
+  color: #FFFFFF;
+  margin-left: 20px;
+  height: 30px;
+  left: 0%;
+  right: 3.33%;
+  top: calc(50% - 30px/2 + 11px);
+
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 30px;
+}
+
+/*+++++++++++MediaCard+++++++++++++++++++*/
+
+
+
+
 
 
 

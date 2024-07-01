@@ -1,9 +1,6 @@
-import * as React from "react";
+import MediaList from "../../components/Media_List/MediaList";
+
 
 export const TvSeries = () => {
-    return (
-        <div>
-            <h1 style={{color:"white"}}>I am the tv series container</h1>
-        </div>
-    );
-}
+	return <MediaList categoryType="tv-series" title="TV Series"/>;
+};

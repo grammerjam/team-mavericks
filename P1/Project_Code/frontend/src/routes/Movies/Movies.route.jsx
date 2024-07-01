@@ -1,10 +1,6 @@
-import * as React from "react";
+import MediaList from "../../components/Media_List/MediaList";
+
 
 export const Movies = () => {
-
-    return (
-        <div>
-            <h1 style={{color:"white"}} >I am the movies container</h1>
-        </div>
-    )
-}
+	return <MediaList categoryType="movie" title="Movies"/>;
+};
