@@ -14,7 +14,7 @@ const app = express();
 
 // Allow CORS
 app.use(cors({
-  origin: "https://vlueberry.netlify.app",
+  origin: "https://boisterous-cassata-effa74.netlify.app",
   credentials: true
 }
 ));
