@@ -21,7 +21,7 @@ const MediaCard = ({ movie, type }) => {
                 ?(
                     type.toLowerCase() == "trending"
                     ?
-                        (   <div style={{ borderRadius: "20px", width: "540px", height: "280px", backgroundImage: `url(${imgSrc})`, backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundSize: "cover"}}>
+                        (   <div className="trending-media-card" style={{backgroundImage: `url(${imgSrc})`}}>
                                 <div className="trending-media-info">
                                     <div className="media-info">
                                         <h4 className="media-info-item">{movie.year} •</h4>

@@ -29,6 +29,7 @@ const trendingTheme = createTheme({
         display: 'flex',
         flexWrap: 'wrap',
         overflow: 'hidden',
+        marginTop: '10px'
     },
     imageList: {
         flexWrap: 'nowrap',
