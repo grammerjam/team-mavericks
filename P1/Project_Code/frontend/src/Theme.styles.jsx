@@ -69,7 +69,13 @@ const theme = createTheme({
 					borderRadius: "20px",
 					marginTop: "20px",
 					color: "#FFFFFF",
-					paddingBottom: "20px"
+					paddingBottom: "20px",
+					'@media (max-width: 767px)': {
+						maxWidth: '327px'
+					},
+					'@media (min-width: 768px)': {
+						maxWidth: '400px'
+					}
 				}
 			}
 		},

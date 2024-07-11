@@ -92,7 +92,7 @@ function Register() {
 		    	<div className="logo-container">
 		    		<img src={logo} alt="logo img"/>
 		    	</div>
-		    	<Container maxWidth="sm">
+		    	<Container>
 			    	<form onSubmit={handleSubmit}>
 			    		<Typography variant="h2">Sign Up</Typography>
 			    		<TextField
