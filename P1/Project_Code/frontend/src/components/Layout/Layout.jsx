@@ -25,16 +25,10 @@ export const Layout = () => {
 
   return (
     <Grid container spacing={0}>
-      <Grid
-        item
-        xs={1}
-        container
-        justifyContent="center"
-        style={{ paddingTop: "1rem" }}
-      >
+      <NavigationBarGridContainer item sm={0} md={0} lg={1} container justifyContent="center">
         <NavigationBar></NavigationBar>
-      </Grid>
-      <Grid item xs={11}>
+      </NavigationBarGridContainer>
+      <Grid item xs={12} md={12} lg={11}>
         <SearchBar></SearchBar>
         <div style={{ visibility: "hidden", padding: "10px" }}>xd</div>
         <Outlet></Outlet>
