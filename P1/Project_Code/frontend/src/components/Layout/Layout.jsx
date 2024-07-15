@@ -5,6 +5,7 @@ import { SearchBar } from "../Search/SearchBar.jsx";
 import { Grid } from "@mui/material";
 
 import { UserContext } from "../../context/User.context.jsx";
+import {NavigationBarGridContainer} from "./Layout.styles.js";
 
 export const Layout = () => {
 
@@ -15,17 +16,17 @@ export const Layout = () => {
   const { user } = useContext(UserContext);
 
   // Redirect to Login Route if no user
-  useEffect(() => {
-    if (!user)
-    {
-      navigate("/login");
-    }
-  }, [user, navigate]);
+  // useEffect(() => {
+  //   if (!user)
+  //   {
+  //     navigate("/login");
+  //   }
+  // }, [user, navigate]);
 
 
   return (
     <Grid container spacing={0}>
-      <NavigationBarGridContainer item sm={0} md={0} lg={1} container justifyContent="center">
+      <NavigationBarGridContainer item xs={0} md={0} lg={1} container justifyContent="center">
         <NavigationBar></NavigationBar>
       </NavigationBarGridContainer>
       <Grid item xs={12} md={12} lg={11}>

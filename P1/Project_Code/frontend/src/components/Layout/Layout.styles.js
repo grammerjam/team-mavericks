@@ -5,5 +5,4 @@ export const NavigationBarGridContainer = styled(Grid)`
     padding-top: 1rem;
     display: flex;
     justify-content: center;
-   
 `
