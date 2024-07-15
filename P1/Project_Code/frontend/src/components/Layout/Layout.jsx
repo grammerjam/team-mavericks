@@ -16,12 +16,12 @@ export const Layout = () => {
   const { user } = useContext(UserContext);
 
   // Redirect to Login Route if no user
-  // useEffect(() => {
-  //   if (!user)
-  //   {
-  //     navigate("/login");
-  //   }
-  // }, [user, navigate]);
+  useEffect(() => {
+    if (!user)
+    {
+      navigate("/login");
+    }
+  }, [user, navigate]);
 
 
   return (
