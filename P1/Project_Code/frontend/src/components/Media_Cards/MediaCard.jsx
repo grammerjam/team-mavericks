@@ -1,6 +1,6 @@
 // src/components/MediaCard.jsx
 import { useState, useEffect } from 'react';
-import { getImagePath } from '../../services/GetImageURLPath.js';
+import { getImagePath } from '../../services/getImagePath.js';
 
 const MediaCard = ({ movie, type }) => {
     const [imgSrc, setImgSrc] = useState('');
