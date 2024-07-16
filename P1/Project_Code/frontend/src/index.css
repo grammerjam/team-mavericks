@@ -160,6 +160,13 @@ body
   line-height: 30px;
 }
 
+.recommended-card img{
+  border-radius: 20px;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
 /*+++++++++++MediaCard+++++++++++++++++++*/
 
 

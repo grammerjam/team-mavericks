@@ -35,7 +35,7 @@ const MediaCard = ({ movie, type }) => {
                     :
 
                         (
-                            <div>
+                            <div className="recommended-card">
                                 <img src={imgSrc} alt={movie.title} />
                                 <div className="media-info">
                                     <h4 className="media-info-item">{movie.year} •</h4>
