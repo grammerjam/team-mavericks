@@ -1,3 +1,5 @@
+
+
 import { createTheme } from "@mui/material";
 
 const theme = createTheme({
@@ -90,19 +92,17 @@ const theme = createTheme({
 					marginTop: "20px",
 					marginBottom: "20px",
 					padding: "10px",
-
-					"&:hover":{
-						backgroundColor: "#f6f6f6",
-						color: "#10141E"
-					}  
-				}
-			}
-		},
-	}
+                    "&:hover":{
+                        backgroundColor: "#f6f6f6",
+                        color: "#10141E"
+                    }
+                }
+            }
+        },
+    }
 });
 
 export default theme;
-
 
 
 
