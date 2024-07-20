@@ -167,6 +167,20 @@ body
   max-width: 100%;
 }
 
+@media (max-width: 767px){
+  .media-heading{
+    font-size: 27px;
+  }
+
+  .media-info-item{
+    font-size: clamp(0.6rem, 2vw, 1.4rem);
+  }
+
+  .media-title{
+    font-size: clamp(1rem, 4vw, 1.4rem);
+  }
+}
+
 /*+++++++++++MediaCard+++++++++++++++++++*/
 
 

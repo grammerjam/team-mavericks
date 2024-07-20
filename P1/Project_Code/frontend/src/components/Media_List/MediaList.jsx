@@ -25,7 +25,7 @@ const MediaList = ({ categoryType, title }) => {
     return (
     	<ThemeProvider theme={theme}>
 	        <div>
-	            <Typography style={{color: "white"}} variant="h1">{title}</Typography>
+	            <Typography className="media-heading" style={{color: "white"}} variant="h1">{title}</Typography>
 	            <div className="media-container">
 		            <Grid container spacing= {4}>
 		            	{
