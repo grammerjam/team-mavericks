@@ -11,13 +11,27 @@ export const NavBarContainer = styled("div")(({ theme }) => ({
   paddingBottom: "1rem",
   background: "#161D2F",
   borderRadius: "20px",
+// Media queries
+  [`@media (min-width: 320px) and (max-width: 1439px)`]: {
+    width: "100%",
+    height: "50%",
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
+
 }));
 
 export const NavBarMenuItemsContainer = styled("div")(({ theme }) => ({
-  flexGrow: 1,
+
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
+  // Media queries
+  [`@media (min-width: 320px) and (max-width: 1439px)`]: {
+    width: "30%",
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
 }));
 
 export const NavBarLink = styled(Link)(({ theme }) => ({
