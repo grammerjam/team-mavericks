@@ -95,7 +95,7 @@ function Login() {
 		    	<div className="logo-container">
 		    		<img src={logo} alt="logo img"/>
 		    	</div>
-		    	<Container maxWidth="sm">
+		    	<Container>
 			    	<form onSubmit={handleSubmit} noValidate>
 			    		<Typography variant="h2">Login</Typography>
 			    		<TextField
