@@ -82,7 +82,7 @@ body
   font-weight: 300;
 }
 
-/*+++++++++++lgin/Signup Page+++++++++++++++++++*/
+/*+++++++++++login/Signup Page+++++++++++++++++++*/
 
 .logo-container
 {
@@ -120,7 +120,7 @@ body
 /*+++++++++++MediaCard+++++++++++++++++++*/
 
 .trending-media-info{
-  margin-top: 190px;
+  margin-top: 140px;
 }
 
 .media-info{
@@ -160,15 +160,42 @@ body
   line-height: 30px;
 }
 
+.trending-media-card{
+  border-radius: 20px;
+  width: 470px;
+  height: 230px;
+  left: 0px;
+  top: 65px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Mobile View */
+@media (max-width: 767px){
+  .trending-media-card{
+    width: 240px;
+    height: 140px;
+  }
+
+  .trending-media-info{
+    margin-top: 55px;
+  }
+
+  .media-info-item{
+    font-size: 14px;
+  }
+
+  .media-title{
+    font-size: 20px;
+  }
+
+  .trending-heading{
+    font-size: 27px;
+  }
+}
+
 /*+++++++++++MediaCard+++++++++++++++++++*/
-
-
-
-
-
-
-
-
 
 
 

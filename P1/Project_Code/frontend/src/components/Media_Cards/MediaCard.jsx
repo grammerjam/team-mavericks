@@ -1,4 +1,3 @@
-// src/components/MediaCard.jsx
 import { useState, useEffect } from 'react';
 import { getImagePath } from '../../services/getImagePath.js';
 
@@ -11,38 +10,34 @@ const MediaCard = ({ movie, type }) => {
         setImgSrc(imagePath);
     }, [movie]);
 
+    if (!imgSrc) {
+        return <p style={{ color: "white" }}>Loading...</p>;
+    }
+
     return (
         <>
-            {
-                imgSrc ? (
-                    type.toLowerCase() === "trending" ? (
-                        <div style={{ borderRadius: "20px", width: "540px", height: "280px", backgroundImage: `url(${imgSrc})`, backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
-                            <div className="trending-media-info">
-                                <div className="media-info">
-                                    <h4 className="media-info-item">{movie.year} •</h4>
-                                    <h4 className="media-info-item">{movie.category} •</h4>
-                                    <h4 className="media-info-item">{movie.rating}</h4>
-                                </div>
-                                <div className="media-title">{movie.title}</div>
-                            </div>
+            {type.toLowerCase() === "trending" ? (
+                <div className="trending-media-card" style={{ backgroundImage: `url(${imgSrc})` }}>
+                    <div className="trending-media-info">
+                        <div className="media-info">
+                            <h4 className="media-info-item">{movie.year} •</h4>
+                            <h4 className="media-info-item">{movie.category} •</h4>
+                            <h4 className="media-info-item">{movie.rating}</h4>
                         </div>
-                    ) : (
-                        <div>
-                            <img src={imgSrc} alt={movie.title} />
-                            <div className="media-info">
-                                <h4 className="media-info-item">{movie.year} •</h4>
-                                <h4 className="media-info-item">{movie.category} •</h4>
-                                <h4 className="media-info-item">{movie.rating}</h4>
-                            </div>
-                            <div className="media-title">{movie.title}</div>
-                        </div>
-                    )
-                ) : (
-                    <p style={{ color: "white" }}>
-                        Loading ...
-                    </p>
-                )
-            }
+                        <div className="media-title">{movie.title}</div>
+                    </div>
+                </div>
+            ) : (
+                <div className='recommended-card'>
+                    <img src={imgSrc} alt={movie.title} />
+                    <div className="media-info">
+                        <h4 className="media-info-item">{movie.year} •</h4>
+                        <h4 className="media-info-item">{movie.category} •</h4>
+                        <h4 className="media-info-item">{movie.rating}</h4>
+                    </div>
+                    <div className="media-title">{movie.title}</div>
+                </div>
+            )}
         </>
     );
 };
