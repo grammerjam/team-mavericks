@@ -1,7 +1,10 @@
 import { useContext } from "react";
 import MediaCard from "./MediaCard";
-import { Box, Grid, Stack } from "@mui/material";
+import { Box, Grid, Stack, ThemeProvider } from "@mui/material";
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
 import { MoviesContext } from "../../context/Movies.context";
+import trendingTheme from "../../services/TrendingTheme"
 
 const MediaCardsContainer = () => {
 
