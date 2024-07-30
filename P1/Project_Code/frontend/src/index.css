@@ -171,8 +171,26 @@ body
   background-size: cover;
 }
 
-/* Mobile View */
+.recommended-card img{
+  border-radius: 20px;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
 @media (max-width: 767px){
+  .media-heading{
+    font-size: 27px;
+  }
+
+  .media-info-item{
+    font-size: clamp(0.6rem, 2vw, 1.4rem);
+  }
+
+  .media-title{
+    font-size: clamp(1rem, 4vw, 1.4rem);
+  }
+  
   .trending-media-card{
     width: 240px;
     height: 140px;
@@ -194,6 +212,8 @@ body
     font-size: 27px;
   }
 }
+
+
 
 /*+++++++++++MediaCard+++++++++++++++++++*/
 
