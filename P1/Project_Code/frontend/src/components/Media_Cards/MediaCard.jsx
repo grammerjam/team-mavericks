@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect, Fragment} from 'react';
 import { getImagePath } from '../../services/getImagePath.js';
 import bookmarkActive from '../../assets/bookmark-active.png';
 import bookmarkInactive from '../../assets/bookmark-inactive.png';
@@ -32,11 +32,12 @@ const MediaCard = ({ movie, type }) => {
               </div>
               <div className="media-title">{movie.title}</div>
             </div>
-            <BookmarkImage src={bookmarkActive} ></BookmarkImage>
+            <BookmarkImage src={bookmarkActive}></BookmarkImage>
           </div>
         ) : (
           <div className="recommended-card">
             <img src={imgSrc} alt={movie.title} />
+            <img src={bookmarkActive} className="bookmark-icon"/>
             <div className="media-info">
               <h4 className="media-info-item">{movie.year} •</h4>
               <h4 className="media-info-item">{movie.category} •</h4>
