@@ -9,8 +9,8 @@ const router = express.Router();
 // Try out POST http://localhost:8000/api/bookmark
 router.post("/bookmark", bookmarkController.bookmarkItem);
 // Try out GET http://localhost:8000/api/bookmarks
-router.get("/bookmarks", userController.getUserBookmarks);
+router.get("/bookmarks", bookmarkController.getUserBookmarks);
 // Try out DELETE http://localhost:8000/api/bookmark
-router.delete("/bookmark", userController.unbookmarkItem);
+router.delete("/bookmark", bookmarkController.unbookmarkItem);
 
 module.exports = router;
