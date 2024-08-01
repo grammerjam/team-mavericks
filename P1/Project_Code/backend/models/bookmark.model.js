@@ -27,8 +27,25 @@ const Bookmark = sequelize.define('Bookmark', {
     }
 });
 
+//Create Associations
 Bookmark.belongsTo(User, { foreignKey: 'userID' });
 User.hasMany(Bookmark, { foreignKey: 'userID' });
+
+// Add static method to add new bookmark
+Bookmark.addBookmark = async(bookmarkData) => {
+    return await Bookmark.create(bookmarkData);
+};
+
+// Add static method to delete bookmark
+User.deleteBookmark = async (userID, mediaID) => {
+    return await Bookmark.destroy({ where: { userID, mediaID }});
+};
+
+// Add static method to get all bookmarks for a user
+User.findUserBookmarks = async(userID) => {
+    return await Bookmark.findAll({ where: { userID } });
+};
+
 
 module.exports = Bookmark;
 
