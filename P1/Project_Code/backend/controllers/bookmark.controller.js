@@ -26,6 +26,7 @@ exports.unbookmarkItem = async (req, res) => {
     try {
         await BookmarkModel.deleteBookmark(userID, mediaID);
         console.log('Unbookmark successful');
+        res.status(200).json({message: "Item was successfully unbookmarked"});
     } catch (error){
         console.log('Error unbookmarking item', error.message);
         res.status(500).json({ error: 'Failed to unbookmark item' });

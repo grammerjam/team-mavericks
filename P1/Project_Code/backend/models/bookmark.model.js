@@ -37,12 +37,12 @@ Bookmark.addBookmark = async(bookmarkData) => {
 };
 
 // Add static method to delete bookmark
-User.deleteBookmark = async (userID, mediaID) => {
+Bookmark.deleteBookmark = async (userID, mediaID) => {
     return await Bookmark.destroy({ where: { userID, mediaID }});
 };
 
 // Add static method to get all bookmarks for a user
-User.findUserBookmarks = async(userID) => {
+Bookmark.findUserBookmarks = async(userID) => {
     return await Bookmark.findAll({ where: { userID } });
 };
 
