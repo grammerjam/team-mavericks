@@ -171,11 +171,24 @@ body
   background-size: cover;
 }
 
-.recommended-card img{
+.recommended-card {
+  position: relative;
+}
+
+.recommended-card img {
   border-radius: 20px;
   width: 100%;
   height: auto;
   max-width: 100%;
+}
+
+.recommended-card .bookmark-icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 32px;
+  height: 32px;
+  z-index: 10;
 }
 
 @media (max-width: 767px){
