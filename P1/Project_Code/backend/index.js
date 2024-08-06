@@ -15,6 +15,7 @@ const app = express();
 // Allow CORS
 app.use(cors({
   origin: "https://boisterous-cassata-effa74.netlify.app",
+  // origin: "http://localhost:5173",
   credentials: true
 }
 ));
@@ -41,11 +42,12 @@ app.use(cookieParser());
 })();
 
 // Import Custom Routers
-const { authRouter, userRouter } = require("./routes/");
+const { authRouter, userRouter, bookmarkRouter } = require("./routes/");
 
 // Incorporate Routes in Express App
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
+app.use("/api",  bookmarkRouter);
 
 app.listen(PORT, () => {
     console.log("App listening on port: " + PORT);
