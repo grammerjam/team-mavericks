@@ -21,7 +21,7 @@ exports.bookmarkItem = async (req, res) => {
 
 //Delete bookmark 
 exports.unbookmarkItem = async (req, res) => {
-    const { userID, mediaID } = req.body;
+    const { userID, mediaID } = req.query;
 
     try {
         await BookmarkModel.deleteBookmark(userID, mediaID);
@@ -35,8 +35,7 @@ exports.unbookmarkItem = async (req, res) => {
 
 //Find all user Bookmarks
 exports.getUserBookmarks = async (req, res) => {
-    const { userID } = req.body;
-
+    const { userID } = req.query;
     try{
         const bookmarks = await BookmarkModel.findUserBookmarks(userID);
         const mediaJson = getMediaJson();
