@@ -12,6 +12,8 @@ export const Bookmarks = () => {
     const { user } = useContext(UserContext);
     const { movies } = useContext(MoviesContext);
     const [bookmarkedMedia, setBookmarkedMedia] = useState([]);
+    const [bookmarkedMovies, setBookmarkedMovies] = useState([]);
+    const [bookmarkedShows, setBookmarkedShows] = useState([]);
 
     const getBookmarks = async () => {
         try {
@@ -28,6 +30,15 @@ export const Bookmarks = () => {
         }
     }
 
+    const getBookmarkedMedia = (categoryType) => {
+        const media = bookmarkedMedia.filter((movie) => {
+            if(movie.category){
+                return movie.category.toLowerCase().includes(categoryType);
+            }
+        });
+        return media;
+    };
+
     useEffect(() => {
         const fetchBookmarkedMedia = async () => {
             const bookmarks = await getBookmarks();
@@ -40,13 +51,37 @@ export const Bookmarks = () => {
         fetchBookmarkedMedia();
     },[movies]);
 
+    useEffect(() => {
+        setBookmarkedMovies(getBookmarkedMedia('movie'));
+        setBookmarkedShows(getBookmarkedMedia('tv-series'));
+    },[bookmarkedMedia]);
+
 	return (
 		<div>
 			<Box color={"white"} className="font-heading-L media-heading">Bookmarked Movies</Box>
 			<div className="media-container">
 				<Grid container spacing= {4}>
 					{
-						bookmarkedMedia.map((movie, index) => (
+						bookmarkedMovies.map((movie, index) => (
+							<Grid 
+								item key={index}
+								xs={6}
+								sm={4}
+								md={4}
+								lg={3}
+								xl={2.4}
+							>
+								<MediaCard movie={movie} type="recommended"/>
+							</Grid>
+						))
+					}
+				</Grid>
+			</div>
+            <Box color={"white"} className="font-heading-L media-heading">Bookmarked TV Series</Box>
+			<div className="media-container">
+				<Grid container spacing= {4}>
+					{
+						bookmarkedShows.map((movie, index) => (
 							<Grid 
 								item key={index}
 								xs={6}
