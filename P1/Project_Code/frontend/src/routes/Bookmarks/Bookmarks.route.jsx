@@ -3,7 +3,7 @@ import axios from "axios";
 import { MoviesContext } from "../../context/Movies.context";
 import { UserContext } from "../../context/User.context";
 import { useContext, useEffect, useState } from "react";
-import { Grid, Box } from "@mui/material";
+import { Grid, Box, Stack } from "@mui/material";
 import MediaCard from "../../components/Media_Cards/MediaCard";
 
 
@@ -58,44 +58,55 @@ export const Bookmarks = () => {
 
 	return (
 		<div>
-			<Box color={"white"} className="font-heading-L media-heading">Bookmarked Movies</Box>
-			<div className="media-container">
-				<Grid container spacing= {4}>
-					{
-						bookmarkedMovies.map((movie, index) => (
-							<Grid 
-								item key={index}
-								xs={6}
-								sm={4}
-								md={4}
-								lg={3}
-								xl={2.4}
-							>
-								<MediaCard movie={movie} type="recommended"/>
-							</Grid>
-						))
-					}
-				</Grid>
-			</div>
-            <Box color={"white"} className="font-heading-L media-heading">Bookmarked TV Series</Box>
-			<div className="media-container">
-				<Grid container spacing= {4}>
-					{
-						bookmarkedShows.map((movie, index) => (
-							<Grid 
-								item key={index}
-								xs={6}
-								sm={4}
-								md={4}
-								lg={3}
-								xl={2.4}
-							>
-								<MediaCard movie={movie} type="recommended"/>
-							</Grid>
-						))
-					}
-				</Grid>
-			</div>
+            {bookmarkedMovies.length > 0 && (
+            <Stack sx={{mb: 6}}>
+                <Box color={"white"} className="font-heading-L media-heading">Bookmarked Movies</Box>
+                <div className="media-container">
+                    <Grid container spacing= {4}>
+                        {
+                            bookmarkedMovies.map((movie, index) => (
+                                <Grid 
+                                    item key={index}
+                                    xs={6}
+                                    sm={4}
+                                    md={4}
+                                    lg={3}
+                                    xl={2.4}
+                                >
+                                    <MediaCard movie={movie} type="recommended"/>
+                                </Grid>
+                            ))
+                        }
+                    </Grid>
+                </div>
+            </Stack>
+            )}
+            {bookmarkedShows.length > 0 && (
+            <Stack>
+                <Box color={"white"} className="font-heading-L media-heading">Bookmarked TV Series</Box>
+                <div className="media-container">
+                    <Grid container spacing= {4}>
+                        {
+                            bookmarkedShows.map((movie, index) => (
+                                <Grid 
+                                    item key={index}
+                                    xs={6}
+                                    sm={4}
+                                    md={4}
+                                    lg={3}
+                                    xl={2.4}
+                                >
+                                    <MediaCard movie={movie} type="recommended"/>
+                                </Grid>
+                            ))
+                        }
+                    </Grid>
+                </div>
+            </Stack>
+            )}
+            {bookmarkedMedia.length === 0 && (
+                    <Box color={"white"} className="font-heading-L media-heading">No bookmarks yet!</Box>
+            )}
 		</div>
     )
 };
