@@ -43,6 +43,10 @@ export const Bookmarks = () => {
         return media;
     };
 
+    const handleUnbookmark = (id) => {
+        setBookmarkedMedia(prev => prev.filter(item => item.id !== id));
+    }
+
     useEffect(() => {
         const fetchBookmarkedMedia = async () => {
             const bookmarks = await getBookmarks();
@@ -83,7 +87,7 @@ export const Bookmarks = () => {
                                                 lg={3}
                                                 xl={2.4}
                                             >
-                                                <MediaCard movie={movie} type="recommended"/>
+                                                <MediaCard movie={movie} type="recommended" onRemove={handleUnbookmark}/>
                                             </Grid>
                                         ))
                                     }
@@ -106,7 +110,7 @@ export const Bookmarks = () => {
                                                 lg={3}
                                                 xl={2.4}
                                             >
-                                                <MediaCard movie={movie} type="recommended"/>
+                                                <MediaCard movie={movie} type="recommended" onRemove={handleUnbookmark}/>
                                             </Grid>
                                         ))
                                     }
