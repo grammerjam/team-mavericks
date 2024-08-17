@@ -17,8 +17,6 @@ const MediaCard = ({ movie, type, onRemove = () => {} }) => {
   const handleToggleBookmark = async () => {
     await toggleBookmark();
 
-    // console.log("inside handleToggleBookmark");
-    // console.log('isBookmarked: ', isBookmarked);
     if(isBookmarked){
       onRemove(movie.id);
     }
