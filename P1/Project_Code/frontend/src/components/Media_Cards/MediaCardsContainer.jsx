@@ -25,18 +25,27 @@ const MediaCardsContainer = () => {
                 </div>
             </ThemeProvider>
 
-            <Grid container spacing={{ sm: 2, md: 3 }} columns={{ xs: 12, sm: 4, md: 3 }}>
-                <Grid item xs={12} sm={12} md={12}>
-                    <Box color={"white"} className="font-heading-L">Recommended for you</Box>
-                </Grid>
-                {
-                    movies.slice(4, movies.length-1).map((movie, index) => (
-                        <Grid item key={index}>
-                            <MediaCard movie={movie} type="recommended"/>
-                        </Grid>
-                        )
-                    )
-                }
+            <Grid>
+                <Box color={"white"} className="font-heading-L media-heading">Recommended for you</Box>
+                <div className="media-container">
+                    <Grid container spacing={4}>
+                        {
+                            movies.slice(4, movies.length-1).map((movie, index) => (
+                                <Grid 
+                                    item key={index}
+                                    xs={6}
+                                    sm={4}
+                                    md={4}
+                                    lg={3}
+                                    xl={3}
+                                >
+                                    <MediaCard movie={movie} type="recommended"/>
+                                </Grid>
+                                )
+                            )
+                        }
+                    </Grid>
+                </div>
             </Grid>
         </Stack>
     )

@@ -21,7 +21,7 @@ body
 
 .page-container
 {
-  width: 100vw;
+  width: 91vw;
   height: 100vh;
 }
 
@@ -80,6 +80,12 @@ body
 {
   font-size: 13px;
   font-weight: 300;
+}
+
+@media (max-width: 1199px){
+  .page-container{
+    width: 100vw;
+  }
 }
 
 /*+++++++++++login/Signup Page+++++++++++++++++++*/
