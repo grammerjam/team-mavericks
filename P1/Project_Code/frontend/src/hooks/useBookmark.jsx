@@ -1,11 +1,13 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { UserContext } from "../context/User.context.jsx";
+import {getApiUrl} from "../services/ApiUrl.js";
 
 const useBookmark = (movie) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [allUsersBookmarks, setAllUsersBookmarks] = useState([]);
   const { user } = useContext(UserContext);
+  const apiURL = getApiUrl();
 
   useEffect(() => {
     if (!user?.id) {
@@ -17,7 +19,7 @@ const useBookmark = (movie) => {
     const fetchBookmarks = async () => {
       try {
         const response = await axios.get(
-            "http://localhost:8000/api/bookmarks",
+            `${apiURL}/api/bookmarks`,
             {
               params: { userID: user.id },
             }
@@ -50,11 +52,11 @@ const useBookmark = (movie) => {
 
     try {
       if (isBookmarked) {
-        await axios.delete("http://localhost:8000/api/bookmark", {
+        await axios.delete(`${apiURL}/api/bookmark`, {
           params: { userID: user.id, mediaID: movie.id },
         });
       } else {
-        await axios.post("http://localhost:8000/api/bookmark", {
+        await axios.post(`${apiURL}/api/bookmark`, {
           userID: user.id,
           mediaID: movie.id,
         });
