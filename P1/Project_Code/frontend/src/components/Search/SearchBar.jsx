@@ -1,12 +1,12 @@
-import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import { IconButton } from "@mui/material";
 
 import { Search, StyledInputBase } from "./SearchBar.styles";
 
 // Import MoviesRoute Context
-import { MoviesContext } from "../../context/Movies.context";
+import { MoviesContext } from "../../context/Movies.context"; 
 
 export const SearchBar = () => {
   // Import MoviesRoute Context
@@ -15,8 +15,14 @@ export const SearchBar = () => {
   // Import Navigation Handler
   const navigate = useNavigate();
 
+  const location = useLocation();
+
   // Let the user user the search input
   const [searchInput, setSearchInput] = useState("");
+
+  useEffect(() => {
+    setSearchInput('');
+  }, [location]);
 
   const onHandleInputChange = (e) => {
     // Change value of searchInput to whatever the user wrote right now
@@ -66,6 +72,7 @@ export const SearchBar = () => {
       <StyledInputBase
         placeholder="Search for movies or TV series"
         inputProps={{ "aria-label": "search" }}
+        value={searchInput}
         onChange={onHandleInputChange}
         onKeyDown={onHandleKeyDownPress}
       />
