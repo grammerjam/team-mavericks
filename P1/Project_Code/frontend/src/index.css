@@ -167,17 +167,6 @@ body
   line-height: 30px;
 }
 
-/* .trending-media-card{
-  border-radius: 20px;
-  width: 470px;
-  height: 230px;
-  left: 0px;
-  top: 65px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-} */
-
 .recommended-card {
   position: relative;
 }
@@ -209,11 +198,6 @@ body
 
   .media-title{
     font-size: clamp(1rem, 4vw, 1.4rem);
-  }
-  
-  .trending-media-card{
-    width: 240px;
-    height: 140px;
   }
 
   .trending-media-info{
