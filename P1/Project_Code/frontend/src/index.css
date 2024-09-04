@@ -152,6 +152,7 @@ body
 }
 
 .media-title{
+  position: relative;
   color: #FFFFFF;
   margin-left: 20px;
   height: 30px;
@@ -166,7 +167,7 @@ body
   line-height: 30px;
 }
 
-.trending-media-card{
+/* .trending-media-card{
   border-radius: 20px;
   width: 470px;
   height: 230px;
@@ -175,7 +176,7 @@ body
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
+} */
 
 .recommended-card {
   position: relative;
