@@ -12,15 +12,27 @@ export const SearchResults = () => {
     if (filteredMovies.length > 0)
     {
         return (
-            <Grid container spacing={{ sm: 2, md: 3 }} columns={{ xs: 12, sm: 4, md: 3 }}>
-                {
-                    filteredMovies.map((movie, index) => (
-                        <Grid item key={index}>
-                            <MediaCard movie={movie} type="searched"/>
-                        </Grid>
-                    ))
-                }
-            </Grid>
+            <div>
+                <Box color={"white"} className="font-heading-L media-heading">Search Results</Box>
+                <div className="media-container">
+                    <Grid container spacing= {4}>
+                        {
+                            filteredMovies.map((movie, index) => (
+                                <Grid 
+                                    item key={index}
+                                    xs={6}
+                                    sm={4}
+                                    md={4}
+                                    lg={3}
+                                    xl={2.4}
+                                >
+                                    <MediaCard movie={movie} type="searched"/>
+                                </Grid>
+                            ))
+                        }
+                    </Grid>
+                </div>
+            </div>
         )   
     }
 
