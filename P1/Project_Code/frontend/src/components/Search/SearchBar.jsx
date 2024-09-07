@@ -21,7 +21,9 @@ export const SearchBar = () => {
   const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
-    setSearchInput('');
+    if(location.pathname !== '/search'){
+      setSearchInput('');
+    }
   }, [location]);
 
   const onHandleInputChange = (e) => {
