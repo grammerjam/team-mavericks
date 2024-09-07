@@ -21,7 +21,8 @@ export const SearchBar = () => {
   const onHandleInputChange = (e) => {
     // Change value of searchInput to whatever the user wrote right now
     const inputVal = e.target.value;
-    setSearchInput(inputVal);
+    const trimmedVal = inputVal.trim();
+    setSearchInput(trimmedVal);
   };
 
   const goToSearchResults = () => {
