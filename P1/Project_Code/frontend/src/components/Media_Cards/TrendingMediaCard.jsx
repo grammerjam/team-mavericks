@@ -8,7 +8,7 @@ const TrendingMediaCard = ({ imgSrc, movie, isBookmarked, toggleBookmark }) => {
     return (
         <TrendingContainer imgSrc={imgSrc}>
             <PlayButton className='play-button'>
-                <img src={playIcon} alt='play button'/>
+                <img className='play-button-img' src={playIcon} alt='play button'/>
                 <PlayText>Play</PlayText>
             </PlayButton>
             <div className="trending-media-info">
@@ -17,7 +17,9 @@ const TrendingMediaCard = ({ imgSrc, movie, isBookmarked, toggleBookmark }) => {
                     <h4 className="media-info-item">{movie.category} •</h4>
                     <h4 className="media-info-item">{movie.rating}</h4>
                 </div>
-                <div className="media-title">{movie.title}</div>
+                <div className="media-title" style={{position: 'relative'}}>
+                    {movie.title}
+                </div>
             </div>
             <BookmarkImage src={isBookmarked ? bookmarkActive : bookmarkInactive} onClick={toggleBookmark}
             ></BookmarkImage>

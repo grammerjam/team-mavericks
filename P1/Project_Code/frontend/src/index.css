@@ -152,7 +152,6 @@ body
 }
 
 .media-title{
-  position: relative;
   color: #FFFFFF;
   margin-left: 20px;
   height: 30px;
@@ -165,26 +164,6 @@ body
   font-weight: 400;
   font-size: 24px;
   line-height: 30px;
-}
-
-.recommended-card {
-  position: relative;
-}
-
-.recommended-card img {
-  border-radius: 20px;
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-}
-
-.recommended-card .bookmark-icon {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 32px;
-  height: 32px;
-  z-index: 10;
 }
 
 @media (max-width: 767px){

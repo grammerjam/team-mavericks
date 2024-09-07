@@ -59,12 +59,13 @@ export const PlayButton = styled("div")`
     opacity: 0;
     background: #97979770;
 
-    img {
+    .play-button-img {
         position: relative;
         left: 7.69%;
         right: 66.67%;
         top: 18.75%;
         bottom: 18.75%;
+        width: 25%;
     }
 `
 export const PlayText = styled("h4")`
@@ -81,7 +82,37 @@ export const PlayText = styled("h4")`
     line-height: 23px;
     color: #FFFFFF;
 `
+export const RecommendedContainer = styled("div")`
+    position: relative;
+    cursor: pointer;
+    display: flex;
 
+    img {
+        border-radius: 20px;
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+        transition: filter 0.3s ease;
+    }
 
+    .bookmark-icon{
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        width: 32px;
+        height: 32px;
+        z-index: 10;
+    }
+
+    @media (min-width: 769px){
+        &:hover img:not(.bookmark-icon, .play-button-img) {
+            filter: brightness(50%);
+        }
+
+        &:hover .play-button{
+            opacity: 1;
+        }
+    }
+`
 
 
