@@ -2,9 +2,13 @@ import { useLocation } from "react-router-dom";
 import React, { useState, useContext } from "react";
 import SiteLogoIcon from "@mui/icons-material/Movie";
 import HomeIcon from "../../assets/icon-nav-home.svg";
+import ActiveHomeIcon from "../../assets/active-icon-nav-home.svg";
 import MovieIcon from "../../assets/icon-nav-movies.svg";
+import ActiveMovieIcon from "../../assets/active-icon-nav-movies.svg";
 import TvIcon from "../../assets/icon-nav-tv-series.svg";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
+import ActiveTvIcon from "../../assets/active-icon-nav-tv-series.svg";
+import BookmarkIcon from "../../assets/icon-nav-bookmark.svg";
+import ActiveBookmarkIcon from "../../assets/active-icon-nav-bookmark.svg";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { IconButton } from "@mui/material";
 import {
@@ -34,10 +38,6 @@ export const NavigationBar = () => {
     logoutUser();
   };
 
-  const iconStyle = (path) => ({
-    color: activePath === path ? "#FFFFFF" : "#5A698F",
-  });
-
   return (
     <NavBarContainer>
       <NavBarLink to="/" onClick={() => handleIconClick("/")}>
@@ -47,22 +47,26 @@ export const NavigationBar = () => {
       </NavBarLink>
       <NavBarMenuItemsContainer>
         <NavBarLink to="/" onClick={() => handleIconClick("/")}>
-          <img src={HomeIcon} />
+          <img src={activePath === "/" ? ActiveHomeIcon : HomeIcon} />
         </NavBarLink>
         <NavBarLink to="/movies" onClick={() => handleIconClick("/movies")}>
-          <img src={ MovieIcon} />
+          <img src={activePath === "/movies" ? ActiveMovieIcon : MovieIcon} />
         </NavBarLink>
         <NavBarLink
           to="/tv-series"
           onClick={() => handleIconClick("/tv-series")}
         >
-          <img src={TvIcon} />
+          <img src={activePath === "/tv-series" ? ActiveTvIcon : TvIcon} />
         </NavBarLink>
         <NavBarLink
           to="/bookmarks"
           onClick={() => handleIconClick("/bookmarks")}
         >
-          <BookmarkIcon sx={iconStyle("/bookmarks")} />
+          <img
+            src={
+              activePath === "/bookmarks" ? ActiveBookmarkIcon : BookmarkIcon
+            }
+          />
         </NavBarLink>
       </NavBarMenuItemsContainer>
       {user ? (
