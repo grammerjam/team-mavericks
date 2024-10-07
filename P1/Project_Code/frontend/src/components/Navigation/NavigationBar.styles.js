@@ -26,11 +26,18 @@ export const NavBarMenuItemsContainer = styled("div")(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  // Media queries
-  [`@media (min-width: 320px) and (max-width: 1439px)`]: {
+// Media queries
+  [`@media (min-width: 426px) and (max-width: 1439px)`]: {
     width: "30%",
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "center",
+    gap: "32px", // 32px gap for screens between 1439px and 426px
+  },
+  [`@media (max-width: 425px)`]: {
+    width: "30%",
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: "20px", // 20px gap for screens smaller than 426px
   },
 }));
 
