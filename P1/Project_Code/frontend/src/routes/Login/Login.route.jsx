@@ -45,12 +45,16 @@ function Login() {
 	const validateInput = async (data) => {
 		let inputErrors = {};
 
-		if (!isEmail(data.email))
+		if (data.email === ""){
+			inputErrors.email = "Email can't be empty";
+		}else if (!isEmail(data.email))
 		{
 			inputErrors.email = "Invalid Email";
 		}
 
-		if(data.password.length < 8){
+		if(data.password === ""){
+			inputErrors.password = "Password can't be empty"
+		}else if(data.password.length < 8){
 			inputErrors.password = "Password is too short. At least 8 characters"
 		}
 	
