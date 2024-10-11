@@ -82,10 +82,10 @@ body
   font-weight: 300;
 }
 
-@media (max-width: 1199px){
+@media(max-width: 1439px){
   .page-container{
-    width: 100vw;
-  }
+      width: 100vw;
+    }
 }
 
 /*+++++++++++login/Signup Page+++++++++++++++++++*/
