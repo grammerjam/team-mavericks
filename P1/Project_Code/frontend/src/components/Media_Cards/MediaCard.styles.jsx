@@ -74,7 +74,7 @@ export const PlayText = styled("h4")`
     left: 49.57%;
     right: 20.51%;
     top: calc(50% - 70px/1 - -0.5px);
-
+    max-width: 70px;
     font-family: 'Outfit';
     font-style: normal;
     font-weight: 400;
