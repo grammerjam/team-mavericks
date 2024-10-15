@@ -33,11 +33,10 @@ const RecommendedMediaCard = ({
         src={movie.category === "movie" ? MovieIcon : TvIcon}
         style={{
             height: "12px",
-            paddingTop: "24px",
             paddingLeft: "5px"
         }}
       ></img>
-      <h4 className="media-info-item">{movie.category === "movie" ? "Movie" : "TV Series"} •</h4>
+      <h4 className="media-info-item">{movie.category === "movie" ? "Movie  " : "TV Series"} •</h4>
       <h4 className="media-info-item">{movie.rating}</h4>
     </div>
     <div className="media-title">{movie.title}</div>

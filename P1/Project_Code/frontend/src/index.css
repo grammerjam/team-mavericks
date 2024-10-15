@@ -133,6 +133,7 @@ body
   display: flex;
   color: #FFFFFF;
   margin-left: 10px;
+  align-items: baseline;
 }
 
 .media-info-item{
@@ -143,9 +144,7 @@ body
   font-size: 15px;
   line-height: 19px;
   height: 19px;
-  left: 0%;
-  right: 78.67%;
-  top: calc(50% - 19px/2);
+  
   mix-blend-mode: normal;
   opacity: 0.75;
   margin-bottom: 5px;
@@ -176,19 +175,11 @@ body
   }
 
   .media-title{
-    font-size: clamp(1rem, 4vw, 1.4rem);
+    font-size: clamp(1.2rem, 4vw, 1.4rem);
   }
 
   .trending-media-info{
     margin-top: 55px;
-  }
-
-  .media-info-item{
-    font-size: 14px;
-  }
-
-  .media-title{
-    font-size: 20px;
   }
 
   .trending-heading{
