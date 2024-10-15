@@ -49,16 +49,19 @@ function Register() {
 	const validateInput = async (data) => {
 		let inputErrors = {};
 
-		if (!isEmail(data.email))
+		if(data.email === ""){
+			inputErrors.email = "Email can't be empty"
+		}else if (!isEmail(data.email))
 		{
 			inputErrors.email = "Invalid Email";
 		}
-
+		
 		if(data.confirmPass !== data.password){
 			inputErrors.confirmPass = 'No match!';
 		}
-
-		if(data.password.length < 8){
+		if(data.password === ""){
+			inputErrors.password = "Password can't be empty"
+		}else if(data.password.length < 8){
 			inputErrors.password = "Password is too short. At least 8 characters"
 		}
 
@@ -97,8 +100,7 @@ function Register() {
 			    		<Typography variant="h2">Sign Up</Typography>
 			    		<TextField
 			    			label="Email address"
-			    			error={errors.email ? true : false}
-			    			required
+			    			error={errors.all ? true : false}
 			    			variant="standard"
 			    			sx={{mb: 3}}
 			    			color="white"
@@ -113,7 +115,6 @@ function Register() {
 			    		<TextField
 			    			label="Password"
 			    			error={errors.password ? true : false}
-			    			required
 			    			variant="standard"
 			    			type="password"
 			    			sx={{mb: 3}}
@@ -127,7 +128,6 @@ function Register() {
 			    		<TextField
 			    			label={"Confirm password"}
 			    			error={errors.confirmPass ? true : false}
-			    			required
 			    			variant="standard"
 			    			type="password"
 			    			sx={{mb: 3}}
