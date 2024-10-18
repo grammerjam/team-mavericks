@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BookmarkImage, TrendingContainer, PlayButton, PlayText } from "./MediaCard.styles.jsx";
 import bookmarkActive from '../../assets/bookmark-active.png';
 import bookmarkInactive from '../../assets/bookmark-inactive.png';
+import bookmarkHover from '../../assets/bookmark-hover.svg';
 import playIcon from '../../assets/icon-play.svg';
 import MovieIcon from "../../assets/icon-category-movie.svg";
 import TvIcon from "../../assets/icon-category-tv.svg";
 
 const TrendingMediaCard = ({ imgSrc, movie, isBookmarked, toggleBookmark }) => {
+    const [isHovered, setIsHovered] = useState(false); // State to track hover
+
     return (
       <TrendingContainer imgSrc={imgSrc}>
         <PlayButton className="play-button">
@@ -35,10 +38,12 @@ const TrendingMediaCard = ({ imgSrc, movie, isBookmarked, toggleBookmark }) => {
             {movie.title}
           </div>
         </div>
-        <BookmarkImage
-          src={isBookmarked ? bookmarkActive : bookmarkInactive}
-          onClick={toggleBookmark}
-        ></BookmarkImage>
+          <BookmarkImage
+              src={isHovered ? bookmarkHover : isBookmarked ? bookmarkActive : bookmarkInactive} // Toggle between hover and normal states
+              onClick={toggleBookmark}
+              onMouseEnter={() => setIsHovered(true)} // Set hover state to true on mouse enter
+              onMouseLeave={() => setIsHovered(false)} // Reset hover state on mouse leave
+          />
       </TrendingContainer>
     );
 };
