@@ -5,4 +5,8 @@ export const NavigationBarGridContainer = styled(Grid)`
     padding-top: 1rem;
     display: flex;
     justify-content: center;
+
+    @media (max-width: 425px){
+        padding-top: 0;
+    }
 `
