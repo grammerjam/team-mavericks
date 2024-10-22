@@ -1,10 +1,11 @@
 import { useContext } from "react";
 import MediaCard from "./MediaCard";
-import { Box, Grid, Stack, ThemeProvider } from "@mui/material";
+import { Grid, Stack, ThemeProvider } from "@mui/material";
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import { MoviesContext } from "../../context/Movies.context";
 import trendingTheme from "../../services/TrendingTheme"
+import { MediaContainer, StyledBox } from "./MediaCardsContainer.styles";
 
 const MediaCardsContainer = () => {
 
@@ -12,7 +13,7 @@ const MediaCardsContainer = () => {
 
     return (
         <Stack spacing={10}>
-            <Box color={"white"} className="font-heading-L trending-heading">Trending</Box>
+            <StyledBox color={"white"} className="font-heading-L trending-heading">Trending</StyledBox>
             <ThemeProvider theme={trendingTheme}>
                 <div style={trendingTheme.root}>
                     <ImageList style={trendingTheme.ImageList} cols={2.5}>
@@ -26,8 +27,8 @@ const MediaCardsContainer = () => {
             </ThemeProvider>
 
             <Grid>
-                <Box color={"white"} className="font-heading-L media-heading">Recommended for you</Box>
-                <div className="media-container">
+                <StyledBox color={"white"} className="font-heading-L media-heading">Recommended for you</StyledBox>
+                <MediaContainer>
                     <Grid container spacing={4}>
                         {
                             movies.slice(4, movies.length-1).map((movie, index) => (
@@ -45,7 +46,7 @@ const MediaCardsContainer = () => {
                             )
                         }
                     </Grid>
-                </div>
+                </MediaContainer>
             </Grid>
         </Stack>
     )

@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Grid, Box } from "@mui/material";
 import { MoviesContext } from "../../context/Movies.context";
 import MediaCard from "../../components/Media_Cards/MediaCard";
+import { MediaContainer, StyledBox } from "../../components/Media_Cards/MediaCardsContainer.styles";
 
 export const SearchResults = () => {
 
@@ -13,8 +14,8 @@ export const SearchResults = () => {
     {
         return (
             <div>
-                <Box color={"white"} className="font-heading-L media-heading">Search Results</Box>
-                <div className="media-container">
+                <StyledBox color={"white"} className="font-heading-L media-heading">Search Results</StyledBox>
+                <MediaContainer>
                     <Grid container spacing= {4}>
                         {
                             filteredMovies.map((movie, index) => (
@@ -31,7 +32,7 @@ export const SearchResults = () => {
                             ))
                         }
                     </Grid>
-                </div>
+                </MediaContainer>
             </div>
         )   
     }
