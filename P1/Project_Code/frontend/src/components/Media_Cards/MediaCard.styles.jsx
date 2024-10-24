@@ -45,6 +45,14 @@ export const TrendingContainer = styled("div")`
         width: 240px;
         height: 140px;
     }
+    
+    @media(min-width: 426px) and (max-width: 1439px){
+        padding-left: 20px;
+    }
+
+    @media (max-width: 425px){
+        padding-left: 10px;
+    }
 `
 
 export const PlayButton = styled("div")`

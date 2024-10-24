@@ -17,7 +17,12 @@ export const NavBarContainer = styled("div")(({ theme }) => ({
     height: "50%",
     flexDirection: "row",
     justifyContent: "space-around",
+    margin: "0 25px 0 25px"
   },
+  ['@media (max-width: 425px)']: {
+    margin: "0",
+    borderRadius:"0"
+  }
 
 }));
 

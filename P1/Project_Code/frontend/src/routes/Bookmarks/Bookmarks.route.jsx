@@ -5,6 +5,7 @@ import { UserContext } from "../../context/User.context";
 import { useContext, useEffect, useState } from "react";
 import { Grid, Box, Stack, CircularProgress } from "@mui/material";
 import MediaCard from "../../components/Media_Cards/MediaCard";
+import { MediaContainer, StyledBox } from "../../components/Media_Cards/MediaCardsContainer.styles";
 
 
 export const Bookmarks = () => {
@@ -74,8 +75,8 @@ export const Bookmarks = () => {
                 <>
                     {bookmarkedMovies.length > 0 && (
                         <Stack sx={{mb: 6}}>
-                            <Box color={"white"} className="font-heading-L media-heading">Bookmarked Movies</Box>
-                            <div className="media-container">
+                            <StyledBox color={"white"} className="font-heading-L media-heading">Bookmarked Movies</StyledBox>
+                            <MediaContainer>
                                 <Grid container spacing= {4}>
                                     {
                                         bookmarkedMovies.map((movie, index) => (
@@ -92,13 +93,13 @@ export const Bookmarks = () => {
                                         ))
                                     }
                                 </Grid>
-                            </div>
+                            </MediaContainer>
                         </Stack>
                     )}
                     {bookmarkedShows.length > 0 && (
                         <Stack>
-                            <Box color={"white"} className="font-heading-L media-heading">Bookmarked TV Series</Box>
-                            <div className="media-container">
+                            <StyledBox color={"white"} className="font-heading-L media-heading">Bookmarked TV Series</StyledBox>
+                            <MediaContainer>
                                 <Grid container spacing= {4}>
                                     {
                                         bookmarkedShows.map((movie, index) => (
@@ -115,11 +116,11 @@ export const Bookmarks = () => {
                                         ))
                                     }
                                 </Grid>
-                            </div>
+                            </MediaContainer>
                         </Stack>
                     )}
                     {bookmarkedMedia.length === 0 && (
-                                <Box color={"white"} className="font-heading-L media-heading">No bookmarks yet!</Box>
+                                <StyledBox color={"white"} className="font-heading-L media-heading">No bookmarks yet!</StyledBox>
                     )}
                 </>
             )}

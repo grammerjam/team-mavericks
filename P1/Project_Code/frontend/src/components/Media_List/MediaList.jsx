@@ -3,6 +3,7 @@ import { MoviesContext } from "../../context/Movies.context";
 import { Grid, ThemeProvider, Typography, Box } from "@mui/material";
 import MediaCard from "../Media_Cards/MediaCard";
 import theme from "../../Theme.styles";
+import { MediaContainer, StyledBox } from "../Media_Cards/MediaCardsContainer.styles";
 
 const MediaList = ({ categoryType, title }) => {
 	const { movies, setFilteredCategory } = useContext(MoviesContext);
@@ -24,8 +25,8 @@ const MediaList = ({ categoryType, title }) => {
 
     return (
 		<div>
-			<Box color={"white"} className="font-heading-L media-heading">{title}</Box>
-			<div className="media-container">
+			<StyledBox color={"white"} className="font-heading-L media-heading">{title}</StyledBox>
+			<MediaContainer>
 				<Grid container spacing= {4}>
 					{
 						filteredCategory.map((movie, index) => (
@@ -42,7 +43,7 @@ const MediaList = ({ categoryType, title }) => {
 						))
 					}
 				</Grid>
-			</div>
+			</MediaContainer>
 		</div>
     )
 }
