@@ -42,12 +42,13 @@ app.use(cookieParser());
 })();
 
 // Import Custom Routers
-const { authRouter, userRouter, bookmarkRouter } = require("./routes/");
+const { authRouter, userRouter, bookmarkRouter, mediaRouter } = require("./routes/");
 
 // Incorporate Routes in Express App
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
 app.use("/api",  bookmarkRouter);
+app.use("/media", mediaRouter);
 
 app.listen(PORT, () => {
     console.log("App listening on port: " + PORT);
