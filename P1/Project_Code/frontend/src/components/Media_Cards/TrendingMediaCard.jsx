@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BookmarkImage, TrendingContainer, PlayButton, PlayText } from "./MediaCard.styles.jsx";
 import bookmarkActive from '../../assets/bookmark-active.png';
 import bookmarkInactive from '../../assets/bookmark-inactive.png';
@@ -9,6 +9,25 @@ import TvIcon from "../../assets/icon-category-tv.svg";
 
 const TrendingMediaCard = ({ imgSrc, movie, isBookmarked, toggleBookmark }) => {
     const [isHovered, setIsHovered] = useState(false); // State to track hover
+    const [title, setTitle] = useState();
+
+    useEffect(()=> {
+      const movieTitle = movie.media_type === "movie" ? movie.title : movie.name;
+      const updateShortenedTitle = () => {
+        if (window.innerWidth < 768 && movieTitle.length > 18){
+          setTitle(movieTitle.slice(0, 18) + "...");
+        }else{
+          setTitle(movieTitle);
+        }
+      };
+
+      updateShortenedTitle();
+      window.addEventListener("resize", updateShortenedTitle);
+
+      //Cleanup function runs when component unmounts
+      return () => window.removeEventListener("resize", updateShortenedTitle);
+    },[movie]);
+
 
     return (
       <TrendingContainer imgSrc={imgSrc}>
@@ -21,7 +40,7 @@ const TrendingMediaCard = ({ imgSrc, movie, isBookmarked, toggleBookmark }) => {
             <h4 className="media-info-item">{movie.year} •</h4>
             <img
               className="img-icon"
-              src={movie.category === "movie" ? MovieIcon : TvIcon}
+              src={movie.media_type === "movie" ? MovieIcon : TvIcon}
               style={{
                 height: "12px",
                 paddingTop: "24px",
@@ -30,12 +49,12 @@ const TrendingMediaCard = ({ imgSrc, movie, isBookmarked, toggleBookmark }) => {
               }}
             ></img>
             <h4 className="media-info-item">
-              {movie.category === "movie" ? "Movie" : "TV Series"} •
+              {movie.media_type === "movie" ? "Movie" : "TV Series"}
             </h4>
             <h4 className="media-info-item">{movie.rating}</h4>
           </div>
           <div className="media-title" style={{ position: "relative" }}>
-            {movie.title}
+            {title}
           </div>
         </div>
           <BookmarkImage
