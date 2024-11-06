@@ -63,7 +63,7 @@ const MediaCardsContainer = () => {
                                     sm={4}
                                     md={4}
                                     lg={3}
-                                    xl={3}
+                                    xl={2.4}
                                 >
                                     <MediaCard movie={movie} type="recommended"/>
                                 </Grid>
