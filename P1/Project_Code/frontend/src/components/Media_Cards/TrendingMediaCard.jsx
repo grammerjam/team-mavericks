@@ -6,6 +6,7 @@ import bookmarkHover from '../../assets/bookmark-hover.svg';
 import playIcon from '../../assets/icon-play.svg';
 import MovieIcon from "../../assets/icon-category-movie.svg";
 import TvIcon from "../../assets/icon-category-tv.svg";
+import { getMovieYear } from '../../services/getMovieYear.js';
 
 const TrendingMediaCard = ({ imgSrc, movie, isBookmarked, toggleBookmark }) => {
     const [isHovered, setIsHovered] = useState(false); // State to track hover
@@ -37,7 +38,7 @@ const TrendingMediaCard = ({ imgSrc, movie, isBookmarked, toggleBookmark }) => {
         </PlayButton>
         <div className="trending-media-info">
           <div className="media-info">
-            <h4 className="media-info-item">{movie.year} •</h4>
+            <h4 className="media-info-item">{getMovieYear(movie)} •</h4>
             <img
               className="img-icon"
               src={movie.media_type === "movie" ? MovieIcon : TvIcon}
