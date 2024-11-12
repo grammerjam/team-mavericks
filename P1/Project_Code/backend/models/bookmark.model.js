@@ -21,6 +21,24 @@ const Bookmark = sequelize.define('Bookmark', {
         type: DataTypes.STRING,
         allowNull: false
     },
+    title: {
+        type: DataTypes.STRING  
+    },
+    posterPath: {
+        type: DataTypes.STRING   
+    },
+    backdropPath: {
+        type: DataTypes.STRING  
+    },
+    overview: {
+        type: DataTypes.STRING  
+    },
+    releaseDate: {
+        type: DataTypes.STRING  
+    },
+    mediaType: {
+        type: DataTypes.STRING  
+    },
     createdAt: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW
