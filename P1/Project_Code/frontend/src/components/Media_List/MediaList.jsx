@@ -1,27 +1,29 @@
-import { useContext, useEffect } from "react";
-import { MoviesContext } from "../../context/Movies.context";
-import { Grid, ThemeProvider, Typography, Box } from "@mui/material";
+import { useState, useEffect } from "react";
+import { Grid } from "@mui/material";
 import MediaCard from "../Media_Cards/MediaCard";
-import theme from "../../Theme.styles";
 import { MediaContainer, StyledBox } from "../Media_Cards/MediaCardsContainer.styles";
+import { getApiUrl } from "../../services/ApiUrl";
+import axios from "axios";
 
 const MediaList = ({ categoryType, title }) => {
-	const { movies, setFilteredCategory } = useContext(MoviesContext);
-	const { filteredCategory } = useContext(MoviesContext);
+	
+	const apiUrl = getApiUrl();
+	const [filteredCategory, setFilteredCategory ] = useState([]);
 
-	useEffect(() => {
-		filterCategory();
-	}, [movies]);
-
-	const filterCategory = () => {
-		const filtered = movies.filter((movie) => {
-			if(movie.category){
-				return movie.category.toLowerCase().includes(categoryType);
-			}
-		});
-
-		setFilteredCategory(filtered);
+	const getMedia = async () => {
+		try{
+			const mediaItems = await axios.get(`${apiUrl}/media/trending`, {
+				params: {category: categoryType}
+			});
+			setFilteredCategory(mediaItems.data.results);
+		}catch(error){
+			console.error("Error fetching media.", error);
+		}
 	}
+
+	useEffect(()=> {
+		getMedia();
+	},[]);
 
     return (
 		<div>

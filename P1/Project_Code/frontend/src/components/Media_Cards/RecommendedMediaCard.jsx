@@ -6,6 +6,7 @@ import MovieIcon from "../../assets/icon-category-movie.svg";
 import TvIcon from "../../assets/icon-category-tv.svg";
 import { RecommendedContainer, PlayButton, PlayText } from "./MediaCard.styles";
 import playIcon from "../../assets/icon-play.svg";
+import { getMovieYear } from "../../services/getMovieYear";
 
 const RecommendedMediaCard = ({
   imgSrc,
@@ -39,21 +40,21 @@ const RecommendedMediaCard = ({
         </PlayButton>
       </RecommendedContainer>
       <div className="media-info">
-        <h4 className="media-info-item">{movie.year} •</h4>
+        <h4 className="media-info-item">{getMovieYear(movie)} •</h4>
         <img
           className="img-icon"
-          src={movie.category === "movie" ? MovieIcon : TvIcon}
+          src={movie.media_type === "movie" ? MovieIcon : TvIcon}
           style={{
             height: "12px",
             paddingLeft: "5px",
           }}
         ></img>
         <h4 className="media-info-item">
-          {movie.category === "movie" ? "Movie  " : "TV Series"} •
+          {movie.media_type === "movie" ? "Movie  " : "TV Series"}
         </h4>
         <h4 className="media-info-item">{movie.rating}</h4>
       </div>
-      <div className="media-title">{movie.title}</div>
+      <div className="media-title">{movie.media_type === "movie" ? movie.title : movie.name}</div>
     </>
   );
 };

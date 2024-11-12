@@ -1,15 +1,40 @@
-import { useContext } from "react";
 import MediaCard from "./MediaCard";
 import { Grid, Stack, ThemeProvider } from "@mui/material";
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import { MoviesContext } from "../../context/Movies.context";
 import trendingTheme from "../../services/TrendingTheme"
 import { MediaContainer, StyledBox } from "./MediaCardsContainer.styles";
+import { getApiUrl } from "../../services/ApiUrl";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const MediaCardsContainer = () => {
 
-    const { movies } = useContext(MoviesContext);
+    const apiUrl = getApiUrl();
+    const [movies, setMovies] = useState([]);
+
+    const getMedia = async () => { 
+        try{
+            let allResults = [];
+            for(let page = 1; page <= 2; page++){
+                const trendingMedia = await axios.get(`${apiUrl}/media/trending`, {
+                    params: {page, category: 'all' }
+                });
+                allResults = [...allResults, ...trendingMedia.data.results];
+            }
+            setMovies(allResults);
+        }catch(error){
+            console.error("Error displaying trending media", error);
+            if(error.response){
+                console.error("Response error data", error.response.data);
+                console.error("Response error status", error.response.status);
+            }
+        }
+    }
+
+    useEffect(() => {
+        getMedia();
+    },[]);
 
     return (
         <Stack spacing={10}>
@@ -38,7 +63,7 @@ const MediaCardsContainer = () => {
                                     sm={4}
                                     md={4}
                                     lg={3}
-                                    xl={3}
+                                    xl={2.4}
                                 >
                                     <MediaCard movie={movie} type="recommended"/>
                                 </Grid>

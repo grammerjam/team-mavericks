@@ -7,10 +7,16 @@ import RecommendedMediaCard from "./RecommendedMediaCard.jsx";
 const MediaCard = ({ movie, type, onRemove = () => {} }) => {
   const [imgSrc, setImgSrc] = useState("");
   const [isBookmarked, toggleBookmark] = useBookmark(movie);
+  const moviePosterUrl = "https://image.tmdb.org/t/p/w500";
 
   // Get the static path to the image required for the media card
   useEffect(() => {
-    const imagePath = getImagePath(movie.pics.regular.medium);
+    let imagePath = "";
+    if(type.toLowerCase() === "trending"){
+      imagePath = `${moviePosterUrl}${movie.backdrop_path}`;
+    }else{
+      imagePath = `${moviePosterUrl}${movie.poster_path}`;
+    }
     setImgSrc(imagePath);
   }, [movie]);
 
