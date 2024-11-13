@@ -22,7 +22,6 @@ const MediaCardsContainer = () => {
                 });
                 allResults = [...allResults, ...trendingMedia.data.results];
             }
-            console.log("allResults: ", allResults);
             setMovies(allResults);
         }catch(error){
             console.error("Error displaying trending media", error);

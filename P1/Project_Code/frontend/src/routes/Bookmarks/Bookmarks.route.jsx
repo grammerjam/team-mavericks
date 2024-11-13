@@ -45,12 +45,9 @@ export const Bookmarks = () => {
     };
 
     const handleUnbookmark = (id) => {
-        console.log("inside handleUnbookmark in the Bookmarks route");
         setBookmarkedMedia(prev => 
             prev.filter(item => {
-                console.log("Item:", item); // Log the entire item to see its structure
-                console.log("Comparing item.mediaID:", item.mediaID, "with id:", id); // Log comparison
-                return item.mediaID !== id; // Adjust `id` to match your data structure if needed
+                return item.mediaID !== id;
             })
         );
     };
