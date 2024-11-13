@@ -22,6 +22,7 @@ const MediaCardsContainer = () => {
                 });
                 allResults = [...allResults, ...trendingMedia.data.results];
             }
+            console.log("allResults: ", allResults);
             setMovies(allResults);
         }catch(error){
             console.error("Error displaying trending media", error);
@@ -56,7 +57,7 @@ const MediaCardsContainer = () => {
                 <MediaContainer>
                     <Grid container spacing={4}>
                         {
-                            movies.slice(4, movies.length-1).map((movie, index) => (
+                            movies.slice(10, movies.length).map((movie, index) => (
                                 <Grid 
                                     item key={index}
                                     xs={6}

@@ -37,32 +37,35 @@ export const Bookmarks = () => {
 
     const getBookmarkedMedia = (categoryType) => {
         const media = bookmarkedMedia.filter((movie) => {
-            if(movie.category){
-                return movie.category.toLowerCase().includes(categoryType);
+            if(movie.mediaType){
+                return movie.mediaType.toLowerCase().includes(categoryType);
             }
         });
         return media;
     };
 
     const handleUnbookmark = (id) => {
-        setBookmarkedMedia(prev => prev.filter(item => item.id !== id));
-    }
+        console.log("inside handleUnbookmark in the Bookmarks route");
+        setBookmarkedMedia(prev => 
+            prev.filter(item => {
+                console.log("Item:", item); // Log the entire item to see its structure
+                console.log("Comparing item.mediaID:", item.mediaID, "with id:", id); // Log comparison
+                return item.mediaID !== id; // Adjust `id` to match your data structure if needed
+            })
+        );
+    };
 
     useEffect(() => {
         const fetchBookmarkedMedia = async () => {
             const bookmarks = await getBookmarks();
-            const bookmarkedMediaIDs = bookmarks.map(bookmark => bookmark.mediaID);
-
-            const filteredMedia = movies.filter(movie => bookmarkedMediaIDs.includes(movie.id));
-
-            setBookmarkedMedia(filteredMedia);
+            setBookmarkedMedia(bookmarks);
         }
         fetchBookmarkedMedia();
-    },[movies]);
+    },[]);
 
     useEffect(() => {
         setBookmarkedMovies(getBookmarkedMedia('movie'));
-        setBookmarkedShows(getBookmarkedMedia('tv-series'));
+        setBookmarkedShows(getBookmarkedMedia('tv'));
     },[bookmarkedMedia]);
 
 	return (
@@ -88,7 +91,7 @@ export const Bookmarks = () => {
                                                 lg={3}
                                                 xl={2.4}
                                             >
-                                                <MediaCard movie={movie} type="recommended" onRemove={handleUnbookmark}/>
+                                                <MediaCard movie={movie} type="recommended" onRemove={handleUnbookmark} isBookmarkedMedia/>
                                             </Grid>
                                         ))
                                     }
@@ -111,7 +114,7 @@ export const Bookmarks = () => {
                                                 lg={3}
                                                 xl={2.4}
                                             >
-                                                <MediaCard movie={movie} type="recommended" onRemove={handleUnbookmark}/>
+                                                <MediaCard movie={movie} type="recommended" onRemove={handleUnbookmark} isBookmarkedMedia/>
                                             </Grid>
                                         ))
                                     }
