@@ -2,11 +2,13 @@ import React, { useState, useContext, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import { IconButton } from "@mui/material";
+import axios from "axios";
+import { getApiUrl } from "../../services/ApiUrl";
 
 import { Search, StyledInputBase } from "./SearchBar.styles";
 
 // Import MoviesRoute Context
-import { MoviesContext } from "../../context/Movies.context"; 
+import { MoviesContext } from "../../context/Movies.context";
 
 export const SearchBar = () => {
   // Import MoviesRoute Context
@@ -19,6 +21,8 @@ export const SearchBar = () => {
 
   // Let the user user the search input
   const [searchInput, setSearchInput] = useState("");
+
+  const apiUrl = getApiUrl();
 
   useEffect(() => {
     if(location.pathname !== '/search'){
@@ -50,14 +54,16 @@ export const SearchBar = () => {
     }
   };
 
-  const filterMovies = () => {
+  const filterMovies = async () => {
     // Filter movies based on the input value
     if (searchInput.length > 0) {
-      const filtered = movies.filter((movie) => {
-        return movie.title.toLowerCase().includes(searchInput.toLowerCase());
+      const results = await axios(`${apiUrl}/media/search`, {
+        params: {
+          query: searchInput
+        }
       });
 
-      setFilteredMovies(filtered);
+      setFilteredMovies(results);
     } else {
       setFilteredMovies([]);
     }
