@@ -15,7 +15,7 @@ const MediaCard = ({ movie, type, onRemove = () => {} }) => {
     if(type.toLowerCase() === "trending"){
       imagePath = `${moviePosterUrl}${movie.backdrop_path}`;
     }else{
-      imagePath = `${moviePosterUrl}${movie.poster_path}`;
+      imagePath = movie.poster_path ? `${moviePosterUrl}${movie.poster_path}`: "../../../public/poster-not-found.png";
     }
     setImgSrc(imagePath);
   }, [movie]);

@@ -4,15 +4,12 @@ import SearchIcon from "@mui/icons-material/Search";
 import { IconButton } from "@mui/material";
 import axios from "axios";
 import { getApiUrl } from "../../services/ApiUrl";
-
 import { Search, StyledInputBase } from "./SearchBar.styles";
-
-// Import MoviesRoute Context
 import { MoviesContext } from "../../context/Movies.context";
 
 export const SearchBar = () => {
   // Import MoviesRoute Context
-  const { movies, setFilteredMovies } = useContext(MoviesContext);
+  const { setFilteredMovies } = useContext(MoviesContext);
 
   // Import Navigation Handler
   const navigate = useNavigate();
@@ -33,8 +30,7 @@ export const SearchBar = () => {
   const onHandleInputChange = (e) => {
     // Change value of searchInput to whatever the user wrote right now
     const inputVal = e.target.value;
-    const trimmedVal = inputVal.trim();
-    setSearchInput(trimmedVal);
+    setSearchInput(inputVal);
   };
 
   const goToSearchResults = () => {
@@ -56,14 +52,15 @@ export const SearchBar = () => {
 
   const filterMovies = async () => {
     // Filter movies based on the input value
-    if (searchInput.length > 0) {
-      const results = await axios(`${apiUrl}/media/search`, {
+    const trimmedInput = searchInput.trim();
+    if (trimmedInput.length > 0) {
+      const movies = await axios(`${apiUrl}/media/search`, {
         params: {
-          query: searchInput
+          query: trimmedInput
         }
       });
 
-      setFilteredMovies(results);
+      setFilteredMovies(movies.data.results);
     } else {
       setFilteredMovies([]);
     }
