@@ -34,4 +34,21 @@ const getMediaDetails = async (mediaID, category) => {
     }
 }
 
-module.exports = { getTrendingMedia, getMediaDetails };
+const searchMedia = async (query) => {
+    try{
+        const results = await axios.get(`${tmdbBaseUrl}/search/multi`, {
+            params: {
+                api_key: tmdbApiKey,
+                language: 'en-US',
+                query: query
+            }
+        });
+        return results.data;
+    }catch(error){
+        console.error("Error finding query media", error);
+        throw error;
+    }
+}
+
+module.exports = { getTrendingMedia, getMediaDetails, searchMedia };
+

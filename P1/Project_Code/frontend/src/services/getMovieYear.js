@@ -2,7 +2,7 @@ export const getMovieYear = (movie, isBookmarkedMedia = false) => {
     let mediaType = "";
     let releaseDate = "";
     let firstAirDate = "";
-
+  
     if(isBookmarkedMedia){
         mediaType = movie.mediaType;
         releaseDate = movie.releaseDate;
@@ -14,5 +14,5 @@ export const getMovieYear = (movie, isBookmarkedMedia = false) => {
     }
 
     return mediaType === "movie" ? 
-    releaseDate.slice(0, 4) : firstAirDate.slice(0, 4);
+    releaseDate?.slice(0, 4) : firstAirDate?.slice(0, 4);
 }

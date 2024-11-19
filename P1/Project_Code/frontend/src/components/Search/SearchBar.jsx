@@ -2,15 +2,14 @@ import React, { useState, useContext, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import { IconButton } from "@mui/material";
-
+import axios from "axios";
+import { getApiUrl } from "../../services/ApiUrl";
 import { Search, StyledInputBase } from "./SearchBar.styles";
-
-// Import MoviesRoute Context
-import { MoviesContext } from "../../context/Movies.context"; 
+import { MoviesContext } from "../../context/Movies.context";
 
 export const SearchBar = () => {
   // Import MoviesRoute Context
-  const { movies, setFilteredMovies } = useContext(MoviesContext);
+  const { setFilteredMovies } = useContext(MoviesContext);
 
   // Import Navigation Handler
   const navigate = useNavigate();
@@ -19,6 +18,8 @@ export const SearchBar = () => {
 
   // Let the user user the search input
   const [searchInput, setSearchInput] = useState("");
+
+  const apiUrl = getApiUrl();
 
   useEffect(() => {
     if(location.pathname !== '/search'){
@@ -29,8 +30,7 @@ export const SearchBar = () => {
   const onHandleInputChange = (e) => {
     // Change value of searchInput to whatever the user wrote right now
     const inputVal = e.target.value;
-    const trimmedVal = inputVal.trim();
-    setSearchInput(trimmedVal);
+    setSearchInput(inputVal);
   };
 
   const goToSearchResults = () => {
@@ -50,14 +50,17 @@ export const SearchBar = () => {
     }
   };
 
-  const filterMovies = () => {
+  const filterMovies = async () => {
     // Filter movies based on the input value
-    if (searchInput.length > 0) {
-      const filtered = movies.filter((movie) => {
-        return movie.title.toLowerCase().includes(searchInput.toLowerCase());
+    const trimmedInput = searchInput.trim();
+    if (trimmedInput.length > 0) {
+      const movies = await axios(`${apiUrl}/media/search`, {
+        params: {
+          query: trimmedInput
+        }
       });
 
-      setFilteredMovies(filtered);
+      setFilteredMovies(movies.data.results);
     } else {
       setFilteredMovies([]);
     }
