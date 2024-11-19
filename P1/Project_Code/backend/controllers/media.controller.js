@@ -1,4 +1,5 @@
-const { getTrendingMedia } = require("../services/tmdbServices");
+const { getTrendingMedia, searchMedia } = require("../services/tmdbServices");
+const xss = require("xss");
 
 //Fetch trending media
 //@params page: choose page nuber(eg. 1, 2)
@@ -12,5 +13,17 @@ exports.fetchTrendingMedia = async (req, res) => {
     }catch(error){
         console.error("Error fetching media", error);
         res.status(500).json({error: "Failed to fetch media"});
+    }
+}
+
+exports.searchMediaItems = async (req, res) => {
+    const { query } = req.query;
+    try{
+        const results = await searchMedia(xss(query));
+        console.log("Search successful");
+        res.status(200).json(results);
+    }catch(error){
+        console.error("Error searching for media", error);
+        res.status(500).json({error: "Failed media search"});
     }
 }

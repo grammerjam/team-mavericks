@@ -3,7 +3,7 @@ import axios from "axios";
 import { UserContext } from "../context/User.context.jsx";
 import {getApiUrl} from "../services/ApiUrl.js";
 
-const useBookmark = (movie) => {
+const useBookmark = (movie, isBookmarkedMedia) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [allUsersBookmarks, setAllUsersBookmarks] = useState([]);
   const { user } = useContext(UserContext);
@@ -33,19 +33,26 @@ const useBookmark = (movie) => {
   }, [user?.id]);
 
   useEffect(() => {
-    if (!movie?.title) {
+    let mediaTitle = "";
+    if(isBookmarkedMedia){
+      mediaTitle = movie.title;
+    }else{
+      mediaTitle = movie.media_type === "movie" ? movie.title : movie.name; 
+    }
+    if (!mediaTitle) {
       // If movie.title is null or undefined, do nothing
       return;
     }
 
     const isBookmarked = allUsersBookmarks.some(
-        (bookmark) => bookmark.title === movie.title
+        (bookmark) => bookmark.title === mediaTitle
     );
     setIsBookmarked(isBookmarked);
   }, [allUsersBookmarks, movie?.title]);
 
   const toggleBookmark = async () => {
-    if (!user?.id || !movie?.id) {
+    const movieID = isBookmarkedMedia ? movie?.mediaID : movie?.id
+    if (!user?.id || !movieID) {
       // If user.id or movie.id is null or undefined, do nothing
       return;
     }
@@ -53,12 +60,13 @@ const useBookmark = (movie) => {
     try {
       if (isBookmarked) {
         await axios.delete(`${apiURL}/api/bookmark`, {
-          params: { userID: user.id, mediaID: movie.id },
+          params: { userID: user.id, mediaID: movieID },
         });
       } else {
         await axios.post(`${apiURL}/api/bookmark`, {
           userID: user.id,
           mediaID: movie.id,
+          mediaType: movie.media_type,
         });
       }
       setIsBookmarked(!isBookmarked);
