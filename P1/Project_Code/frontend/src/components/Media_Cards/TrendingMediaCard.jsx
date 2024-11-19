@@ -6,6 +6,7 @@ import bookmarkHover from '../../assets/bookmark-hover.svg';
 import playIcon from '../../assets/icon-play.svg';
 import MovieIcon from "../../assets/icon-category-movie.svg";
 import TvIcon from "../../assets/icon-category-tv.svg";
+import { updateShortenedTitle } from '../../services/updateShortenedTitle.js';
 import { getMovieYear } from '../../services/getMovieYear.js';
 
 const TrendingMediaCard = ({ imgSrc, movie, isBookmarked, toggleBookmark }) => {
@@ -14,19 +15,17 @@ const TrendingMediaCard = ({ imgSrc, movie, isBookmarked, toggleBookmark }) => {
 
     useEffect(()=> {
       const movieTitle = movie.media_type === "movie" ? movie.title : movie.name;
-      const updateShortenedTitle = () => {
-        if (window.innerWidth < 768 && movieTitle.length > 18){
-          setTitle(movieTitle.slice(0, 18) + "...");
-        }else{
-          setTitle(movieTitle);
-        }
-      };
+      const maxWinWidth = 768;
+      const maxLength = 18;
 
-      updateShortenedTitle();
-      window.addEventListener("resize", updateShortenedTitle);
-
+      //Shorten the title based on screen width
+      updateShortenedTitle(movieTitle, maxWinWidth, maxLength, setTitle);
+      //Function reference for the event listener
+      const handleResize = () => updateShortenedTitle(movieTitle, maxWinWidth, maxLength, setTitle);
+      //Event Listener
+      window.addEventListener("resize", handleResize);
       //Cleanup function runs when component unmounts
-      return () => window.removeEventListener("resize", updateShortenedTitle);
+      return () => window.removeEventListener("resize", handleResize);
     },[movie]);
 
 

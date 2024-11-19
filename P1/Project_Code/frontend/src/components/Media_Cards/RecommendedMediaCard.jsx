@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import bookmarkActive from "../../assets/bookmark-active.png";
 import bookmarkInactive from "../../assets/bookmark-inactive.png";
 import bookmarkHover from "../../assets/bookmark-hover.svg";
@@ -7,14 +7,41 @@ import TvIcon from "../../assets/icon-category-tv.svg";
 import { RecommendedContainer, PlayButton, PlayText } from "./MediaCard.styles";
 import playIcon from "../../assets/icon-play.svg";
 import { getMovieYear } from "../../services/getMovieYear";
+import { updateShortenedTitle } from '../../services/updateShortenedTitle';
 
 const RecommendedMediaCard = ({
   imgSrc,
   movie,
   isBookmarked,
   toggleBookmark,
+  isBookmarkedMedia
 }) => {
   const [isHovered, setIsHovered] = useState(false); // State to track hover
+  const [mediaType, setMediaType] = useState();
+  const [title, setTitle] = useState();
+
+  useEffect(() => {
+    let movieTitle = "";
+    const maxWinWidth = 768;
+    const maxLength = 23;
+
+    if(isBookmarkedMedia){
+      setMediaType(movie.mediaType);
+      movieTitle = movie.title;
+    }else{
+      setMediaType(movie.media_type);
+      movieTitle = movie.media_type === "movie" ? movie.title : movie.name;
+    }
+
+    //Shorten the title based on screen width
+    updateShortenedTitle(movieTitle, maxWinWidth, maxLength, setTitle);
+    //Function reference for the event listener
+    const handleResize = () => updateShortenedTitle(movieTitle, maxWinWidth, maxLength, setTitle);
+    //Event Listener
+    window.addEventListener("resize", handleResize);
+    //Cleanup function runs when component unmounts
+    return () => window.removeEventListener("resize", handleResize);
+  },[movie])
 
   return (
     <>
@@ -40,21 +67,21 @@ const RecommendedMediaCard = ({
         </PlayButton>
       </RecommendedContainer>
       <div className="media-info">
-        <h4 className="media-info-item">{getMovieYear(movie)} •</h4>
+        <h4 className="media-info-item">{getMovieYear(movie, isBookmarkedMedia)} •</h4>
         <img
           className="img-icon"
-          src={movie.media_type === "movie" ? MovieIcon : TvIcon}
+          src={mediaType === "movie" ? MovieIcon : TvIcon}
           style={{
             height: "12px",
             paddingLeft: "5px",
           }}
         ></img>
         <h4 className="media-info-item">
-          {movie.media_type === "movie" ? "Movie  " : "TV Series"}
+          {mediaType === "movie" ? "Movie  " : "TV Series"}
         </h4>
         <h4 className="media-info-item">{movie.rating}</h4>
       </div>
-      <div className="media-title">{movie.media_type === "movie" ? movie.title : movie.name}</div>
+      <div className="media-title" style={{marginBottom: "40px"}}>{title}</div>
     </>
   );
 };
