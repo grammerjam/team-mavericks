@@ -51,3 +51,4 @@ const searchMedia = async (query) => {
 }
 
 module.exports = { getTrendingMedia, getMediaDetails, searchMedia };
+

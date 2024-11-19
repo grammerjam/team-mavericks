@@ -4,9 +4,9 @@ import useBookmark from "../../hooks/useBookmark.jsx";
 import TrendingMediaCard from "./TrendingMediaCard.jsx";
 import RecommendedMediaCard from "./RecommendedMediaCard.jsx";
 
-const MediaCard = ({ movie, type, onRemove = () => {} }) => {
+const MediaCard = ({ movie, type, onRemove = () => {}, isBookmarkedMedia = false }) => {
   const [imgSrc, setImgSrc] = useState("");
-  const [isBookmarked, toggleBookmark] = useBookmark(movie);
+  const [isBookmarked, toggleBookmark] = useBookmark(movie, isBookmarkedMedia);
   const moviePosterUrl = "https://image.tmdb.org/t/p/w500";
 
   // Get the static path to the image required for the media card
@@ -15,7 +15,11 @@ const MediaCard = ({ movie, type, onRemove = () => {} }) => {
     if(type.toLowerCase() === "trending"){
       imagePath = `${moviePosterUrl}${movie.backdrop_path}`;
     }else{
-      imagePath = movie.poster_path ? `${moviePosterUrl}${movie.poster_path}`: "../../../public/poster-not-found.png";
+      if(isBookmarkedMedia){
+        imagePath = movie.posterPath ? `${moviePosterUrl}${movie.posterPath}`: "../../../public/poster-not-found.png";
+      }else{
+        imagePath = movie.poster_path ? `${moviePosterUrl}${movie.poster_path}`: "../../../public/poster-not-found.png";
+      }
     }
     setImgSrc(imagePath);
   }, [movie]);
@@ -24,7 +28,11 @@ const MediaCard = ({ movie, type, onRemove = () => {} }) => {
     await toggleBookmark();
 
     if(isBookmarked){
-      onRemove(movie.id);
+      if(isBookmarkedMedia){
+        onRemove(movie.mediaID);
+      }else{
+        onRemove(movie.id);
+      }
     }
   }
 
@@ -47,6 +55,7 @@ const MediaCard = ({ movie, type, onRemove = () => {} }) => {
           movie={movie}
           isBookmarked={isBookmarked}
           toggleBookmark={handleToggleBookmark}
+          isBookmarkedMedia={isBookmarkedMedia}
         ></RecommendedMediaCard>
       )}
     </>
