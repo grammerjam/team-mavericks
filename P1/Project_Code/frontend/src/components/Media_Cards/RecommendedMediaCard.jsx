@@ -8,6 +8,7 @@ import { RecommendedContainer, PlayButton, PlayText } from "./MediaCard.styles";
 import playIcon from "../../assets/icon-play.svg";
 import { getMovieYear } from "../../services/getMovieYear";
 import { updateShortenedTitle } from '../../services/updateShortenedTitle';
+import { useNavigate } from "react-router-dom";
 
 const RecommendedMediaCard = ({
   imgSrc,
@@ -19,6 +20,7 @@ const RecommendedMediaCard = ({
   const [isHovered, setIsHovered] = useState(false); // State to track hover
   const [mediaType, setMediaType] = useState();
   const [title, setTitle] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     let movieTitle = "";
@@ -43,6 +45,12 @@ const RecommendedMediaCard = ({
     return () => window.removeEventListener("resize", handleResize);
   },[movie])
 
+  const handlePlayClick = () => {
+    const mediaID = isBookmarkedMedia ? movie.mediaID : movie.id;
+    const mediaType = isBookmarkedMedia ? movie.mediaType : movie.media_type; 
+    navigate(`/watch/${mediaType}/${mediaID}`);
+  }
+
   return (
     <>
       <RecommendedContainer>
@@ -61,7 +69,7 @@ const RecommendedMediaCard = ({
           onMouseEnter={() => setIsHovered(true)} // Set hover state to true on mouse enter
           onMouseLeave={() => setIsHovered(false)} // Reset hover state on mouse leave
         />
-        <PlayButton className="play-button">
+        <PlayButton className="play-button" onClick={handlePlayClick}>
           <img className="play-button-img" src={playIcon} alt="play button" />
           <PlayText>Play</PlayText>
         </PlayButton>
