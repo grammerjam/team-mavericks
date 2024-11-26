@@ -16,9 +16,9 @@ const MediaCard = ({ movie, type, onRemove = () => {}, isBookmarkedMedia = false
       imagePath = `${moviePosterUrl}${movie.backdrop_path}`;
     }else{
       if(isBookmarkedMedia){
-        imagePath = movie.posterPath ? `${moviePosterUrl}${movie.posterPath}`: "../../../public/poster-not-found.png";
+        imagePath = movie.posterPath ? `${moviePosterUrl}${movie.posterPath}`: "../../../poster-not-found.png";
       }else{
-        imagePath = movie.poster_path ? `${moviePosterUrl}${movie.poster_path}`: "../../../public/poster-not-found.png";
+        imagePath = movie.poster_path ? `${moviePosterUrl}${movie.poster_path}`: "../../../poster-not-found.png";
       }
     }
     setImgSrc(imagePath);
