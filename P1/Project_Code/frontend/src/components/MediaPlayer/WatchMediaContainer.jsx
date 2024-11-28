@@ -14,6 +14,8 @@ import {
     Genre
 } from "./WatchMediaContainer.styles";
 import { Button } from "@mui/material";
+import { ThemeProvider } from "@emotion/react";
+import theme from "../../Theme.styles";
 
 
 const WatchMediaContainer = () => {
@@ -69,32 +71,34 @@ const WatchMediaContainer = () => {
     }
 
     return (
-        <MediaContainer backdrop={backdropUrl}>
-            {
-                playTrailer && (
-                    videoUrl ? (
-                        <CustomMediaPlayer url={videoUrl}/>
-                    ) : (
-                        <NoVideoMsg color={'white'}>No trailer video found</NoVideoMsg>
+        <ThemeProvider theme={theme}>
+            <MediaContainer backdrop={backdropUrl}>
+                {
+                    playTrailer && (
+                        videoUrl ? (
+                            <CustomMediaPlayer url={videoUrl}/>
+                        ) : (
+                            <NoVideoMsg color={'white'}>No trailer video found</NoVideoMsg>
+                        )
                     )
-                )
-            }
-            <MediaInfoContainer>
-                <Title>{media_type === "movie" ? mediaData?.title : mediaData?.name}</Title>
-                <ReleaseDate>
-                    Release Date: {media_type === "movie" ? mediaData?.release_date : mediaData?.first_air_date}
-                </ReleaseDate>
-                <Genres>
-                    {
-                        (mediaData?.genres)?.map((genre) => (
-                            <Genre>{genre.name}</Genre>
-                        ))
-                    }
-                </Genres>
-                <Overview>{mediaData?.overview}</Overview>
-                <Button onClick={handlePlayTrailer} variant="contained">{playTrailer ? "Close Video" : "Play Trailer"}</Button>
-            </MediaInfoContainer>
-        </MediaContainer>
+                }
+                <MediaInfoContainer>
+                    <Title>{media_type === "movie" ? mediaData?.title : mediaData?.name}</Title>
+                    <ReleaseDate>
+                        Release Date: {media_type === "movie" ? mediaData?.release_date : mediaData?.first_air_date}
+                    </ReleaseDate>
+                    <Genres>
+                        {
+                            (mediaData?.genres)?.map((genre) => (
+                                <Genre>{genre.name}</Genre>
+                            ))
+                        }
+                    </Genres>
+                    <Overview>{mediaData?.overview}</Overview>
+                    <Button onClick={handlePlayTrailer} variant="contained">{playTrailer ? "Close Video" : "Play Trailer"}</Button>
+                </MediaInfoContainer>
+            </MediaContainer>
+        </ThemeProvider>
     );
 }
 
