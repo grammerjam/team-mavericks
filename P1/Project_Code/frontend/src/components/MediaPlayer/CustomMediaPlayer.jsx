@@ -1,12 +1,12 @@
 import { IconButton, Slider } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import PauseIcon from '@mui/icons-material/Pause';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
-import { ControlsContainer, PlayerWrapper } from "./CustomMediaPlayer.styles";
+import { ControlsContainer, PlayerWrapper, ShowControlsButton } from "./CustomMediaPlayer.styles";
 import Screenfull from "screenfull";
 
 const CustomMediaPlayer = (props) => {
@@ -60,27 +60,23 @@ const CustomMediaPlayer = (props) => {
           setControlsVisible(false);
         }, 3000);
     };
-    
+
     useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    container.addEventListener('mousemove', handleMouseMove);
-
-    return () => {
-        container.removeEventListener('mousemove', handleMouseMove);
-        clearTimeout(timeoutRef.current);
-    };
+        return () => {
+          clearTimeout(timeoutRef.current);
+        };
     }, []);
 
-
     return (
-        <PlayerWrapper ref={containerRef}>
+        <PlayerWrapper onMouseMove={handleMouseMove} ref={containerRef}>
             <ReactPlayer 
                 ref={playerRef}
                 url={props.url}
                 playing={playing}
-                onPlay={() => setPlaying(true)}
+                onPlay={() => {
+                    setPlaying(true)
+                    handleMouseMove();
+                }}
                 onPause={() => setPlaying(false)}
                 volume={volume}
                 muted={muted}
@@ -138,6 +134,7 @@ const CustomMediaPlayer = (props) => {
                     <FullscreenIcon sx={{fontSize: 32}}/>
                 </IconButton>
             </ControlsContainer>
+            {!controlsVisible && (<ShowControlsButton>Show Controls</ShowControlsButton>)}
         </PlayerWrapper>
     );
 
