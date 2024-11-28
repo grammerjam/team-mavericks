@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { getApiUrl } from "../../services/ApiUrl";
 import { 
-    PlayerWrapper, 
     NoVideoMsg, 
     MediaContainer,
     MediaInfoContainer,
@@ -74,9 +73,7 @@ const WatchMediaContainer = () => {
             {
                 playTrailer && (
                     videoUrl ? (
-                        <PlayerWrapper>
-                            <CustomMediaPlayer url={videoUrl}/>
-                        </PlayerWrapper>
+                        <CustomMediaPlayer url={videoUrl}/>
                     ) : (
                         <NoVideoMsg color={'white'}>No trailer video found</NoVideoMsg>
                     )
@@ -95,7 +92,7 @@ const WatchMediaContainer = () => {
                     }
                 </Genres>
                 <Overview>{mediaData?.overview}</Overview>
-                <Button onClick={handlePlayTrailer} variant="contained" fullWidth >{playTrailer ? "Close Video" : "Play Trailer"}</Button>
+                <Button onClick={handlePlayTrailer} variant="contained">{playTrailer ? "Close Video" : "Play Trailer"}</Button>
             </MediaInfoContainer>
         </MediaContainer>
     );

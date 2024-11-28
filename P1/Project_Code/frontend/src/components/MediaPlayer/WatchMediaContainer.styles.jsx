@@ -12,15 +12,6 @@ export const MediaContainer = styled("div")`
     
 `
 
-export const PlayerWrapper = styled("div")`
-    width: 100%;
-    max-width: 1050px;
-    overflow: hidden;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
-    margin: 20px;
-    
-`
-
 export const NoVideoMsg = styled("div")`
     padding: 10px;
     text-align: center;
@@ -33,11 +24,11 @@ export const NoVideoMsg = styled("div")`
 
 export const MediaInfoContainer = styled("div")`
     max-width: 700px;
-    heigh: auto;
+    height: auto;
     background-color: rgba(10, 10, 10, 0.9);
     padding: 40px;
     align-self: flex-start;
-    margin: 20px 0 20px 60px;
+    margin: 90px 0 20px 60px;
     border-radius: 15px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.1);
