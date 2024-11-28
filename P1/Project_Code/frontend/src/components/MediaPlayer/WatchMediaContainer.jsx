@@ -40,8 +40,6 @@ const WatchMediaContainer = () => {
                 });
                 setMediaData(media.data);
                 const videos = media.data.videos.results;
-                console.log(videos);
-                console.log("mediaData:  ", media.data);
                 const videoUrl = getVideoUrl(videos);
                 setVideoUrl(videoUrl);
             }catch(error){
