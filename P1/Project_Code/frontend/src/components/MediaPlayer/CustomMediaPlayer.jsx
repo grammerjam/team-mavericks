@@ -1,4 +1,4 @@
-import { IconButton, Slider } from "@mui/material";
+import { Box, IconButton, Slider } from "@mui/material";
 import { forwardRef, useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
@@ -6,7 +6,7 @@ import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import PauseIcon from '@mui/icons-material/Pause';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
-import { ControlsContainer, PlayerWrapper, ShowControlsButton } from "./CustomMediaPlayer.styles";
+import { BottomControllers, ControlsContainer, PlayerWrapper, ShowControlsButton, TopControllers } from "./CustomMediaPlayer.styles";
 import Screenfull from "screenfull";
 
 const CustomMediaPlayer = (props) => {
@@ -68,7 +68,16 @@ const CustomMediaPlayer = (props) => {
     }, []);
 
     return (
-        <PlayerWrapper onMouseMove={handleMouseMove} ref={containerRef}>
+        <PlayerWrapper 
+            onMouseMove={handleMouseMove} 
+            ref={containerRef}
+            sx={{
+                height: {
+                    xs: '350px',
+                    sm: '550px'
+                }
+            }}
+        >
             <ReactPlayer 
                 ref={playerRef}
                 url={props.url}
@@ -94,47 +103,96 @@ const CustomMediaPlayer = (props) => {
                     }
                 }}
             />
-            <ControlsContainer visible={controlsVisible}>
-                <IconButton onClick={handlePlayPause} color="secondary">
-                    {playing ? <PauseIcon sx={{fontSize: 32}}/> : <PlayArrowIcon sx={{fontSize: 32}}/>}
-                </IconButton>
-                <IconButton>
-                    <Slider
-                        value={progress}
-                        min={0}
-                        max={1}
-                        step={0.01}
-                        onChange={handleSeekChange}
-                        color="secondary"
-                        style={{ 
-                            flexGrow: 1, 
-                            marginLeft: '10px', 
-                            width: '700px', 
-                            marginRight: '10px' 
-                        }}
-                        aria-label="Progress slider"
-                    />
-                </IconButton>
-                <IconButton onClick={handleMuteToggle} color="secondary">
-                    {muted ? <VolumeOffIcon/> : <VolumeUpIcon />}
-                </IconButton>
-                <IconButton>
-                    <Slider
-                        value={volume}
-                        onChange={handleVolumeChange}
-                        min={0}
-                        max={1}
-                        step={0.01}
-                        style={{width: '100px'}}
-                        color="secondary"
-                        aria-label="Volume slider"
-                    />
-                </IconButton>
-                <IconButton onClick={handleFullscreen} color="secondary" size="large">
-                    <FullscreenIcon sx={{fontSize: 32}}/>
-                </IconButton>
+            <ControlsContainer 
+                visible={controlsVisible}
+                sx={{
+                    width: {
+                        xs: '100%',
+                        sm: 'calc(100% - 70px)'
+                    }
+                }}
+            >
+                <TopControllers>
+                    <Box display="flex" alignItems="center" width="100%">
+                        <Slider
+                            value={progress}
+                            min={0}
+                            max={1}
+                            step={0.01}
+                            onChange={handleSeekChange}
+                            color="secondary"
+                            sx={{ 
+                                flexGrow: 1, 
+                                marginLeft: '10px',
+                                marginRight: '10px',
+                            }}
+                            aria-label="Progress slider"
+                        />
+                    </Box>
+                </TopControllers>
+                <BottomControllers>
+                    <Box>
+                        <IconButton onClick={handlePlayPause} color="secondary">
+                            {playing ? 
+                                <PauseIcon 
+                                    sx={{
+                                        fontSize: {
+                                            xs: '48px',
+                                            sm: '32px'
+                                        }
+                                    }}
+                                /> 
+                                : 
+                                <PlayArrowIcon 
+                                    sx={{
+                                        fontSize: {
+                                            xs: '48px',
+                                            sm: '32px'
+                                        }
+                                    }}
+                                />
+                            }
+                        </IconButton>
+                        <IconButton 
+                            onClick={handleMuteToggle} 
+                            color="secondary"
+                            sx={{
+                                display: {
+                                    xs: 'none',
+                                    sm: 'inline'
+                                }
+                            }}
+                        >
+                            {muted ? <VolumeOffIcon/> : <VolumeUpIcon />}
+                        </IconButton>
+                        <IconButton 
+                            sx={{
+                                display: {
+                                    xs: 'none',
+                                    sm: 'inline'
+                                }
+                            }}
+                        >
+                            <Slider
+                                value={volume}
+                                onChange={handleVolumeChange}
+                                min={0}
+                                max={1}
+                                step={0.01}
+                                style={{width: '25vw', maxWidth: '130px', minWidth: '25px'}}
+                                color="secondary"
+                                aria-label="Volume slider"
+                            />
+                        </IconButton>
+                    </Box>
+                    <Box>
+                        <IconButton onClick={handleFullscreen} color="secondary" size="large">
+                            <FullscreenIcon sx={{fontSize: 32}}/>
+                        </IconButton>
+                    </Box>
+                </BottomControllers>
             </ControlsContainer>
-            {!controlsVisible && (<ShowControlsButton>Show Controls</ShowControlsButton>)}
+            {!controlsVisible && (<ShowControlsButton onClick={handleMouseMove}>Show Controls</ShowControlsButton>)}
         </PlayerWrapper>
     );
 

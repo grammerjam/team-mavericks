@@ -25,11 +25,9 @@ export const NoVideoMsg = styled("div")`
 export const MediaInfoContainer = styled("div")`
     max-width: 700px;
     height: auto;
-    background-color: rgba(10, 10, 10, 0.9);
+    background-color: rgba(10, 10, 10, 0.75);
     padding: 40px;
     align-self: flex-start;
-    margin: 90px 0 20px 60px;
-    border-radius: 15px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.1);
 `

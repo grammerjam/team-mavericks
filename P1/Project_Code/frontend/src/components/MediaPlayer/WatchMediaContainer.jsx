@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CustomMediaPlayer from "../../components/MediaPlayer/CustomMediaPlayer";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -28,6 +28,7 @@ const WatchMediaContainer = () => {
     const [companyLogo, setCompanyLogo] = useState("");
     const basicImgUrl = "https://image.tmdb.org/t/p";
     const [playTrailer, setPlayTrailer] = useState(false);
+    const mediaContainerRef = useRef(null);
 
     useEffect(() => {
         const fetchMedia = async () => {
@@ -68,9 +69,15 @@ const WatchMediaContainer = () => {
         setPlayTrailer(!playTrailer);
     }
 
+    const scrollToMedia = () => {
+        if(mediaContainerRef.current){
+            mediaContainerRef.current.scrollIntoView({behavior: 'smooth'});
+        }
+    }
+
     return (
         <ThemeProvider theme={theme}>
-            <MediaContainer backdrop={backdropUrl}>
+            <MediaContainer ref={mediaContainerRef} backdrop={backdropUrl}>
                 {
                     playTrailer && (
                         videoUrl ? (
@@ -80,7 +87,18 @@ const WatchMediaContainer = () => {
                         )
                     )
                 }
-                <MediaInfoContainer>
+                <MediaInfoContainer 
+                    sx={{
+                        margin: {
+                            xs: "0", 
+                            md: "90px 0 20px 60px"
+                        },
+                        borderRadius: {
+                            xs: "0",
+                            md: "15px"
+                        }
+                    }}
+                >
                     <Title>{media_type === "movie" ? mediaData?.title : mediaData?.name}</Title>
                     <ReleaseDate>
                         Release Date: {media_type === "movie" ? mediaData?.release_date : mediaData?.first_air_date}
@@ -92,8 +110,22 @@ const WatchMediaContainer = () => {
                             ))
                         }
                     </Genres>
+                    <Button 
+                        onClick={() => {
+                            scrollToMedia();
+                            handlePlayTrailer();
+                        }}
+                        variant="contained"
+                        sx={{
+                            width: {
+                                xs: '100%',
+                                sm: 'auto'
+                            }
+                        }}
+                    >
+                        {playTrailer ? "Close Video" : "Play Trailer"}
+                    </Button>
                     <Overview>{mediaData?.overview}</Overview>
-                    <Button onClick={handlePlayTrailer} variant="contained">{playTrailer ? "Close Video" : "Play Trailer"}</Button>
                 </MediaInfoContainer>
             </MediaContainer>
         </ThemeProvider>
