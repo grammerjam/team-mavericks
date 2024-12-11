@@ -81,6 +81,7 @@ const CustomMediaPlayer = (props) => {
             <ReactPlayer 
                 ref={playerRef}
                 url={props.url}
+                playsinline={true}
                 playing={playing}
                 onPlay={() => {
                     setPlaying(true)
