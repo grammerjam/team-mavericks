@@ -5,7 +5,6 @@ import TrendingMediaCard from "./TrendingMediaCard.jsx";
 import RecommendedMediaCard from "./RecommendedMediaCard.jsx";
 import PosterNotFound from "../../assets/poster-not-found.png"
 
-
 const MediaCard = ({ movie, type, onRemove = () => {}, isBookmarkedMedia = false }) => {
   const [imgSrc, setImgSrc] = useState("");
   const [isBookmarked, toggleBookmark] = useBookmark(movie, isBookmarkedMedia);
