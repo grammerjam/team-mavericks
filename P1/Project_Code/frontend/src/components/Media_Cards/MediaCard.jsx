@@ -3,6 +3,8 @@ import { getImagePath } from "../../services/getImagePath.js";
 import useBookmark from "../../hooks/useBookmark.jsx";
 import TrendingMediaCard from "./TrendingMediaCard.jsx";
 import RecommendedMediaCard from "./RecommendedMediaCard.jsx";
+import PosterNotFound from "../../assets/poster-not-found.png"
+
 
 const MediaCard = ({ movie, type, onRemove = () => {}, isBookmarkedMedia = false }) => {
   const [imgSrc, setImgSrc] = useState("");
@@ -16,9 +18,9 @@ const MediaCard = ({ movie, type, onRemove = () => {}, isBookmarkedMedia = false
       imagePath = `${moviePosterUrl}${movie.backdrop_path}`;
     }else{
       if(isBookmarkedMedia){
-        imagePath = movie.posterPath ? `${moviePosterUrl}${movie.posterPath}`: "../../../poster-not-found.png";
+        imagePath = movie.posterPath ? `${moviePosterUrl}${movie.posterPath}`: PosterNotFound;
       }else{
-        imagePath = movie.poster_path ? `${moviePosterUrl}${movie.poster_path}`: "../../../poster-not-found.png";
+        imagePath = movie.poster_path ? `${moviePosterUrl}${movie.poster_path}`: PosterNotFound;
       }
     }
     setImgSrc(imagePath);

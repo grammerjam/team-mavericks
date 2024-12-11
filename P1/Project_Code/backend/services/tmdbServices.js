@@ -19,12 +19,13 @@ const getTrendingMedia = async (page = 1, category = 'all') => {
     }
 }
 
-const getMediaDetails = async (mediaID, category) => {
+const getMediaDetails = async (mediaID, category = 'all') => {
     try{
         const response = await axios.get(`${tmdbBaseUrl}/${category}/${mediaID}`, {
             params: {
                 api_key: tmdbApiKey,
                 language: 'en-US',
+                append_to_response: 'videos'
             }
         })
         return response.data;
