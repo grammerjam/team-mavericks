@@ -13,6 +13,7 @@ import {Movies} from "./routes/Movies/Movies.route.jsx";
 import {Bookmarks} from "./routes/Bookmarks/Bookmarks.route.jsx";
 import {TvSeries} from "./routes/TvSeries/TvSeries.route.jsx";
 import {SearchResults} from "./routes/SearchResults/SearchResults.route.jsx"
+import { WatchMedia } from './routes/WatchMedia/WatchMedia.route.jsx';
 
 function App() {
     return (
@@ -26,6 +27,7 @@ function App() {
                                     <Route path="/tv-series" element={<TvSeries/>} />
                                     <Route path="/bookmarks" element={<Bookmarks/>} />
                                     <Route path="/search" element={<SearchResults/>} />
+                                    <Route path='/watch/:media_type/:id' element={<WatchMedia/>}/>
                                 </Route>
                                 <Route path="/login" element={<Login />} />
                                 <Route path="/register" element={<Register />} />

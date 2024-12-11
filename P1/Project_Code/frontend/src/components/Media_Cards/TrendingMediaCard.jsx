@@ -8,10 +8,12 @@ import MovieIcon from "../../assets/icon-category-movie.svg";
 import TvIcon from "../../assets/icon-category-tv.svg";
 import { updateShortenedTitle } from '../../services/updateShortenedTitle.js';
 import { getMovieYear } from '../../services/getMovieYear.js';
+import { useNavigate } from 'react-router-dom';
 
 const TrendingMediaCard = ({ imgSrc, movie, isBookmarked, toggleBookmark }) => {
     const [isHovered, setIsHovered] = useState(false); // State to track hover
     const [title, setTitle] = useState();
+    const navigate = useNavigate();
 
     useEffect(()=> {
       const movieTitle = movie.media_type === "movie" ? movie.title : movie.name;
@@ -28,10 +30,13 @@ const TrendingMediaCard = ({ imgSrc, movie, isBookmarked, toggleBookmark }) => {
       return () => window.removeEventListener("resize", handleResize);
     },[movie]);
 
+    const handleCardClick = () => {
+      navigate(`/watch/${movie.media_type}/${movie.id}`);
+    }
 
     return (
       <TrendingContainer imgSrc={imgSrc}>
-        <PlayButton className="play-button">
+        <PlayButton className="play-button" onClick={handleCardClick}>
           <img className="play-button-img" src={playIcon} alt="play button" />
           <PlayText>Play</PlayText>
         </PlayButton>
