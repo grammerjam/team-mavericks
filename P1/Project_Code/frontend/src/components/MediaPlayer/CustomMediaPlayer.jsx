@@ -16,8 +16,9 @@ const CustomMediaPlayer = (props) => {
     const playerRef = useRef(null);
     const containerRef = useRef(null);
     const [progress, setProgress] = useState(0);
-    const [controlsVisible, setControlsVisible] = useState(true);
+    const [controlsVisible, setControlsVisible] = useState(false);
     const timeoutRef = useRef(null);
+    const [youtubeControls, setYoutubeControls] = useState(false);
 
     const handlePlayPause = () => {
         setPlaying(!playing);
@@ -54,16 +55,28 @@ const CustomMediaPlayer = (props) => {
     };
     
     const handleMouseMove = () => {
-        setControlsVisible(true);
-        clearTimeout(timeoutRef.current);
-        timeoutRef.current = setTimeout(() => {
-          setControlsVisible(false);
-        }, 3000);
+        if(!youtubeControls){
+            setControlsVisible(true);
+            clearTimeout(timeoutRef.current);
+            timeoutRef.current = setTimeout(() => {
+            setControlsVisible(false);
+            }, 3000);
+        }else{
+            setControlsVisible(false);
+        }
+    };
+
+    const youtubeControlsVisibility = () => {
+        const isSmallScreen = window.innerWidth <= 790;
+        setYoutubeControls(isSmallScreen);
     };
 
     useEffect(() => {
+        youtubeControlsVisibility();
+        window.addEventListener("resize", youtubeControlsVisibility);
         return () => {
           clearTimeout(timeoutRef.current);
+          window.removeEventListener("resize", youtubeControlsVisibility);
         };
     }, []);
 
@@ -79,6 +92,7 @@ const CustomMediaPlayer = (props) => {
             }}
         >
             <ReactPlayer 
+                key={youtubeControls} // Forces remount on showControls change
                 ref={playerRef}
                 url={props.url}
                 playsinline={true}
@@ -97,7 +111,7 @@ const CustomMediaPlayer = (props) => {
                     youtube: {
                         playerVars: {
                             autoplay: 1,
-                            controls: 0,
+                            controls: youtubeControls ? 1 : 0,
                             modestbranding: 1,
                             rel: 0,
                         }
@@ -193,7 +207,11 @@ const CustomMediaPlayer = (props) => {
                     </Box>
                 </BottomControllers>
             </ControlsContainer>
-            {!controlsVisible && (<ShowControlsButton onClick={handleMouseMove}>Show Controls</ShowControlsButton>)}
+            {
+                window.innerWidth > 790
+                &&
+                (!controlsVisible && (<ShowControlsButton onClick={handleMouseMove}>Show Controls</ShowControlsButton>))
+            }
         </PlayerWrapper>
     );
 
