@@ -7,8 +7,9 @@ const CustomMediaPlayer = (props) => {
         <PlayerWrapper
             sx={{
                 height: {
-                    xs: '350px',
-                    sm: '550px'
+                    xs: '250px',
+                    sm: '450px',
+                    md: '550px'
                 }
             }}
         >

@@ -10,6 +10,6 @@ export const PlayerWrapper = styled("div")`
     position: relative;
     width: 100%;
     max-width: 1060px;
-    box-shadow: 9px 4px 12px rgba(156, 39, 176, 1);
+    box-shadow: 0px 2px 12px white;
     
 `

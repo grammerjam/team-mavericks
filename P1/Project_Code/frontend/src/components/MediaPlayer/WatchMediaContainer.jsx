@@ -74,27 +74,49 @@ const WatchMediaContainer = () => {
         <ThemeProvider theme={theme}>
             <WatchContainer>
                 <TopContainer>
-                    <BackdropImage onClick={() => handlePlayTrailer()}>
-                        <img src={backdropUrl} alt="Movie Backdrop"/>
-                    </BackdropImage>
                     {
                         !playTrailer && (
-                            <Button 
-                                onClick={() => {
-                                    handlePlayTrailer();
-                                }}
-                                variant="contained"
-                                sx={{
-                                    zIndex: 2,
-                                    borderRadius: 20,
-                                    position: 'absolute'
-                                }}
-                            >
-                                Play Trailer
-                            </Button>
+                            <>
+                                <BackdropImage 
+                                    onClick={() => handlePlayTrailer()}
+                                    sx={{
+                                        width: {
+                                            xs: "100%",
+                                            md: "950px",
+                                            lg: "1280px"
+                                        },
+                                        height: {
+                                            lg: "550px",
+                                        }
+                                    }}
+                                >
+                                    <img src={backdropUrl} alt="Movie Backdrop"/>
+                                </BackdropImage>
+                                <Button 
+                                    onClick={() => {
+                                        handlePlayTrailer();
+                                    }}
+                                    variant="contained"
+                                    sx={{
+                                        zIndex: 2,
+                                        borderRadius: 20,
+                                        position: 'absolute'
+                                    }}
+                                >
+                                    Play Trailer
+                                </Button>
+                            </>
                         )
                     }
-                    <MediaContainer>
+                </TopContainer>
+                <MediaContainer
+                        sx={{
+                            width: {
+                                xs: "100%",
+                                lg: "1060px"
+                            },
+                        }}
+                    >
                         {
                             playTrailer && (
                                 videoUrl ? (
@@ -104,20 +126,8 @@ const WatchMediaContainer = () => {
                                 )
                             )
                         }
-                    </MediaContainer>
-                </TopContainer>
-                <MediaInfoContainer 
-                    sx={{
-                        margin: {
-                            xs: "0", 
-                            md: "0 0 20px 60px"
-                        },
-                        borderRadius: {
-                            xs: "0",
-                            md: "15px"
-                        }
-                    }}
-                >
+                </MediaContainer>
+                <MediaInfoContainer>
                     <Title>{media_type === "movie" ? mediaData?.title : mediaData?.name}</Title>
                     <ReleaseDate>
                         Release Date: {media_type === "movie" ? mediaData?.release_date : mediaData?.first_air_date}

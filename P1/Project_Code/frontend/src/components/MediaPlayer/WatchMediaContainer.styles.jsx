@@ -13,8 +13,6 @@ export const TopContainer = styled("div")`
 `
 
 export const BackdropImage = styled("div")`
-    width: 1280px;
-    height: 600px;
     z-index: 1;
     cursor: pointer;
     position: relative;
@@ -30,9 +28,7 @@ export const BackdropImage = styled("div")`
 `
 
 export const MediaContainer = styled("div")`
-    width: 1060px;
     z-index: 2;
-    position: absolute;
 `
 
 export const NoVideoMsg = styled("div")`
@@ -46,9 +42,8 @@ export const NoVideoMsg = styled("div")`
 `
 
 export const MediaInfoContainer = styled("div")`
-    width: 1380px;
-    height: auto;
     padding: 40px;
+    max-width: 1060px;
 `
 
 export const Title = styled("h1")`
