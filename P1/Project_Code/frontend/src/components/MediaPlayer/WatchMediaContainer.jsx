@@ -120,6 +120,7 @@ const WatchMediaContainer = () => {
                         sx={{
                             width: {
                                 xs: "100%",
+                                md: "90%",
                                 lg: "1060px"
                             },
                         }}
