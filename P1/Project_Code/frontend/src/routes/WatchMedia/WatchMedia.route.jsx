@@ -1,5 +1,9 @@
 import WatchMediaContainer from "../../components/MediaPlayer/WatchMediaContainer";
 
 export const WatchMedia = () => {
-    return <WatchMediaContainer />;
+    return (
+        <div className="page-container">
+            <WatchMediaContainer />
+        </div>
+    );
 }

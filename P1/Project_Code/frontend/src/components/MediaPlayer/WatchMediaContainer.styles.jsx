@@ -1,19 +1,38 @@
 import { styled } from "@mui/material";
 
-export const MediaContainer = styled("div")`
+export const WatchContainer = styled("div")`
     display: flex;
     flex-direction: column;
     align-items: center;
+`
+
+export const TopContainer = styled("div")`
+    display: flex;
     justify-content: center;
-    min-height: 100vh;
-    background-color: #1e1e1e;
-    background: url(${(props) => props.backdrop}) no-repeat center center;
-    background-size: cover;
-    
+    align-items: center;
+`
+
+export const BackdropImage = styled("div")`
+    z-index: 1;
+    cursor: pointer;
+    position: relative;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: filter 0.3 ease
+    }
+    &:hover img {
+        filter: brightness(0.8);
+    }
+`
+
+export const MediaContainer = styled("div")`
+    z-index: 2;
 `
 
 export const NoVideoMsg = styled("div")`
-    padding: 10px;
+    padding: 100px;
     text-align: center;
     margin-top: 2rem;
     color: #bbb;
@@ -23,13 +42,8 @@ export const NoVideoMsg = styled("div")`
 `
 
 export const MediaInfoContainer = styled("div")`
-    max-width: 700px;
-    height: auto;
-    background-color: rgba(10, 10, 10, 0.75);
     padding: 40px;
-    align-self: flex-start;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 1060px;
 `
 
 export const Title = styled("h1")`

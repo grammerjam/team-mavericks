@@ -66,7 +66,7 @@ export const Bookmarks = () => {
     },[bookmarkedMedia]);
 
 	return (
-		<Box>
+		<Box className="page-container">
             {isLoading ? (
                 <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
                     <CircularProgress />

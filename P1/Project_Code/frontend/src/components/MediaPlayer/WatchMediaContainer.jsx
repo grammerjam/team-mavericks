@@ -11,7 +11,10 @@ import {
     ReleaseDate,
     Overview,
     Genres,
-    Genre
+    Genre,
+    WatchContainer,
+    BackdropImage,
+    TopContainer
 } from "./WatchMediaContainer.styles";
 import { Button } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
@@ -25,10 +28,9 @@ const WatchMediaContainer = () => {
     const [videoUrl, setVideoUrl] = useState("");
     const [mediaData, setMediaData] = useState();
     const [backdropUrl, setBackdropUrl] = useState("");
-    const [companyLogo, setCompanyLogo] = useState("");
     const basicImgUrl = "https://image.tmdb.org/t/p";
     const [playTrailer, setPlayTrailer] = useState(false);
-    const mediaContainerRef = useRef(null);
+    const WatchContainerRef = useRef(null);
 
     useEffect(() => {
         const fetchMedia = async () => {
@@ -70,35 +72,70 @@ const WatchMediaContainer = () => {
     }
 
     const scrollToMedia = () => {
-        if(mediaContainerRef.current){
-            mediaContainerRef.current.scrollIntoView({behavior: 'smooth'});
+        if(WatchContainerRef.current){
+            WatchContainerRef.current.scrollIntoView({behavior: 'smooth'});
         }
     }
 
     return (
         <ThemeProvider theme={theme}>
-            <MediaContainer ref={mediaContainerRef} backdrop={backdropUrl}>
-                {
-                    playTrailer && (
-                        videoUrl ? (
-                            <CustomMediaPlayer url={videoUrl}/>
-                        ) : (
-                            <NoVideoMsg color={'white'}>No trailer video found</NoVideoMsg>
+            <WatchContainer ref={WatchContainerRef}>
+                <TopContainer>
+                    {
+                        !playTrailer && (
+                            <>
+                                <BackdropImage 
+                                    onClick={() => handlePlayTrailer()}
+                                    sx={{
+                                        width: {
+                                            xs: "100%",
+                                            md: "950px",
+                                            lg: "1280px"
+                                        },
+                                        height: {
+                                            lg: "550px",
+                                        }
+                                    }}
+                                >
+                                    <img src={backdropUrl} alt="Movie Backdrop"/>
+                                </BackdropImage>
+                                <Button 
+                                    onClick={() => {
+                                        handlePlayTrailer();
+                                    }}
+                                    variant="contained"
+                                    sx={{
+                                        zIndex: 2,
+                                        borderRadius: 20,
+                                        position: 'absolute'
+                                    }}
+                                >
+                                    Play Trailer
+                                </Button>
+                            </>
                         )
-                    )
-                }
-                <MediaInfoContainer 
-                    sx={{
-                        margin: {
-                            xs: "0", 
-                            md: "90px 0 20px 60px"
-                        },
-                        borderRadius: {
-                            xs: "0",
-                            md: "15px"
+                    }
+                </TopContainer>
+                <MediaContainer
+                        sx={{
+                            width: {
+                                xs: "100%",
+                                md: "90%",
+                                lg: "1060px"
+                            },
+                        }}
+                    >
+                        {
+                            playTrailer && (
+                                videoUrl ? (
+                                    <CustomMediaPlayer url={videoUrl}/>
+                                ) : (
+                                    <NoVideoMsg color={'white'}>No trailer video found</NoVideoMsg>
+                                )
+                            )
                         }
-                    }}
-                >
+                </MediaContainer>
+                <MediaInfoContainer>
                     <Title>{media_type === "movie" ? mediaData?.title : mediaData?.name}</Title>
                     <ReleaseDate>
                         Release Date: {media_type === "movie" ? mediaData?.release_date : mediaData?.first_air_date}
@@ -112,22 +149,22 @@ const WatchMediaContainer = () => {
                     </Genres>
                     <Button 
                         onClick={() => {
-                            scrollToMedia();
                             handlePlayTrailer();
+                            scrollToMedia();
                         }}
                         variant="contained"
                         sx={{
                             width: {
                                 xs: '100%',
                                 sm: 'auto'
-                            }
+                            },
                         }}
                     >
                         {playTrailer ? "Close Video" : "Play Trailer"}
                     </Button>
                     <Overview>{mediaData?.overview}</Overview>
                 </MediaInfoContainer>
-            </MediaContainer>
+            </WatchContainer>
         </ThemeProvider>
     );
 }
