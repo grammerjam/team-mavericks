@@ -13,7 +13,7 @@ export const SearchResults = () => {
     if (filteredMovies.length > 0)
     {
         return (
-            <div>
+            <div className="page-container">
                 <StyledBox color={"white"} className="font-heading-L media-heading">Search Results</StyledBox>
                 <MediaContainer>
                     <Grid container spacing= {4}>
