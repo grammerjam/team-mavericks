@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CustomMediaPlayer from "../../components/MediaPlayer/CustomMediaPlayer";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -30,6 +30,7 @@ const WatchMediaContainer = () => {
     const [backdropUrl, setBackdropUrl] = useState("");
     const basicImgUrl = "https://image.tmdb.org/t/p";
     const [playTrailer, setPlayTrailer] = useState(false);
+    const WatchContainerRef = useRef(null);
 
     useEffect(() => {
         const fetchMedia = async () => {
@@ -70,9 +71,15 @@ const WatchMediaContainer = () => {
         setPlayTrailer(!playTrailer);
     }
 
+    const scrollToMedia = () => {
+        if(WatchContainerRef.current){
+            WatchContainerRef.current.scrollIntoView({behavior: 'smooth'});
+        }
+    }
+
     return (
         <ThemeProvider theme={theme}>
-            <WatchContainer>
+            <WatchContainer ref={WatchContainerRef}>
                 <TopContainer>
                     {
                         !playTrailer && (
@@ -142,6 +149,7 @@ const WatchMediaContainer = () => {
                     <Button 
                         onClick={() => {
                             handlePlayTrailer();
+                            scrollToMedia();
                         }}
                         variant="contained"
                         sx={{

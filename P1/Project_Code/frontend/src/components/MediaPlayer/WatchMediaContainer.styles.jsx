@@ -32,7 +32,7 @@ export const MediaContainer = styled("div")`
 `
 
 export const NoVideoMsg = styled("div")`
-    padding: 10px;
+    padding: 100px;
     text-align: center;
     margin-top: 2rem;
     color: #bbb;
