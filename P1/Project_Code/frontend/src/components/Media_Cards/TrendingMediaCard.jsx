@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BookmarkImage, TrendingContainer, PlayButton, PlayText } from "./MediaCard.styles.jsx";
+import { BookmarkImage, TrendingContainer, PlayButton, PlayText, BlankWrapper, PlayButtonImg } from "./MediaCard.styles.jsx";
 import bookmarkActive from '../../assets/bookmark-active.png';
 import bookmarkInactive from '../../assets/bookmark-inactive.png';
 import bookmarkHover from '../../assets/bookmark-hover.svg';
@@ -36,32 +36,36 @@ const TrendingMediaCard = ({ imgSrc, movie, isBookmarked, toggleBookmark }) => {
 
     return (
       <TrendingContainer imgSrc={imgSrc}>
-        <PlayButton className="play-button" onClick={handleCardClick}>
-          <img className="play-button-img" src={playIcon} alt="play button" />
-          <PlayText>Play</PlayText>
-        </PlayButton>
-        <div className="trending-media-info">
-          <div className="media-info">
-            <h4 className="media-info-item">{getMovieYear(movie)} •</h4>
-            <img
-              className="img-icon"
-              src={movie.media_type === "movie" ? MovieIcon : TvIcon}
-              style={{
-                height: "12px",
-                paddingTop: "24px",
-                paddingLeft: "5px",
-                  zIndex: "1",
-              }}
-            ></img>
-            <h4 className="media-info-item">
-              {movie.media_type === "movie" ? "Movie" : "TV Series"}
-            </h4>
-            <h4 className="media-info-item">{movie.rating}</h4>
+        <BlankWrapper onClick={handleCardClick}>
+          <PlayButton className="play-button">
+            <PlayButtonImg>
+              <img className="play-button-img" src={playIcon} alt="play button" />
+            </PlayButtonImg>
+            <PlayText>Play</PlayText>
+          </PlayButton>
+          <div className="trending-media-info">
+            <div className="media-info">
+              <h4 className="media-info-item">{getMovieYear(movie)} •</h4>
+              <img
+                className="img-icon"
+                src={movie.media_type === "movie" ? MovieIcon : TvIcon}
+                style={{
+                  height: "12px",
+                  paddingTop: "24px",
+                  paddingLeft: "5px",
+                    zIndex: "1",
+                }}
+              ></img>
+              <h4 className="media-info-item">
+                {movie.media_type === "movie" ? "Movie" : "TV Series"}
+              </h4>
+              <h4 className="media-info-item">{movie.rating}</h4>
+            </div>
+            <div className="media-title" style={{ position: "relative" }}>
+              {title}
+            </div>
           </div>
-          <div className="media-title" style={{ position: "relative" }}>
-            {title}
-          </div>
-        </div>
+        </BlankWrapper>
           <BookmarkImage
               src={isHovered ? bookmarkHover : isBookmarked ? bookmarkActive : bookmarkInactive} // Toggle between hover and normal states
               onClick={toggleBookmark}
