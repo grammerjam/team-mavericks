@@ -66,16 +66,16 @@ export const PlayButton = styled("div")`
     transition: opacity 0.3s ease;
     opacity: 0;
     background: #97979770;
-
-    .play-button-img {
-        position: relative;
-        left: 7.69%;
-        right: 66.67%;
-        top: 18.75%;
-        bottom: 18.75%;
-        width: 25%;
-    }
 `
+export const PlayButtonImg = styled("div")`
+    position: relative;
+    left: 7.69%;
+    right: 66.67%;
+    top: 18.75%;
+    bottom: 18.75%;
+    width: 25%;
+`
+
 export const PlayText = styled("h4")`
     position: relative;
     height: 23px;
@@ -121,6 +121,12 @@ export const RecommendedContainer = styled("div")`
             opacity: 1;
         }
     }
+`
+
+export const BlankWrapper = styled("div")`
+    width: 100%;
+    height: 100%;
+    position: absolute;
 `
 
 

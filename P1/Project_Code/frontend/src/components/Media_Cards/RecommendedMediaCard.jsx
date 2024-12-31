@@ -4,7 +4,7 @@ import bookmarkInactive from "../../assets/bookmark-inactive.png";
 import bookmarkHover from "../../assets/bookmark-hover.svg";
 import MovieIcon from "../../assets/icon-category-movie.svg";
 import TvIcon from "../../assets/icon-category-tv.svg";
-import { RecommendedContainer, PlayButton, PlayText } from "./MediaCard.styles";
+import { RecommendedContainer, PlayButton, PlayText, PlayButtonImg } from "./MediaCard.styles";
 import playIcon from "../../assets/icon-play.svg";
 import { getMovieYear } from "../../services/getMovieYear";
 import { updateShortenedTitle } from '../../services/updateShortenedTitle';
@@ -54,7 +54,7 @@ const RecommendedMediaCard = ({
   return (
     <>
       <RecommendedContainer>
-        <img src={imgSrc} alt={movie.title} />
+        <img src={imgSrc} alt={movie.title} onClick={handlePlayClick}/>
         <img
           src={
             isHovered
@@ -70,7 +70,9 @@ const RecommendedMediaCard = ({
           onMouseLeave={() => setIsHovered(false)} // Reset hover state on mouse leave
         />
         <PlayButton className="play-button" onClick={handlePlayClick}>
-          <img className="play-button-img" src={playIcon} alt="play button" />
+          <PlayButtonImg>
+            <img className="play-button-img" src={playIcon} alt="play button" />
+          </PlayButtonImg>
           <PlayText>Play</PlayText>
         </PlayButton>
       </RecommendedContainer>
