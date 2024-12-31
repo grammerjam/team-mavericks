@@ -15,9 +15,9 @@ export const SearchResults = () => {
         return(
             <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
                 <l-momentum
-                size="40"
+                size="50"
                 speed="1.1" 
-                color="black" 
+                color="white" 
                 ></l-momentum>
             </Box>
         );
