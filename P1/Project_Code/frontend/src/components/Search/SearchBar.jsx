@@ -9,7 +9,7 @@ import { MoviesContext } from "../../context/Movies.context";
 
 export const SearchBar = () => {
   // Import MoviesRoute Context
-  const { setFilteredMovies } = useContext(MoviesContext);
+  const { setFilteredMovies, loading, setLoading } = useContext(MoviesContext);
 
   // Import Navigation Handler
   const navigate = useNavigate();
@@ -53,16 +53,27 @@ export const SearchBar = () => {
   const filterMovies = async () => {
     // Filter movies based on the input value
     const trimmedInput = searchInput.trim();
-    if (trimmedInput.length > 0) {
-      const movies = await axios(`${apiUrl}/media/search`, {
-        params: {
-          query: trimmedInput
-        }
-      });
+    setLoading(true);
+    try{
+      if (trimmedInput.length > 0) {
+        const movies = await axios(`${apiUrl}/media/search`, {
+          params: {
+            query: trimmedInput
+          }
+        });
 
-      setFilteredMovies(movies.data.results);
-    } else {
-      setFilteredMovies([]);
+        setFilteredMovies(movies.data.results);
+      } else {
+        setFilteredMovies([]);
+      }
+    }catch(err){
+      console.log('Error', err);
+      if(err.response){
+          console.error("Response error data", err.response.data);
+          console.error("Response error status", err.response.status);      
+      }
+    }finally{
+      setLoading(false);
     }
   };
 

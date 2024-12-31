@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import { Grid, Box, Stack, CircularProgress } from "@mui/material";
 import MediaCard from "../../components/Media_Cards/MediaCard";
 import { MediaContainer, StyledBox } from "../../components/Media_Cards/MediaCardsContainer.styles";
+import { momentum } from 'ldrs'
 
 
 export const Bookmarks = () => {
@@ -18,6 +19,7 @@ export const Bookmarks = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const getBookmarks = async () => {
+        momentum.register()
         setIsLoading(true);
         try {
             const response = await axios.get(`${apiUrl}/api/bookmarks`,
@@ -69,7 +71,11 @@ export const Bookmarks = () => {
 		<Box className="page-container">
             {isLoading ? (
                 <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
-                    <CircularProgress />
+                    <l-momentum
+                    size="50"
+                    speed="1.1" 
+                    color="white" 
+                    ></l-momentum>
                 </Box>
             ):(
                 <>
