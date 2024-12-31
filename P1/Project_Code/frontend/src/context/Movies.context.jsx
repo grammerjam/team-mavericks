@@ -6,11 +6,23 @@ const MoviesContext = createContext();
 const MoviesContextProvider = ({ children }) => {
     // Change filtered movies
     const [filteredMovies, setFilteredMovies] = useState([]);
-
+    const [loading, setLoading] = useState(false);
     const [filteredCategory, setFilteredCategory] = useState([]);
 
     return (
-        <MoviesContext.Provider value={{movies, filteredMovies, setFilteredMovies, filteredCategory, setFilteredCategory}}>
+        <MoviesContext.Provider 
+            value={
+                {
+                    movies, 
+                    filteredMovies, 
+                    setFilteredMovies, 
+                    filteredCategory, 
+                    setFilteredCategory,
+                    loading,
+                    setLoading
+                }
+            }
+        >
             {children}
         </MoviesContext.Provider>
     );
